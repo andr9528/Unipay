@@ -55,6 +55,18 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Inner Windows\CardSystem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Inner Windows\MobilSystem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Inner Windows\SearchResult.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -62,6 +74,15 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Inner Windows\CardSystem.xaml.cs">
+      <DependentUpon>CardSystem.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Inner Windows\MobilSystem.xaml.cs">
+      <DependentUpon>MobilSystem.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Inner Windows\SearchResult.xaml.cs">
+      <DependentUpon>SearchResult.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -94,6 +115,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Functionality Windows\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Unipay-Lib\Unipay-Lib.csproj">
+      <Project>{022b5c0b-9c0c-49fe-b551-5090be8b778e}</Project>
+      <Name>Unipay-Lib</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
