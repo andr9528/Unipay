@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="Export.cs" />
     <Compile Include="Import.cs" />
+    <Compile Include="Logic.cs" />
     <Compile Include="Repository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

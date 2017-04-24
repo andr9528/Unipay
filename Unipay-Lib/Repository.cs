@@ -25,7 +25,7 @@ namespace Unipay_Lib
             return repository;
         }
         //
-        // should take one argument, per list that is to be stored in the repository
+        // should take one argument per list that is to be stored in the repository
         //
         public void GetLists()
         {
