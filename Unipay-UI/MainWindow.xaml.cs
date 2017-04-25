@@ -20,9 +20,11 @@ namespace Unipay_UI
     /// </summary>
     public partial class MainWindow : Window
     {
+        string[] Types = new string[] { "", "Mobilsystem", "Kortsystem", "Kunder"};
         public MainWindow()
         {
             InitializeComponent();
+            TypeFilter.ItemsSource = Types;
         }
 
         private void Mobilsystem_Click(object sender, RoutedEventArgs e)
@@ -41,6 +43,11 @@ namespace Unipay_UI
         }
 
         private void Kunde_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void TypeFilter_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
         }
