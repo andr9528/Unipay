@@ -24,5 +24,25 @@ namespace Unipay_UI
         {
             InitializeComponent();
         }
+
+        private void Mobilsystem_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Kortsystem_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Søgeresultat_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Kunde_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
