@@ -74,7 +74,13 @@
                 <ColumnDefinition Width="200"/>
                 <ColumnDefinition Width="200"/>
             </Grid.ColumnDefinitions>
-            
+
+            <Button Grid.Row="4" Grid.Column="1" Name="Import" Content="Import Excel" Width="150" Height="50" Click="Import_Click"/>
+            <Button Grid.Row="0" Grid.Column="1" Name="Export" Content="Export PDF" Width="150" Height="50" Click="Export_Click"/>
+            <Button Grid.Row="1" Grid.Column="1" Name="NewSubscription" Content="Nyt Abonnement" Width="150" Height="50" Click="NewSubscription_Click"/>
+            <Button Grid.Row="2" Grid.Column="1" Name="EditSubscription" Content="Rediger Abonnement" Width="150" Height="50" Click="EditSubscription_Click"/>
+            <Button Grid.Row="3" Grid.Column="1" Name="DeleteSubscription" Content="Slet Abonnement" Width="150" Height="50" Click="DeleteSubscription_Click"/>
+
         </Grid>
         <Frame Grid.Row="1" Grid.Column="0" Width="800" Height="600" Name="PageView" NavigationUIVisibility="Hidden"/>
     </Grid>

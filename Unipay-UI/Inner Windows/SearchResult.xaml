@@ -5,10 +5,12 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Unipay_UI.Inner_Window"
       mc:Ignorable="d" 
-      d:DesignHeight="300" d:DesignWidth="300"
+      d:DesignHeight="600" d:DesignWidth="800"
       Title="SearchResult">
 
     <Grid>
-        
+        <DataGrid Height="200" Width="800" Name="MobilGridView" Margin="0,0,0,400"/>
+        <DataGrid Height="200" Width="800" Name="CardGridView" Margin="0,0,0,0"/>
+        <DataGrid Height="200" Width="800" Name="CustomerGridView" Margin="0,400,0,0"/>
     </Grid>
 </Page>

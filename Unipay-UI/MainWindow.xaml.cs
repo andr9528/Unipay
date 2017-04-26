@@ -51,5 +51,30 @@ namespace Unipay_UI
         {
 
         }
+
+        private void Import_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Export_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void NewSubscription_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void EditSubscription_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void DeleteSubscription_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
