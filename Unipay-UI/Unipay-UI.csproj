@@ -59,6 +59,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Inner Windows\Customers.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Inner Windows\MobilSystem.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -77,6 +81,9 @@
     </Compile>
     <Compile Include="Inner Windows\CardSystem.xaml.cs">
       <DependentUpon>CardSystem.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Inner Windows\Customers.xaml.cs">
+      <DependentUpon>Customers.xaml</DependentUpon>
     </Compile>
     <Compile Include="Inner Windows\MobilSystem.xaml.cs">
       <DependentUpon>MobilSystem.xaml</DependentUpon>

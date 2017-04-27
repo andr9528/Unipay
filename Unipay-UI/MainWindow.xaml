@@ -5,8 +5,83 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Unipay_UI"
         mc:Ignorable="d"
-        Title="MainWindow" Height="600" Width="1200">
+        Title="MainWindow" Height="730" Width="1210">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="600"/>
+        </Grid.RowDefinitions>
         
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="800"/>
+            <ColumnDefinition Width="400"/>
+        </Grid.ColumnDefinitions>
+        
+        <Grid Grid.Column="0" Grid.Row="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="100"/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition Width="200"/>
+            </Grid.ColumnDefinitions>
+
+            <Button Grid.Column="0" Name="Mobilsystem" Content="Mobilsystemer" Height="80" Width="160" Click="Mobilsystem_Click"/>
+            <Button Grid.Column="1" Name="Kortsystem" Content="Kortsystemer" Height="80" Width="160" Click="Kortsystem_Click"/>
+            <Button Grid.Column="2" Name="Kunde" Content="Kunder" Height="80" Width="160" Click="Kunde_Click"/>
+            <Button Grid.Column="3" Name="Søgeresultat" Content="Søgeresultater" Height="80" Width="160" Click="Søgeresultat_Click"/>
+        </Grid>
+        <Grid Grid.Column="1" Grid.Row="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="300"/>
+            </Grid.ColumnDefinitions>
+            <TextBox Grid.Row="0" Grid.Column="0" Text="Søg:" ToolTip="Indtast hvad du ønsker at finde og kig under søgeresultater" 
+                     TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" IsReadOnly="True"/>
+            <TextBox Grid.Row="1" Grid.Column="0" Text="Filter:" ToolTip="Øverste Vælger det system du vil søge i og den nederste vælger den colone du ønsker at søge i, eller efterlad dem blanke for at søge overalt"
+                     TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" IsReadOnly="True"/>
+            <TextBox Grid.Row="0" Grid.Column="1" Name="SearchBox" TextAlignment="Center" VerticalAlignment="Center" Width="260"/>
+            <Grid Grid.Row="1" Grid.Column="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="300"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="25"/>
+                    <RowDefinition Height="25"/>
+                </Grid.RowDefinitions>
+                <ComboBox Grid.Row="0" Name="TypeFilter" Width="260" Height="20" SelectionChanged="TypeFilter_SelectionChanged"/>
+                <ComboBox Grid.Row="1" Name="ColumnFilter" Width="260" Height="20"/>
+            </Grid>
+        </Grid>
+        <Grid Grid.Column="1" Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="100"/>
+                <RowDefinition Height="100"/>
+                <RowDefinition Height="100"/>
+                <RowDefinition Height="100"/>
+                <RowDefinition Height="100"/>
+                <RowDefinition Height="100"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition Width="200"/>
+            </Grid.ColumnDefinitions>
+
+            <Button Grid.Row="4" Grid.Column="1" Name="Import" Content="Import Excel" Width="150" Height="50" Click="Import_Click"/>
+            <Button Grid.Row="0" Grid.Column="1" Name="Export" Content="Export PDF" Width="150" Height="50" Click="Export_Click"/>
+            <Button Grid.Row="1" Grid.Column="1" Name="NewSubscription" Content="Nyt Abonnement" Width="150" Height="50" Click="NewSubscription_Click"/>
+            <Button Grid.Row="2" Grid.Column="1" Name="EditSubscription" Content="Rediger Abonnement" Width="150" Height="50" Click="EditSubscription_Click"/>
+            <Button Grid.Row="3" Grid.Column="1" Name="DeleteSubscription" Content="Slet Abonnement" Width="150" Height="50" Click="DeleteSubscription_Click"/>
+
+        </Grid>
+        <Frame Grid.Row="1" Grid.Column="0" Width="800" Height="600" Name="PageView" NavigationUIVisibility="Hidden"/>
     </Grid>
 </Window>

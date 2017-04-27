@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Unipay_Lib
 {
-    class Import
+    class ImportTrash
     {
     }
 }
