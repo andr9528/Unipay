@@ -11,5 +11,6 @@ namespace Unipay_Lib.Building_Blocks
         public string ID { get; set; }
         public string Name { get; set; }
         public string Firm { get; set; }
+        public string Mail { get; set; }
     }
 }

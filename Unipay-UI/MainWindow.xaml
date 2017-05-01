@@ -82,6 +82,8 @@
             <Button Grid.Row="3" Grid.Column="1" Name="DeleteSubscription" Content="Slet Abonnement" Width="150" Height="50" Click="DeleteSubscription_Click"/>
 
         </Grid>
-        <Frame Grid.Row="1" Grid.Column="0" Width="800" Height="600" Name="PageView" NavigationUIVisibility="Hidden"/>
+        <DataGrid Grid.Row="1" Grid.Column="0" Height="200" Width="800" Name="MobilGrid"/>
+        <DataGrid Grid.Row="1" Grid.Column="0" Height="200" Width="800" Name="CardGrid"/>
+        <DataGrid Grid.Row="1" Grid.Column="0" Height="200" Width="800" Name="MercGrid"/>
     </Grid>
 </Window>

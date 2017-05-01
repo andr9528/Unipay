@@ -55,22 +55,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="Inner Windows\CardSystem.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Inner Windows\Customers.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Inner Windows\MobilSystem.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Inner Windows\SearchResult.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -78,18 +62,6 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Inner Windows\CardSystem.xaml.cs">
-      <DependentUpon>CardSystem.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Inner Windows\Customers.xaml.cs">
-      <DependentUpon>Customers.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Inner Windows\MobilSystem.xaml.cs">
-      <DependentUpon>MobilSystem.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Inner Windows\SearchResult.xaml.cs">
-      <DependentUpon>SearchResult.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>

@@ -12,6 +12,7 @@ namespace Unipay_Lib
         List<Cardsystem> Cardsystems;
         List<Mobilsystem> Mobilsystems;
         List<Merchant> Merchants;
+
         static readonly Repository repository = new Repository();
         //
         // Instantiate any lists stored in this repository
@@ -47,6 +48,18 @@ namespace Unipay_Lib
             {
                 Merchants = merc;
             }
+        }
+        public List<Cardsystem> GetCardsystems()
+        {
+            return Cardsystems;
+        }
+        public List<Mobilsystem> GetMobilsystems()
+        {
+            return Mobilsystems;
+        }
+        public List<Merchant> GetMerchants()
+        {
+            return Merchants;
         }
     }
 }
