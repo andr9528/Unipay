@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -24,8 +25,11 @@ namespace Unipay_UI
     /// </summary>
     public partial class MainWindow : Window
     {
-        string[] Types = new string[] { "", "Mobilsystem", "Kortsystem", "Kunder"};
-
+        List<string> Types = new List<string> { "", "Mobilsystem", "Kortsystem", "Kunder"};
+        List<string> ColumnAll = new List<string> { "" };
+        List<string> ColumnMobil = new List<string> { "" };
+        List<string> ColumnCard = new List<string> { "" };
+        List<string> ColumnMerc = new List<string> { "" };
 
 
         List<Mobilsystem> SRMobil = new List<Mobilsystem>();
@@ -38,9 +42,6 @@ namespace Unipay_UI
         DataTable phoneView = new DataTable();
         DataTable cardView = new DataTable();
         DataTable mercView = new DataTable();
-
-        Thread update;
-        Thread search;
 
         public bool PhoneState { get; set; }
         public bool CardState { get; set; }
@@ -83,39 +84,377 @@ namespace Unipay_UI
             mercView.Columns.Add("Firma");
             mercView.Columns.Add("Mail");
 
-            update = new Thread(new ThreadStart(UpdateView));
-            search = new Thread(new ThreadStart(Search));
-            update.Start();
-            search.Start();
+            foreach (DataColumn column in phoneView.Columns)
+            {
+                if (!ColumnAll.Contains(column.ColumnName))
+                {
+                    ColumnAll.Add(column.ColumnName);
+                }
+                if (!ColumnMobil.Contains(column.ColumnName))
+                {
+                    ColumnMobil.Add(column.ColumnName);
+                }
+                
+            }
+            foreach (DataColumn column in cardView.Columns)
+            {
+                if (!ColumnAll.Contains(column.ColumnName)) 
+                {
+                    ColumnAll.Add(column.ColumnName);
+                }
+                if (!ColumnCard.Contains(column.ColumnName))
+                {
+                    ColumnCard.Add(column.ColumnName);
+                }
+
+            }
+            foreach (DataColumn column in mercView.Columns)
+            {
+                if (!ColumnAll.Contains(column.ColumnName))
+                {
+                    ColumnAll.Add(column.ColumnName);
+                }
+                if (!ColumnMerc.Contains(column.ColumnName))
+                {
+                    ColumnMerc.Add(column.ColumnName);
+                }
+            }
+
+            ColumnFilter.ItemsSource = ColumnAll;
+
+            UpdateView();
         }
 
         private void Search()
         {
-            while (true)
-            {
-                SRMobil.Clear();
-                SRCard.Clear();
-                SRMerc.Clear();
+            SRMobil.Clear();
+            SRCard.Clear();
+            SRMerc.Clear();
 
-                if (TypeFilter.SelectedIndex == 0 || TypeFilter.SelectedIndex == 1)
+            if (TypeFilter.SelectedIndex == 0 || TypeFilter.SelectedIndex == 1)
+            {
+                foreach (Mobilsystem mobil in repo.GetMobilsystems())
                 {
-                    foreach (Mobilsystem mobil in repo.GetMobilsystems())
+                    if (ColumnFilter.SelectedIndex == 0)
+                    {
+                        if (mobil.Address.Contains(SearchBox.Text) || mobil.BoxName.Contains(SearchBox.Text) || mobil.CreationDate.ToStringDF().Contains(SearchBox.Text)
+                            || mobil.ToStringDE().Contains(SearchBox.Text) || mobil.ToStringDN().Contains(SearchBox.Text)
+                            || mobil.MachineAddress.Contains(SearchBox.Text) || mobil.Merchant.ID.Contains(SearchBox.Text)
+                            || mobil.SimNumber.Contains(SearchBox.Text))
+                        {
+                            SRMobil.Add(mobil);
+                        }
+                    }
+                    else
+                    {
+                        if (TypeFilter.SelectedIndex == 0)
+                        {
+                            if (ColumnAll[ColumnFilter.SelectedIndex] == "Merchant ID")
+                            {
+                                if (mobil.Merchant.ID.Contains(SearchBox.Text))
+                                {
+                                    SRMobil.Add(mobil);
+                                }
+                            }
+                            else if (ColumnAll[ColumnFilter.SelectedIndex] == "Status")
+                            {
+                                if (mobil.ToStringS().Contains(SearchBox.Text))
+                                {
+                                    SRMobil.Add(mobil);
+                                }
+                            }
+                            else if (ColumnAll[ColumnFilter.SelectedIndex] == "Forsinkelse Elavon")
+                            {
+                                if (mobil.ToStringDE().Contains(SearchBox.Text))
+                                {
+                                    SRMobil.Add(mobil);
+                                }
+                            }
+                            else if (ColumnAll[ColumnFilter.SelectedIndex] == "Forsinkelse NETS")
+                            {
+                                if (mobil.ToStringDN().Contains(SearchBox.Text))
+                                {
+                                    SRMobil.Add(mobil);
+                                }
+                            }
+                            else if (ColumnAll[ColumnFilter.SelectedIndex] == "MAC Addresse")
+                            {
+                                if (mobil.MachineAddress.Contains(SearchBox.Text))
+                                {
+                                    SRMobil.Add(mobil);
+                                }
+                            }
+                            else if (ColumnAll[ColumnFilter.SelectedIndex] == "Boks Navn")
+                            {
+                                if (mobil.BoxName.Contains(SearchBox.Text))
+                                {
+                                    SRMobil.Add(mobil);
+                                }
+                            }
+                            else if (ColumnAll[ColumnFilter.SelectedIndex] == "Sim Nummer")
+                            {
+                                if (mobil.SimNumber.Contains(SearchBox.Text))
+                                {
+                                    SRMobil.Add(mobil);
+                                }
+                            }
+                            else if (ColumnAll[ColumnFilter.SelectedIndex] == "Opretelses Dato")
+                            {
+                                if (mobil.CreationDate.ToStringDF().Contains(SearchBox.Text))
+                                {
+                                    SRMobil.Add(mobil);
+                                }
+                            }
+                            else if (ColumnAll[ColumnFilter.SelectedIndex] == "Addresse for Enhed")
+                            {
+                                if (mobil.Address.Contains(SearchBox.Text))
+                                {
+                                    SRMobil.Add(mobil);
+                                }
+                            }
+                        }
+                        else
+                        {
+                            if (ColumnMobil[ColumnFilter.SelectedIndex] == "Merchant ID")
+                            {
+                                if (mobil.Merchant.ID.Contains(SearchBox.Text))
+                                {
+                                    SRMobil.Add(mobil);
+                                }
+                            }
+                            else if (ColumnMobil[ColumnFilter.SelectedIndex] == "Status")
+                            {
+                                if (mobil.ToStringS().Contains(SearchBox.Text))
+                                {
+                                    SRMobil.Add(mobil);
+                                }
+                            }
+                            else if (ColumnMobil[ColumnFilter.SelectedIndex] == "Forsinkelse Elavon")
+                            {
+                                if (mobil.ToStringDE().Contains(SearchBox.Text))
+                                {
+                                    SRMobil.Add(mobil);
+                                }
+                            }
+                            else if (ColumnMobil[ColumnFilter.SelectedIndex] == "Forsinkelse NETS")
+                            {
+                                if (mobil.ToStringDN().Contains(SearchBox.Text))
+                                {
+                                    SRMobil.Add(mobil);
+                                }
+                            }
+                            else if (ColumnMobil[ColumnFilter.SelectedIndex] == "MAC Addresse")
+                            {
+                                if (mobil.MachineAddress.Contains(SearchBox.Text))
+                                {
+                                    SRMobil.Add(mobil);
+                                }
+                            }
+                            else if (ColumnMobil[ColumnFilter.SelectedIndex] == "Boks Navn")
+                            {
+                                if (mobil.BoxName.Contains(SearchBox.Text))
+                                {
+                                    SRMobil.Add(mobil);
+                                }
+                            }
+                            else if (ColumnMobil[ColumnFilter.SelectedIndex] == "Sim Nummer")
+                            {
+                                if (mobil.SimNumber.Contains(SearchBox.Text))
+                                {
+                                    SRMobil.Add(mobil);
+                                }
+                            }
+                            else if (ColumnMobil[ColumnFilter.SelectedIndex] == "Opretelses Dato")
+                            {
+                                if (mobil.CreationDate.ToStringDF().Contains(SearchBox.Text))
+                                {
+                                    SRMobil.Add(mobil);
+                                }
+                            }
+                            else if (ColumnMobil[ColumnFilter.SelectedIndex] == "Addresse for Enhed")
+                            {
+                                if (mobil.Address.Contains(SearchBox.Text))
+                                {
+                                    SRMobil.Add(mobil);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            if (TypeFilter.SelectedIndex == 0 || TypeFilter.SelectedIndex == 2)
+            {
+                foreach (Cardsystem card in repo.GetCardsystems())
+                {
+                    if (ColumnFilter.SelectedIndex == 0)
+                    {
+                        if (card.Address.Contains(SearchBox.Text) || card.PhysicalID.Contains(SearchBox.Text) || card.CreationDate.ToStringDF().Contains(SearchBox.Text)
+                            || card.ToStringDE().Contains(SearchBox.Text) || card.ToStringDC().Contains(SearchBox.Text)
+                            || card.PhysicalID.Contains(SearchBox.Text) || card.Merchant.ID.Contains(SearchBox.Text)
+                            || card.SimProducer.Contains(SearchBox.Text))
+                        {
+                            SRCard.Add(card);
+                        }
+                    }
+                    else
+                    {
+                        if (TypeFilter.SelectedIndex == 0)
+                        {
+                            if (ColumnAll[ColumnFilter.SelectedIndex] == "Merchant ID")
+                            {
+                                if (card.Merchant.ID.Contains(SearchBox.Text))
+                                {
+                                    SRCard.Add(card);
+                                }
+                            }
+                            else if (ColumnAll[ColumnFilter.SelectedIndex] == "Status")
+                            {
+                                if (card.ToStringS().Contains(SearchBox.Text))
+                                {
+                                    SRCard.Add(card);
+                                }
+                            }
+                            else if (ColumnAll[ColumnFilter.SelectedIndex] == "Forsinkelse Elavon")
+                            {
+                                if (card.ToStringDE().Contains(SearchBox.Text))
+                                {
+                                    SRCard.Add(card);
+                                }
+                            }
+                            else if (ColumnAll[ColumnFilter.SelectedIndex] == "Forsinkelse CPI")
+                            {
+                                if (card.ToStringDC().Contains(SearchBox.Text))
+                                {
+                                    SRCard.Add(card);
+                                }
+                            }
+                            else if (ColumnAll[ColumnFilter.SelectedIndex] == "Terminal ID")
+                            {
+                                if (card.TerminalID.Contains(SearchBox.Text))
+                                {
+                                    SRCard.Add(card);
+                                }
+                            }
+                            else if (ColumnAll[ColumnFilter.SelectedIndex] == "Phys ID")
+                            {
+                                if (card.PhysicalID.Contains(SearchBox.Text))
+                                {
+                                    SRCard.Add(card);
+                                }
+                            }
+                            else if (ColumnAll[ColumnFilter.SelectedIndex] == "Sim Producent")
+                            {
+                                if (card.SimProducer.Contains(SearchBox.Text))
+                                {
+                                    SRCard.Add(card);
+                                }
+                            }
+                            else if (ColumnAll[ColumnFilter.SelectedIndex] == "Opretelses Dato")
+                            {
+                                if (card.CreationDate.ToStringDF().Contains(SearchBox.Text))
+                                {
+                                    SRCard.Add(card);
+                                }
+                            }
+                            else if (ColumnAll[ColumnFilter.SelectedIndex] == "Addresse for Enhed")
+                            {
+                                if (card.Address.Contains(SearchBox.Text))
+                                {
+                                    SRCard.Add(card);
+                                }
+                            }
+                        }
+                        else
+                        {
+                            if (ColumnCard[ColumnFilter.SelectedIndex] == "Merchant ID")
+                            {
+                                if (card.Merchant.ID.Contains(SearchBox.Text))
+                                {
+                                    SRCard.Add(card);
+                                }
+                            }
+                            else if (ColumnCard[ColumnFilter.SelectedIndex] == "Status")
+                            {
+                                if (card.ToStringS().Contains(SearchBox.Text))
+                                {
+                                    SRCard.Add(card);
+                                }
+                            }
+                            else if (ColumnCard[ColumnFilter.SelectedIndex] == "Forsinkelse Elavon")
+                            {
+                                if (card.ToStringDE().Contains(SearchBox.Text))
+                                {
+                                    SRCard.Add(card);
+                                }
+                            }
+                            else if (ColumnCard[ColumnFilter.SelectedIndex] == "Forsinkelse CPI")
+                            {
+                                if (card.ToStringDC().Contains(SearchBox.Text))
+                                {
+                                    SRCard.Add(card);
+                                }
+                            }
+                            else if (ColumnCard[ColumnFilter.SelectedIndex] == "MAC Addresse")
+                            {
+                                if (card.TerminalID.Contains(SearchBox.Text))
+                                {
+                                    SRCard.Add(card);
+                                }
+                            }
+                            else if (ColumnCard[ColumnFilter.SelectedIndex] == "Phys ID")
+                            {
+                                if (card.PhysicalID.Contains(SearchBox.Text))
+                                {
+                                    SRCard.Add(card);
+                                }
+                            }
+                            else if (ColumnCard[ColumnFilter.SelectedIndex] == "Sim Producent")
+                            {
+                                if (card.SimProducer.Contains(SearchBox.Text))
+                                {
+                                    SRCard.Add(card);
+                                }
+                            }
+                            else if (ColumnCard[ColumnFilter.SelectedIndex] == "Opretelses Dato")
+                            {
+                                if (card.CreationDate.ToStringDF().Contains(SearchBox.Text))
+                                {
+                                    SRCard.Add(card);
+                                }
+                            }
+                            else if (ColumnCard[ColumnFilter.SelectedIndex] == "Addresse for Enhed")
+                            {
+                                if (card.Address.Contains(SearchBox.Text))
+                                {
+                                    SRCard.Add(card);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            if (TypeFilter.SelectedIndex == 0 || TypeFilter.SelectedIndex == 3)
+            {
+                foreach (Merchant merc in repo.GetMerchants())
+                {
+                    if (ColumnFilter.SelectedIndex == 0)
                     {
 
                     }
                 }
-
-                Thread.Sleep(1000);
             }
         }
 
         public void UpdateView()
         {
-            while (true)
-            {
                 if (PhoneState)
                 {
                     MobilGrid.Height = 600;
+                    CardGrid.Height = 0;
+                    MercGrid.Height = 0;
+                    MobilGrid.Margin = new Thickness(0, 0, 0, 0);
+                    CardGrid.Margin = new Thickness(0, 0, 0, 0);
+                    MercGrid.Margin = new Thickness(0, 0, 0, 0);
                     MobilGrid.Visibility = Visibility.Visible;
                     CardGrid.Visibility = Visibility.Hidden;
                     MercGrid.Visibility = Visibility.Hidden;
@@ -124,10 +463,16 @@ namespace Unipay_UI
                     {
 
                     }
-                }
+                
+            }
                 else if (CardState)
                 {
+                    MobilGrid.Height = 0;
                     CardGrid.Height = 600;
+                    MercGrid.Height = 0;
+                    MobilGrid.Margin = new Thickness(0, 0, 0, 0);
+                    CardGrid.Margin = new Thickness(0, 0, 0, 0);
+                    MercGrid.Margin = new Thickness(0, 0, 0, 0);
                     MobilGrid.Visibility = Visibility.Hidden;
                     CardGrid.Visibility = Visibility.Visible;
                     MercGrid.Visibility = Visibility.Hidden;
@@ -136,10 +481,16 @@ namespace Unipay_UI
                     {
 
                     }
-                }
+                
+            }
                 else if (MerchantState)
                 {
+                    MobilGrid.Height = 0;
+                    CardGrid.Height = 0;
                     MercGrid.Height = 600;
+                    MobilGrid.Margin = new Thickness(0, 0, 0, 0);
+                    CardGrid.Margin = new Thickness(0, 0, 0, 0);
+                    MercGrid.Margin = new Thickness(0, 0, 0, 0);
                     MobilGrid.Visibility = Visibility.Hidden;
                     CardGrid.Visibility = Visibility.Hidden;
                     MercGrid.Visibility = Visibility.Visible;
@@ -148,26 +499,159 @@ namespace Unipay_UI
                     {
 
                     }
-                }
+                
+            }
                 else if (SearchState)
                 {
-                    if (TypeFilter.SelectedIndex == 0)
+                    if (SRMobil.Count != 0 && SRCard.Count != 0 && SRMerc.Count != 0) // all have hits
                     {
                         MobilGrid.Height = 200;
                         CardGrid.Height = 200;
                         MercGrid.Height = 200;
                         MobilGrid.Margin = new Thickness(0, 0, 0, 400);
+                        CardGrid.Margin = new Thickness(0, 0, 0, 0);
                         MercGrid.Margin = new Thickness(0, 400, 0, 0);
                         MobilGrid.Visibility = Visibility.Visible;
                         CardGrid.Visibility = Visibility.Visible;
                         MercGrid.Visibility = Visibility.Visible;
+
+                        SetMobilGrid();
+                        SetCardGrid();
+                        SetMercGrid();
                     }
-                    
+                    else if (SRMobil.Count != 0 && SRCard.Count != 0 && SRMerc.Count == 0) // all but Merc have hits
+                    {
+                        MobilGrid.Height = 300;
+                        CardGrid.Height = 300;
+                        MercGrid.Height = 0;
+                        MobilGrid.Margin = new Thickness(0, 0, 0, 300);
+                        CardGrid.Margin = new Thickness(0, 300, 0, 0);
+                        MercGrid.Margin = new Thickness(0, 0, 0, 0);
+                        MobilGrid.Visibility = Visibility.Visible;
+                        CardGrid.Visibility = Visibility.Visible;
+                        MercGrid.Visibility = Visibility.Hidden;
+
+                        SetMobilGrid();
+                        SetCardGrid();
+                    }
+                    else if (SRMobil.Count != 0 && SRCard.Count == 0 && SRMerc.Count != 0) // all but Card have hits
+                    {
+                        MobilGrid.Height = 300;
+                        CardGrid.Height = 0;
+                        MercGrid.Height = 300;
+                        MobilGrid.Margin = new Thickness(0, 0, 0, 300);
+                        CardGrid.Margin = new Thickness(0, 0, 0, 0);
+                        MercGrid.Margin = new Thickness(0, 300, 0, 0);
+                        MobilGrid.Visibility = Visibility.Visible;
+                        CardGrid.Visibility = Visibility.Hidden;
+                        MercGrid.Visibility = Visibility.Visible;
+
+                        SetMobilGrid();
+                        SetMercGrid();
+                    }
+                    else if (SRMobil.Count == 0 && SRCard.Count != 0 && SRMerc.Count != 0) // all but Mobil have hits
+                    {
+                        MobilGrid.Height = 0;
+                        CardGrid.Height = 300;
+                        MercGrid.Height = 300;
+                        MobilGrid.Margin = new Thickness(0, 0, 0, 0);
+                        CardGrid.Margin = new Thickness(0, 0, 0, 300);
+                        MercGrid.Margin = new Thickness(0, 300, 0, 0);
+                        MobilGrid.Visibility = Visibility.Hidden;
+                        CardGrid.Visibility = Visibility.Visible;
+                        MercGrid.Visibility = Visibility.Visible;
+
+                        SetCardGrid();
+                        SetMercGrid();
+                    }
+                    else if (SRMobil.Count != 0 && SRCard.Count == 0 && SRMerc.Count == 0) // Mobil have hits
+                    {
+                        MobilGrid.Height = 600;
+                        CardGrid.Height = 0;
+                        MercGrid.Height = 0;
+                        MobilGrid.Margin = new Thickness(0, 0, 0, 0);
+                        CardGrid.Margin = new Thickness(0, 0, 0, 0);
+                        MercGrid.Margin = new Thickness(0, 0, 0, 0);
+                        MobilGrid.Visibility = Visibility.Visible;
+                        CardGrid.Visibility = Visibility.Hidden;
+                        MercGrid.Visibility = Visibility.Hidden;
+
+                        SetMobilGrid();
+                    }
+                    else if (SRMobil.Count == 0 && SRCard.Count != 0 && SRMerc.Count == 0) // Card have hits
+                    {
+                        MobilGrid.Height = 0;
+                        CardGrid.Height = 600;
+                        MercGrid.Height = 0;
+                        MobilGrid.Margin = new Thickness(0, 0, 0, 0);
+                        CardGrid.Margin = new Thickness(0, 0, 0, 0);
+                        MercGrid.Margin = new Thickness(0, 0, 0, 0);
+                        MobilGrid.Visibility = Visibility.Hidden;
+                        CardGrid.Visibility = Visibility.Visible;
+                        MercGrid.Visibility = Visibility.Hidden;
+
+                        SetCardGrid();
+                    }
+                    else if (SRMobil.Count == 0 && SRCard.Count == 0 && SRMerc.Count != 0) // Merc have hits
+                    {
+                        MobilGrid.Height = 0;
+                        CardGrid.Height = 0;
+                        MercGrid.Height = 600;
+                        MobilGrid.Margin = new Thickness(0, 0, 0, 0);
+                        CardGrid.Margin = new Thickness(0, 0, 0, 0);
+                        MercGrid.Margin = new Thickness(0, 0, 0, 0);
+                        MobilGrid.Visibility = Visibility.Hidden;
+                        CardGrid.Visibility = Visibility.Hidden;
+                        MercGrid.Visibility = Visibility.Visible;
+
+                        SetMercGrid();
+                    }
+                    else if (SRMobil.Count == 0 && SRCard.Count == 0 && SRMerc.Count == 0) // None have hits
+                    {
+                        MobilGrid.Height = 0;
+                        CardGrid.Height = 0;
+                        MercGrid.Height = 0;
+                        MobilGrid.Margin = new Thickness(0, 0, 0, 0);
+                        CardGrid.Margin = new Thickness(0, 0, 0, 0);
+                        MercGrid.Margin = new Thickness(0, 0, 0, 0);
+                        MobilGrid.Visibility = Visibility.Hidden;
+                        CardGrid.Visibility = Visibility.Hidden;
+                        MercGrid.Visibility = Visibility.Hidden;
+                    }
+
 
 
                 }
-                Thread.Sleep(2000);
+        }
+
+        private void SetMobilGrid()
+        {
+            foreach (Mobilsystem mobil in SRMobil)
+            {
+
             }
+
+            
+        }
+
+        private void SetCardGrid()
+        {
+            foreach (Cardsystem card in SRCard)
+            {
+
+            }
+
+            
+        }
+
+        private void SetMercGrid()
+        {
+            foreach (Merchant merc in SRMerc)
+            {
+
+            }
+
+            
         }
 
         private void Mobilsystem_Click(object sender, RoutedEventArgs e)
@@ -204,7 +688,25 @@ namespace Unipay_UI
 
         private void TypeFilter_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            if (TypeFilter.SelectedIndex == 0)
+            {
+                ColumnFilter.ItemsSource = ColumnAll;
+            }
+            else if (TypeFilter.SelectedIndex == 1)
+            {
+                ColumnFilter.ItemsSource = ColumnMobil;
+            }
+            else if (TypeFilter.SelectedIndex == 2)
+            {
+                ColumnFilter.ItemsSource = ColumnCard;
+            }
+            else if (TypeFilter.SelectedIndex == 3)
+            {
+                ColumnFilter.ItemsSource = ColumnMerc;
+            }
 
+            Search();
+            UpdateView();
         }
 
         private void Import_Click(object sender, RoutedEventArgs e)
@@ -232,5 +734,16 @@ namespace Unipay_UI
 
         }
 
+        private void SearchBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            Search();
+            UpdateView();
+        }
+
+        private void ColumnFilter_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Search();
+            UpdateView();
+        }
     }
 }

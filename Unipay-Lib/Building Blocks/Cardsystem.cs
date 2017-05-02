@@ -19,5 +19,16 @@ namespace Unipay_Lib.Building_Blocks
         {
 
         }
+        public string ToStringDC()
+        {
+            if (DelayCPI == true)
+            {
+                return "Forsinket";
+            }
+            else
+            {
+                return "Ikke Forsinkket";
+            }
+        }
     }
 }

@@ -18,5 +18,16 @@ namespace Unipay_Lib.Building_Blocks
         {
             
         }
+        public string ToStringDN()
+        {
+            if (DelayNETS == true)
+            {
+                return "Forsinket";
+            }
+            else
+            {
+                return "Ikke Forsinkket";
+            }
+        }
     }
 }

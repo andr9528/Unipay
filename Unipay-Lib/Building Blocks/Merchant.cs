@@ -12,5 +12,17 @@ namespace Unipay_Lib.Building_Blocks
         public string Name { get; set; }
         public string Firm { get; set; }
         public string Mail { get; set; }
+
+        public string ToStringM()
+        {
+            string output = "";
+
+            output += ID + ", ";
+            output += Name + ", ";
+            output += Firm + ", ";
+            output += Mail;
+
+            return output;
+        }
     }
 }

@@ -16,5 +16,28 @@ namespace Unipay_Lib.Building_Blocks
         public Date CreationDate { get; set; }
         public string Address { get; set; }
 
+        public string ToStringDE()
+        {
+            if (DelayElavon == true)
+            {
+                return "Forsinket";
+            }
+            else
+            {
+                return "Ikke Forsinkket";
+            }
+        }
+        public string ToStringS()
+        {
+            if (Status == true)
+            {
+                return "Aktiv";
+            }
+            else
+            {
+                return "Inaktiv";
+            }
+        }
+
     }
 }
