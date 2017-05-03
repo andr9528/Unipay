@@ -439,7 +439,76 @@ namespace Unipay_UI
                 {
                     if (ColumnFilter.SelectedIndex == 0)
                     {
-
+                        if (merc.ID.Contains(SearchBox.Text) || merc.Name.Contains(SearchBox.Text) 
+                            || merc.Firm.Contains(SearchBox.Text) || merc.Mail.Contains(SearchBox.Text))
+                        {
+                            SRMerc.Add(merc);
+                        }
+                    }
+                    else
+                    {
+                        if (TypeFilter.SelectedIndex == 0)
+                        {
+                            if (ColumnAll[ColumnFilter.SelectedIndex] == "Merchant ID")
+                            {
+                                if (merc.ID.Contains(SearchBox.Text))
+                                {
+                                    SRMerc.Add(merc);
+                                }
+                            }
+                            else if (ColumnAll[ColumnFilter.SelectedIndex] == "Navn")
+                            {
+                                if (merc.Name.Contains(SearchBox.Text))
+                                {
+                                    SRMerc.Add(merc);
+                                }
+                            }
+                            else if (ColumnAll[ColumnFilter.SelectedIndex] == "Firma")
+                            {
+                                if (merc.Firm.Contains(SearchBox.Text))
+                                {
+                                    SRMerc.Add(merc);
+                                }
+                            }
+                            else if (ColumnAll[ColumnFilter.SelectedIndex] == "Mail")
+                            {
+                                if (merc.Mail.Contains(SearchBox.Text))
+                                {
+                                    SRMerc.Add(merc);
+                                }
+                            }
+                        }
+                        else
+                        {
+                            if (ColumnMerc[ColumnFilter.SelectedIndex] == "Merchant ID")
+                            {
+                                if (merc.ID.Contains(SearchBox.Text))
+                                {
+                                    SRMerc.Add(merc);
+                                }
+                            }
+                            else if (ColumnMerc[ColumnFilter.SelectedIndex] == "Navn")
+                            {
+                                if (merc.Name.Contains(SearchBox.Text))
+                                {
+                                    SRMerc.Add(merc);
+                                }
+                            }
+                            else if (ColumnMerc[ColumnFilter.SelectedIndex] == "Firma")
+                            {
+                                if (merc.Firm.Contains(SearchBox.Text))
+                                {
+                                    SRMerc.Add(merc);
+                                }
+                            }
+                            else if (ColumnMerc[ColumnFilter.SelectedIndex] == "Mail")
+                            {
+                                if (merc.Mail.Contains(SearchBox.Text))
+                                {
+                                    SRMerc.Add(merc);
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -447,7 +516,13 @@ namespace Unipay_UI
 
         public void UpdateView()
         {
-                if (PhoneState)
+            phoneView.Clear();
+            cardView.Clear();
+            mercView.Clear();
+
+            if (PhoneState)
+                {
+                if (repo.GetMobilsystems().Count() != 0)
                 {
                     MobilGrid.Height = 600;
                     CardGrid.Height = 0;
@@ -461,11 +536,39 @@ namespace Unipay_UI
 
                     foreach (Mobilsystem mobil in repo.GetMobilsystems())
                     {
+                        DataRow row = phoneView.NewRow();
 
+                        row["Merchant ID"] = mobil.Merchant.ID;
+                        row["Status"] = mobil.ToStringS();
+                        row["Forsinkelse Elavon"] = mobil.ToStringDE();
+                        row["Forsinkelse NETS"] = mobil.ToStringDN();
+                        row["MAC Addresse"] = mobil.MachineAddress;
+                        row["Boks Navn"] = mobil.BoxName;
+                        row["Sim Nummer"] = mobil.SimNumber;
+                        row["Opretelses Dato"] = mobil.CreationDate.ToStringDF();
+                        row["Addresse for Enhed"] = mobil.Address;
+
+                        phoneView.Rows.Add(row);
                     }
+                }
+                else
+                {
+                    MobilGrid.Height = 0;
+                    CardGrid.Height = 0;
+                    MercGrid.Height = 0;
+                    MobilGrid.Margin = new Thickness(0, 0, 0, 0);
+                    CardGrid.Margin = new Thickness(0, 0, 0, 0);
+                    MercGrid.Margin = new Thickness(0, 0, 0, 0);
+                    MobilGrid.Visibility = Visibility.Hidden;
+                    CardGrid.Visibility = Visibility.Hidden;
+                    MercGrid.Visibility = Visibility.Hidden;
+                }
+                
                 
             }
                 else if (CardState)
+                {
+                if (repo.GetCardsystems().Count() != 0)
                 {
                     MobilGrid.Height = 0;
                     CardGrid.Height = 600;
@@ -479,11 +582,39 @@ namespace Unipay_UI
 
                     foreach (Cardsystem card in repo.GetCardsystems())
                     {
+                        DataRow row = cardView.NewRow();
 
+                        row["Merchant ID"] = card.Merchant.ID;
+                        row["Status"] = card.ToStringS();
+                        row["Forsinkelse Elavon"] = card.ToStringDE();
+                        row["Forsinkelse CPI"] = card.ToStringDC();
+                        row["Terminal ID"] = card.TerminalID;
+                        row["Phys ID"] = card.PhysicalID;
+                        row["Sim Producent"] = card.SimProducer;
+                        row["Opretelses Dato"] = card.CreationDate.ToStringDF();
+                        row["Addresse for Enhed"] = card.Address;
+
+                        cardView.Rows.Add(row);
                     }
+                }
+                else
+                {
+                    MobilGrid.Height = 0;
+                    CardGrid.Height = 0;
+                    MercGrid.Height = 0;
+                    MobilGrid.Margin = new Thickness(0, 0, 0, 0);
+                    CardGrid.Margin = new Thickness(0, 0, 0, 0);
+                    MercGrid.Margin = new Thickness(0, 0, 0, 0);
+                    MobilGrid.Visibility = Visibility.Hidden;
+                    CardGrid.Visibility = Visibility.Hidden;
+                    MercGrid.Visibility = Visibility.Hidden;
+                }
+                
                 
             }
                 else if (MerchantState)
+                {
+                if (repo.GetMerchants().Count() != 0)
                 {
                     MobilGrid.Height = 0;
                     CardGrid.Height = 0;
@@ -497,8 +628,29 @@ namespace Unipay_UI
 
                     foreach (Merchant merc in repo.GetMerchants())
                     {
+                        DataRow row = mercView.NewRow();
 
+                        row["Merchant ID"] = merc.ID;
+                        row["Navn"] = merc.Name;
+                        row["Firma"] = merc.Firm;
+                        row["Mail"] = merc.Mail;
+
+                        mercView.Rows.Add(row);
                     }
+                }
+                else
+                {
+                    MobilGrid.Height = 0;
+                    CardGrid.Height = 0;
+                    MercGrid.Height = 0;
+                    MobilGrid.Margin = new Thickness(0, 0, 0, 0);
+                    CardGrid.Margin = new Thickness(0, 0, 0, 0);
+                    MercGrid.Margin = new Thickness(0, 0, 0, 0);
+                    MobilGrid.Visibility = Visibility.Hidden;
+                    CardGrid.Visibility = Visibility.Hidden;
+                    MercGrid.Visibility = Visibility.Hidden;
+                }
+                
                 
             }
                 else if (SearchState)
@@ -628,30 +780,55 @@ namespace Unipay_UI
         {
             foreach (Mobilsystem mobil in SRMobil)
             {
+                DataRow row = phoneView.NewRow();
 
+                row["Merchant ID"] = mobil.Merchant.ID;
+                row["Status"] = mobil.ToStringS();
+                row["Forsinkelse Elavon"] = mobil.ToStringDE();
+                row["Forsinkelse NETS"] = mobil.ToStringDN();
+                row["MAC Addresse"] = mobil.MachineAddress;
+                row["Boks Navn"] = mobil.BoxName;
+                row["Sim Nummer"] = mobil.SimNumber;
+                row["Opretelses Dato"] = mobil.CreationDate.ToStringDF();
+                row["Addresse for Enhed"] = mobil.Address;
+
+                phoneView.Rows.Add(row);
             }
-
-            
         }
 
         private void SetCardGrid()
         {
             foreach (Cardsystem card in SRCard)
             {
+                DataRow row = cardView.NewRow();
 
+                row["Merchant ID"] = card.Merchant.ID;
+                row["Status"] = card.ToStringS();
+                row["Forsinkelse Elavon"] = card.ToStringDE();
+                row["Forsinkelse CPI"] = card.ToStringDC();
+                row["Terminal ID"] = card.TerminalID;
+                row["Phys ID"] = card.PhysicalID;
+                row["Sim Producent"] = card.SimProducer;
+                row["Opretelses Dato"] = card.CreationDate.ToStringDF();
+                row["Addresse for Enhed"] = card.Address;
+
+                cardView.Rows.Add(row);
             }
-
-            
         }
 
         private void SetMercGrid()
         {
             foreach (Merchant merc in SRMerc)
             {
+                DataRow row = mercView.NewRow();
 
+                row["Merchant ID"] = merc.ID;
+                row["Navn"] = merc.Name;
+                row["Firma"] = merc.Firm;
+                row["Mail"] = merc.Mail;
+
+                mercView.Rows.Add(row);
             }
-
-            
         }
 
         private void Mobilsystem_Click(object sender, RoutedEventArgs e)
@@ -660,6 +837,8 @@ namespace Unipay_UI
             CardState = false;
             MerchantState = false;
             SearchState = false;
+
+            UpdateView();
         }
 
         private void Kortsystem_Click(object sender, RoutedEventArgs e)
@@ -668,6 +847,8 @@ namespace Unipay_UI
             CardState = true;
             MerchantState = false;
             SearchState = false;
+
+            UpdateView();
         }
 
         private void Søgeresultat_Click(object sender, RoutedEventArgs e)
@@ -676,6 +857,8 @@ namespace Unipay_UI
             CardState = false;
             MerchantState = false;
             SearchState = true;
+
+            UpdateView();
         }
 
         private void Kunde_Click(object sender, RoutedEventArgs e)
@@ -684,6 +867,8 @@ namespace Unipay_UI
             CardState = false;
             MerchantState = true;
             SearchState = false;
+
+            UpdateView();
         }
 
         private void TypeFilter_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -712,6 +897,8 @@ namespace Unipay_UI
         private void Import_Click(object sender, RoutedEventArgs e)
         {
 
+
+            UpdateView();
         }
 
         private void Export_Click(object sender, RoutedEventArgs e)
@@ -722,16 +909,22 @@ namespace Unipay_UI
         private void NewSubscription_Click(object sender, RoutedEventArgs e)
         {
 
+
+            UpdateView();
         }
 
         private void EditSubscription_Click(object sender, RoutedEventArgs e)
         {
 
+
+            UpdateView();
         }
 
         private void DeleteSubscription_Click(object sender, RoutedEventArgs e)
         {
 
+
+            UpdateView();
         }
 
         private void SearchBox_TextChanged(object sender, TextChangedEventArgs e)
