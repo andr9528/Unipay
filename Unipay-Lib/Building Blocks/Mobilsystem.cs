@@ -11,8 +11,6 @@ namespace Unipay_Lib.Building_Blocks
         public bool DelayNETS { get; set; }
         public string MachineAddress { get; set; }
         public string BoxName { get; set; }
-        // might be able to be unified with SimProducer from cardsystem in basesystem
-        public string SimNumber { get; set; }
 
         public Mobilsystem()
         {

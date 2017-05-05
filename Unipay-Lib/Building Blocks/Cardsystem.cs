@@ -12,8 +12,6 @@ namespace Unipay_Lib.Building_Blocks
         public bool DelayCPI { get; set; }
         public string TerminalID { get; set; }
         public string PhysicalID { get; set; }
-        // migth be able to be unified with SimNumber from mobilsystem in basesystem
-        public string SimProducer { get; set; }
 
         public Cardsystem()
         {

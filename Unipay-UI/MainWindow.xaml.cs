@@ -67,7 +67,9 @@ namespace Unipay_UI
             phoneView.Columns.Add("Boks Navn");
             phoneView.Columns.Add("Sim Nummer");
             phoneView.Columns.Add("Opretelses Dato");
+            phoneView.Columns.Add("Luknings Dato");
             phoneView.Columns.Add("Addresse for Enhed");
+            phoneView.Columns.Add("Noter");
 
             cardView.Columns.Add("Merchant ID");
             cardView.Columns.Add("Status");
@@ -77,12 +79,15 @@ namespace Unipay_UI
             cardView.Columns.Add("Phys ID");
             cardView.Columns.Add("Sim Producent");
             cardView.Columns.Add("Opretelses Dato");
+            cardView.Columns.Add("Luknings Dato");
             cardView.Columns.Add("Addresse for Enhed");
+            cardView.Columns.Add("Noter");
 
             mercView.Columns.Add("Merchant ID");
             mercView.Columns.Add("Navn");
             mercView.Columns.Add("Firma");
             mercView.Columns.Add("Mail");
+            mercView.Columns.Add("Noter");
 
             foreach (DataColumn column in phoneView.Columns)
             {
@@ -140,7 +145,8 @@ namespace Unipay_UI
                         if (mobil.Address.Contains(SearchBox.Text) || mobil.BoxName.Contains(SearchBox.Text) || mobil.CreationDate.ToStringDF().Contains(SearchBox.Text)
                             || mobil.ToStringDE().Contains(SearchBox.Text) || mobil.ToStringDN().Contains(SearchBox.Text)
                             || mobil.MachineAddress.Contains(SearchBox.Text) || mobil.Merchant.ID.Contains(SearchBox.Text)
-                            || mobil.SimNumber.Contains(SearchBox.Text))
+                            || mobil.SimNumber.Contains(SearchBox.Text) || mobil.CloseingDate.ToStringDF().Contains(SearchBox.Text)
+                            || mobil.Note.Contains(SearchBox.Text))
                         {
                             SRMobil.Add(mobil);
                         }
@@ -212,6 +218,20 @@ namespace Unipay_UI
                                     SRMobil.Add(mobil);
                                 }
                             }
+                            else if (ColumnAll[ColumnFilter.SelectedIndex] == "Luknings Dato")
+                            {
+                                if (mobil.CloseingDate.ToStringDF().Contains(SearchBox.Text))
+                                {
+                                    SRMobil.Add(mobil);
+                                }
+                            }
+                            else if (ColumnAll[ColumnFilter.SelectedIndex] == "Noter")
+                            {
+                                if (mobil.Note.Contains(SearchBox.Text))
+                                {
+                                    SRMobil.Add(mobil);
+                                }
+                            }
                         }
                         else
                         {
@@ -278,6 +298,20 @@ namespace Unipay_UI
                                     SRMobil.Add(mobil);
                                 }
                             }
+                            else if (ColumnMobil[ColumnFilter.SelectedIndex] == "Luknings Dato")
+                            {
+                                if (mobil.CloseingDate.ToStringDF().Contains(SearchBox.Text))
+                                {
+                                    SRMobil.Add(mobil);
+                                }
+                            }
+                            else if (ColumnMobil[ColumnFilter.SelectedIndex] == "Noter")
+                            {
+                                if (mobil.Note.Contains(SearchBox.Text))
+                                {
+                                    SRMobil.Add(mobil);
+                                }
+                            }
                         }
                     }
                 }
@@ -291,7 +325,8 @@ namespace Unipay_UI
                         if (card.Address.Contains(SearchBox.Text) || card.PhysicalID.Contains(SearchBox.Text) || card.CreationDate.ToStringDF().Contains(SearchBox.Text)
                             || card.ToStringDE().Contains(SearchBox.Text) || card.ToStringDC().Contains(SearchBox.Text)
                             || card.PhysicalID.Contains(SearchBox.Text) || card.Merchant.ID.Contains(SearchBox.Text)
-                            || card.SimProducer.Contains(SearchBox.Text))
+                            || card.SimNumber.Contains(SearchBox.Text) || card.CloseingDate.ToStringDF().Contains(SearchBox.Text)
+                            || card.Note.Contains(SearchBox.Text))
                         {
                             SRCard.Add(card);
                         }
@@ -344,7 +379,7 @@ namespace Unipay_UI
                             }
                             else if (ColumnAll[ColumnFilter.SelectedIndex] == "Sim Producent")
                             {
-                                if (card.SimProducer.Contains(SearchBox.Text))
+                                if (card.SimNumber.Contains(SearchBox.Text))
                                 {
                                     SRCard.Add(card);
                                 }
@@ -359,6 +394,20 @@ namespace Unipay_UI
                             else if (ColumnAll[ColumnFilter.SelectedIndex] == "Addresse for Enhed")
                             {
                                 if (card.Address.Contains(SearchBox.Text))
+                                {
+                                    SRCard.Add(card);
+                                }
+                            }
+                            else if (ColumnAll[ColumnFilter.SelectedIndex] == "Luknings Dato")
+                            {
+                                if (card.CloseingDate.ToStringDF().Contains(SearchBox.Text))
+                                {
+                                    SRCard.Add(card);
+                                }
+                            }
+                            else if (ColumnAll[ColumnFilter.SelectedIndex] == "Noter")
+                            {
+                                if (card.Note.Contains(SearchBox.Text))
                                 {
                                     SRCard.Add(card);
                                 }
@@ -410,7 +459,7 @@ namespace Unipay_UI
                             }
                             else if (ColumnCard[ColumnFilter.SelectedIndex] == "Sim Producent")
                             {
-                                if (card.SimProducer.Contains(SearchBox.Text))
+                                if (card.SimNumber.Contains(SearchBox.Text))
                                 {
                                     SRCard.Add(card);
                                 }
@@ -429,6 +478,20 @@ namespace Unipay_UI
                                     SRCard.Add(card);
                                 }
                             }
+                            else if (ColumnCard[ColumnFilter.SelectedIndex] == "Luknings Dato")
+                            {
+                                if (card.CloseingDate.ToStringDF().Contains(SearchBox.Text))
+                                {
+                                    SRCard.Add(card);
+                                }
+                            }
+                            else if (ColumnCard[ColumnFilter.SelectedIndex] == "Noter")
+                            {
+                                if (card.Note.Contains(SearchBox.Text))
+                                {
+                                    SRCard.Add(card);
+                                }
+                            }
                         }
                     }
                 }
@@ -440,7 +503,8 @@ namespace Unipay_UI
                     if (ColumnFilter.SelectedIndex == 0)
                     {
                         if (merc.ID.Contains(SearchBox.Text) || merc.Name.Contains(SearchBox.Text) 
-                            || merc.Firm.Contains(SearchBox.Text) || merc.Mail.Contains(SearchBox.Text))
+                            || merc.Firm.Contains(SearchBox.Text) || merc.Mail.Contains(SearchBox.Text)
+                            || merc.Note.Contains(SearchBox.Text))
                         {
                             SRMerc.Add(merc);
                         }
@@ -477,6 +541,13 @@ namespace Unipay_UI
                                     SRMerc.Add(merc);
                                 }
                             }
+                            else if (ColumnAll[ColumnFilter.SelectedIndex] == "Noter")
+                            {
+                                if (merc.Note.Contains(SearchBox.Text))
+                                {
+                                    SRMerc.Add(merc);
+                                }
+                            }
                         }
                         else
                         {
@@ -504,6 +575,13 @@ namespace Unipay_UI
                             else if (ColumnMerc[ColumnFilter.SelectedIndex] == "Mail")
                             {
                                 if (merc.Mail.Contains(SearchBox.Text))
+                                {
+                                    SRMerc.Add(merc);
+                                }
+                            }
+                            else if (ColumnMerc[ColumnFilter.SelectedIndex] == "Noter")
+                            {
+                                if (merc.Note.Contains(SearchBox.Text))
                                 {
                                     SRMerc.Add(merc);
                                 }
@@ -590,7 +668,7 @@ namespace Unipay_UI
                         row["Forsinkelse CPI"] = card.ToStringDC();
                         row["Terminal ID"] = card.TerminalID;
                         row["Phys ID"] = card.PhysicalID;
-                        row["Sim Producent"] = card.SimProducer;
+                        row["Sim Producent"] = card.SimNumber;
                         row["Opretelses Dato"] = card.CreationDate.ToStringDF();
                         row["Addresse for Enhed"] = card.Address;
 
@@ -808,7 +886,7 @@ namespace Unipay_UI
                 row["Forsinkelse CPI"] = card.ToStringDC();
                 row["Terminal ID"] = card.TerminalID;
                 row["Phys ID"] = card.PhysicalID;
-                row["Sim Producent"] = card.SimProducer;
+                row["Sim Producent"] = card.SimNumber;
                 row["Opretelses Dato"] = card.CreationDate.ToStringDF();
                 row["Addresse for Enhed"] = card.Address;
 

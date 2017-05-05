@@ -15,6 +15,9 @@ namespace Unipay_Lib.Building_Blocks
         public bool DelayElavon { get; set; }
         public Date CreationDate { get; set; }
         public string Address { get; set; }
+        public string SimNumber { get; set; }
+        public Date CloseingDate { get; set; }
+        public string Note { get; set; }
 
         public string ToStringDE()
         {
