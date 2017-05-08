@@ -13,9 +13,24 @@ namespace Unipay_Lib.Building_Blocks
         public string TerminalID { get; set; }
         public string PhysicalID { get; set; }
 
-        public Cardsystem()
+        public Cardsystem(Merchant merc, Date crd, string address,
+            string simnr, string tid, string physid,
+            bool status = true, bool de = false,
+            bool dc = false, string note = "", Date cld = null)
         {
+            Merchant = merc;
+            CreationDate = crd;
+            CloseingDate = cld;
 
+            Status = status;
+            DelayElavon = de;
+            DelayCPI = dc;
+
+            TerminalID = tid;
+            PhysicalID = physid;
+            Address = address;
+            SimNumber = simnr;
+            Note = note;
         }
         public string ToStringDC()
         {

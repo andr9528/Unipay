@@ -848,9 +848,6 @@ namespace Unipay_UI
                         CardGrid.Visibility = Visibility.Hidden;
                         MercGrid.Visibility = Visibility.Hidden;
                     }
-
-
-
                 }
         }
 

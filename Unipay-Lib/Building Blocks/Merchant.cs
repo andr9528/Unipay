@@ -14,6 +14,15 @@ namespace Unipay_Lib.Building_Blocks
         public string Mail { get; set; }
         public string Note { get; set; }
 
+        public Merchant(string id, string name, string firm, string mail, string note = "")
+        {
+            ID = id;
+            Name = name;
+            Firm = firm;
+            Mail = mail;
+            Note = note;
+        }
+
         public string ToStringM()
         {
             string output = "";
