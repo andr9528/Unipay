@@ -7,6 +7,7 @@ using System.IO;
 using Excel = Microsoft.Office.Interop.Excel;
 using Unipay_Lib.Building_Blocks;
 using System.Reflection;
+using ExcelAddOn;
 
 namespace Unipay_Lib
 {
@@ -18,9 +19,62 @@ namespace Unipay_Lib
         List<Cardsystem> cardsystems = new List<Cardsystem>();
         List<Merchant> merchants = new List<Merchant>();
 
+        string backup = "Datafile.xlsx";
+        
         public void ImportBackup()
         {
-            
+            string path = Path.Combine(Environment.CurrentDirectory, backup);
+            int skip = 0;
+            int sheet = 0;
+
+            foreach (var worksheet in Workbook.Worksheets(@path))
+            {
+                foreach (var row in worksheet.Rows)
+                {
+                    if (skip == 0)
+                    {
+                        continue;
+                    }
+                    skip++;
+                    if (sheet == 0) // if it is the mechants sheet
+                    {
+                        Merchant merc = new Merchant(row.Cells[0].ToString(), row.Cells[1].ToString(), row.Cells[2].ToString(),
+                            row.Cells[3].ToString(), row.Cells[4].ToString());
+
+                        merchants.Add(merc);
+                    }
+                    else if (sheet == 1) // if it is the cardsystems sheet
+                    {
+                        Merchant merc = null;
+                        Date crd = new Date(int.Parse(row.Cells[8].ToString().Split('-')[0]),
+                            int.Parse(row.Cells[8].ToString().Split('-')[1]),
+                            int.Parse(row.Cells[8].ToString().Split('-')[2]));
+                        Date cld = null;
+                        if (row.Cells[9] != null)
+                        {
+                            cld = new Date(int.Parse(row.Cells[9].ToString().Split('-')[0]),
+                            int.Parse(row.Cells[9].ToString().Split('-')[1]),
+                            int.Parse(row.Cells[9].ToString().Split('-')[2]));
+                        }
+
+                        foreach (Merchant merchant in merchants)
+                        {
+                            if (merchant.ID == row.Cells[0].ToString())
+                            {
+                                merc = merchant;
+                            }
+                        }
+
+                        Cardsystem card = new Cardsystem();
+                    }
+                    else if (sheet == 2) // if it is the mobilsystems sheet
+                    {
+
+                    }
+                }
+                sheet++;
+            }
+            repo.GetLists(cardsystems, mobilsystems, merchants);
         }
 
         public void ExportBackup()
@@ -35,7 +89,8 @@ namespace Unipay_Lib
             object misValue = Missing.Value;
 
             xlWB = xlApp.Workbooks.Add(misValue);
-            xlWS = (Excel.Worksheet)xlWB.Worksheets.get_Item(1);
+            xlWS = (Excel.Worksheet)xlWB.Worksheets.get_Item(3);
+            xlWS.Name = "Mobilsystems";
 
             xlWS.Cells[1, 1] = "MerchantID";
             xlWS.Cells[1, 2] = "Status";
@@ -68,6 +123,7 @@ namespace Unipay_Lib
             }
 
             xlWS = (Excel.Worksheet)xlWB.Worksheets.get_Item(2);
+            xlWS.Name = "Cardsystems";
 
             xlWS.Cells[1, 1] = "MerchantID";
             xlWS.Cells[1, 2] = "Status";
@@ -98,7 +154,8 @@ namespace Unipay_Lib
                 }
                 xlWS.Cells[y, 11] = repo.GetCardsystems()[l].Note;
             }
-            xlWS = (Excel.Worksheet)xlWB.Worksheets.get_Item(3);
+            xlWS = (Excel.Worksheet)xlWB.Worksheets.get_Item(1);
+            xlWS.Name = "Merchants";
 
             xlWS.Cells[1, 1] = "ID";
             xlWS.Cells[1, 2] = "Name";
@@ -114,12 +171,14 @@ namespace Unipay_Lib
                 xlWS.Cells[y, 1] = repo.GetMerchants()[l].Mail;
                 xlWS.Cells[y, 1] = repo.GetMerchants()[l].Note;
             }
-            string backup = "Datafile.xls";
+
             string path = Path.Combine(Environment.CurrentDirectory, backup);
 
             xlWB.SaveAs(path, Excel.XlFileFormat.xlWorkbookNormal, misValue,
                 misValue, true, true, Excel.XlSaveAsAccessMode.xlShared, false, false,
                 misValue, misValue, misValue);
+            xlWB.Close(true, misValue, misValue);
+            xlApp.Quit();
         }
     }
 }
