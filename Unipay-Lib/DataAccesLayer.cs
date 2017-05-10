@@ -56,6 +56,35 @@ namespace Unipay_Lib
                             int.Parse(row.Cells[9].ToString().Split('-')[1]),
                             int.Parse(row.Cells[9].ToString().Split('-')[2]));
                         }
+                        bool status = false;
+                        bool de = false;
+                        bool dc = false;
+
+                        if (row.Cells[1].ToString() == "Aktiv")
+                        {
+                            status = true;
+                        }
+                        else
+                        {
+                            status = false;
+                        }
+                        if (row.Cells[2].ToString() == "Forsinket")
+                        {
+                            de = true;
+                        }
+                        else
+                        {
+                            de = false;
+                        }
+                        if (row.Cells[3].ToString() == "Forsinket")
+                        {
+                            dc = true;
+                        }
+                        else
+                        {
+                            dc = false;
+                        }
+
 
                         foreach (Merchant merchant in merchants)
                         {
@@ -65,11 +94,70 @@ namespace Unipay_Lib
                             }
                         }
 
-                        Cardsystem card = new Cardsystem();
+                        Cardsystem card = new Cardsystem(merc, crd, row.Cells[4].ToString(),
+                            row.Cells[5].ToString(), row.Cells[6].ToString(),
+                            row.Cells[7].ToString(), status, de, dc,
+                            row.Cells[10].ToString(), cld);
+
+                        cardsystems.Add(card);
                     }
                     else if (sheet == 2) // if it is the mobilsystems sheet
                     {
+                        Merchant merc = null;
+                        Date crd = new Date(int.Parse(row.Cells[8].ToString().Split('-')[0]),
+                            int.Parse(row.Cells[8].ToString().Split('-')[1]),
+                            int.Parse(row.Cells[8].ToString().Split('-')[2]));
+                        Date cld = null;
+                        if (row.Cells[9] != null)
+                        {
+                            cld = new Date(int.Parse(row.Cells[9].ToString().Split('-')[0]),
+                            int.Parse(row.Cells[9].ToString().Split('-')[1]),
+                            int.Parse(row.Cells[9].ToString().Split('-')[2]));
+                        }
+                        bool status = false;
+                        bool de = false;
+                        bool dn = false;
 
+                        if (row.Cells[1].ToString() == "Aktiv")
+                        {
+                            status = true;
+                        }
+                        else
+                        {
+                            status = false;
+                        }
+                        if (row.Cells[2].ToString() == "Forsinket")
+                        {
+                            de = true;
+                        }
+                        else
+                        {
+                            de = false;
+                        }
+                        if (row.Cells[3].ToString() == "Forsinket")
+                        {
+                            dn = true;
+                        }
+                        else
+                        {
+                            dn = false;
+                        }
+
+
+                        foreach (Merchant merchant in merchants)
+                        {
+                            if (merchant.ID == row.Cells[0].ToString())
+                            {
+                                merc = merchant;
+                            }
+                        }
+
+                        Mobilsystem mobil = new Mobilsystem(merc, crd, row.Cells[4].ToString(),
+                            row.Cells[5].ToString(), row.Cells[6].ToString(),
+                            row.Cells[7].ToString(), status, de, dn,
+                            row.Cells[10].ToString(), cld);
+
+                        mobilsystems.Add(mobil);
                     }
                 }
                 sheet++;

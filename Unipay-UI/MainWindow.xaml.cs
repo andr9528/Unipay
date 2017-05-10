@@ -17,6 +17,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Unipay_Lib;
 using Unipay_Lib.Building_Blocks;
+using Unipay_UI.Functionality_Windows;
 
 namespace Unipay_UI
 {
@@ -983,7 +984,9 @@ namespace Unipay_UI
 
         private void NewSubscription_Click(object sender, RoutedEventArgs e)
         {
+            NewSubscription newsub = new NewSubscription();
 
+            newsub.ShowDialog();
 
             UpdateView();
         }

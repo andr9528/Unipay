@@ -1,0 +1,91 @@
+﻿<Window x:Class="Unipay_UI.Functionality_Windows.NewSubscription"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Unipay_UI.Functionality_Windows"
+        mc:Ignorable="d"
+        Title="NewSubscription" Height="580" Width="610">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="120"/>
+            <ColumnDefinition Width="180"/>
+            <ColumnDefinition Width="120"/>
+            <ColumnDefinition Width="180"/>
+        </Grid.ColumnDefinitions>
+        
+        <ComboBox Grid.Column="1" Grid.Row="0" Name="TypeToCreate"
+                  SelectionChanged="TypeToCreate_SelectionChanged" Height="25" Width="160"/>
+        <ComboBox Grid.Column="3" Grid.Row="0" Name="MerchantSelector"
+                  SelectionChanged="MerchantSelector_SelectionChanged" Height="25" Width="160"/>
+
+
+        <TextBox Grid.Column="0" Grid.Row="0" Text="Opret:" ToolTip="Vælg hvad du gerne vil oprette"
+                     TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" IsReadOnly="True"/>
+        <TextBox Grid.Column="2" Grid.Row="0" Text="Kunder:" ToolTip="Vælg den kunde der skal bindes til systemet, eller opret en ny sammen med systemet"
+                     TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" IsReadOnly="True"/>
+
+        <TextBox Grid.Column="2" Grid.Row="1" Text="ID:" ToolTip="Hvad er Kundens ID? Skal Udfyldes"
+                     TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" IsReadOnly="True"/>
+        <TextBox Grid.Column="2" Grid.Row="2" Text="Navn:" ToolTip="Hvad er Kundens Navn? Skal Udfyldes"
+                     TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" IsReadOnly="True"/>
+        <TextBox Grid.Column="2" Grid.Row="3" Text="Firma:" ToolTip="Hvilket Firma høre vedkommende til? Skal Udfyldes"
+                     TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" IsReadOnly="True"/>
+        <TextBox Grid.Column="2" Grid.Row="4" Text="Mail:" ToolTip="Hvad er vedkommendens Mail? Skal Udfyldes"
+                     TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" IsReadOnly="True"/>
+        <TextBox Grid.Column="2" Grid.Row="5" Text="Note:" ToolTip="Andre ting der skal gemmes?"
+                     TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" IsReadOnly="True"/>
+
+        <TextBox Grid.Column="3" Grid.Row="1" Name="IDText" Width="160"
+                 TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <TextBox Grid.Column="3" Grid.Row="2" Name="NameText" Width="160"
+                 TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <TextBox Grid.Column="3" Grid.Row="3" Name="FirmText" Width="160"
+                 TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <TextBox Grid.Column="3" Grid.Row="4" Name="MailText" Width="160"
+                 TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <TextBox Grid.Column="3" Grid.Row="5" Name="NoteText" Width="160"
+                 TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+        <TextBox Grid.Column="0" Grid.Row="1" Text="Status:" ToolTip="Hvad er Systemets Status? Skal Udfyldes"
+                     TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" IsReadOnly="True"/>
+        <TextBox Grid.Column="0" Grid.Row="2" Text="Addresse:" ToolTip="Hvor er Systemets henne? Skal Udfyldes"
+                     TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" IsReadOnly="True"/>
+        <TextBox Grid.Column="0" Grid.Row="3" Text="Simkort Nummer:" ToolTip="Hvad er Systemets simkort nummer? Skal Udfyldes"
+                     TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" IsReadOnly="True"/>
+        <TextBox Grid.Column="0" Grid.Row="4" Text="Opretelses Dato:" ToolTip="Hvornår blev Systemets oprettet? Skal Udfyldes"
+                     TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" IsReadOnly="True"/>
+        <TextBox Grid.Column="0" Grid.Row="5" Text="Luknings Dato:" ToolTip="Hvornår blev Systemets lukket?"
+                     TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" IsReadOnly="True"/>
+        
+        <Grid Grid.Row="10" Grid.Column="3">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="90"/>
+                <ColumnDefinition Width="90"/>
+            </Grid.ColumnDefinitions>
+
+            <Button Grid.Row="0" Grid.Column="1" Content="Annuller" Name="Cancel" Click="Cancel_Click"
+                    HorizontalAlignment="Center" VerticalAlignment="Center" Height="30" Width="60"/>
+            <Button Grid.Row="0" Grid.Column="0" Content="Okay" Name="Accept" Click="Accept_Click"
+                    HorizontalAlignment="Center" VerticalAlignment="Center" Height="30" Width="60"/>
+        </Grid>
+    </Grid>
+</Window>
