@@ -5,19 +5,20 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Unipay_UI"
         mc:Ignorable="d"
-        Title="MainWindow" Height="730" Width="1210">
+        Title="Unipay Systems" Height="730" Width="1210" Icon="ico.ico">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="100"/>
             <RowDefinition Height="600"/>
         </Grid.RowDefinitions>
-        
+
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="800"/>
+            <ColumnDefinition Width="176"/>
+            <ColumnDefinition Width="625"/>
             <ColumnDefinition Width="400"/>
         </Grid.ColumnDefinitions>
-        
-        <Grid Grid.Column="0" Grid.Row="0">
+
+        <Grid Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2">
             <Grid.RowDefinitions>
                 <RowDefinition Height="100"/>
             </Grid.RowDefinitions>
@@ -34,7 +35,7 @@
             <Button Grid.Column="2" Name="Kunde" Content="Kunder" Height="80" Width="160" Click="Kunde_Click"/>
             <Button Grid.Column="3" Name="Søgeresultat" Content="Søgeresultater" Height="80" Width="160" Click="Søgeresultat_Click"/>
         </Grid>
-        <Grid Grid.Column="1" Grid.Row="0">
+        <Grid Grid.Column="2" Grid.Row="0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="50"/>
                 <RowDefinition Height="50"/>
@@ -61,7 +62,7 @@
                 <ComboBox Grid.Row="1" Name="ColumnFilter" Width="260" Height="20" SelectionChanged="ColumnFilter_SelectionChanged"/>
             </Grid>
         </Grid>
-        <Grid Grid.Column="1" Grid.Row="1">
+        <Grid Grid.Column="2" Grid.Row="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="100"/>
                 <RowDefinition Height="100"/>
@@ -82,8 +83,8 @@
             <Button Grid.Row="3" Grid.Column="1" Name="DeleteSubscription" Content="Slet Abonnement" Width="150" Height="50" Click="DeleteSubscription_Click"/>
 
         </Grid>
-        <DataGrid Grid.Row="1" Grid.Column="0" Height="200" Width="800" Name="MobilGrid" IsReadOnly="True"/>
-        <DataGrid Grid.Row="1" Grid.Column="0" Height="200" Width="800" Name="CardGrid" IsReadOnly="True"/>
-        <DataGrid Grid.Row="1" Grid.Column="0" Height="200" Width="800" Name="MercGrid" IsReadOnly="True"/>
+        <DataGrid Grid.Row="1" Grid.Column="0" Height="200" Width="800" Name="MobilGrid" IsReadOnly="True" Grid.ColumnSpan="2" Margin="0,200,1,200"/>
+        <DataGrid Grid.Row="1" Grid.Column="0" Height="200" Width="800" Name="CardGrid" IsReadOnly="True" Grid.ColumnSpan="2" Margin="0,200,1,200"/>
+        <DataGrid Grid.Row="1" Grid.Column="0" Height="200" Width="800" Name="MercGrid" IsReadOnly="True" Grid.ColumnSpan="2" Margin="0,200,1,200"/>
     </Grid>
 </Window>

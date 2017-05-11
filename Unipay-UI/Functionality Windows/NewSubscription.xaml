@@ -5,12 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Unipay_UI.Functionality_Windows"
         mc:Ignorable="d"
-        Title="NewSubscription" Height="580" Width="610">
+        Title="NewSubscription" Height="450" Width="930">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="50"/>
-            <RowDefinition Height="50"/>
-            <RowDefinition Height="50"/>
             <RowDefinition Height="50"/>
             <RowDefinition Height="50"/>
             <RowDefinition Height="50"/>
@@ -26,53 +23,76 @@
             <ColumnDefinition Width="180"/>
             <ColumnDefinition Width="120"/>
             <ColumnDefinition Width="180"/>
+            <ColumnDefinition Width="120"/>
+            <ColumnDefinition Width="180"/>
         </Grid.ColumnDefinitions>
         
         <ComboBox Grid.Column="1" Grid.Row="0" Name="TypeToCreate"
                   SelectionChanged="TypeToCreate_SelectionChanged" Height="25" Width="160"/>
-        <ComboBox Grid.Column="3" Grid.Row="0" Name="MerchantSelector"
+        <ComboBox Grid.Column="5" Grid.Row="0" Name="MerchantSelector"
                   SelectionChanged="MerchantSelector_SelectionChanged" Height="25" Width="160"/>
 
 
         <TextBox Grid.Column="0" Grid.Row="0" Text="Opret:" ToolTip="Vælg hvad du gerne vil oprette"
                      TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" IsReadOnly="True"/>
-        <TextBox Grid.Column="2" Grid.Row="0" Text="Kunder:" ToolTip="Vælg den kunde der skal bindes til systemet, eller opret en ny sammen med systemet"
+        <TextBox Grid.Column="4" Grid.Row="0" Text="Kunde:" ToolTip="Vælg den kunde der skal bindes til systemet, eller opret en ny sammen med systemet"
                      TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" IsReadOnly="True"/>
 
-        <TextBox Grid.Column="2" Grid.Row="1" Text="ID:" ToolTip="Hvad er Kundens ID? Skal Udfyldes"
+        <TextBox Grid.Column="4" Grid.Row="1" Text="ID:" ToolTip="Hvad er Kundens ID? Skal Udfyldes"
                      TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" IsReadOnly="True"/>
-        <TextBox Grid.Column="2" Grid.Row="2" Text="Navn:" ToolTip="Hvad er Kundens Navn? Skal Udfyldes"
+        <TextBox Grid.Column="4" Grid.Row="2" Text="Navn:" ToolTip="Hvad er Kundens Navn? Skal Udfyldes"
                      TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" IsReadOnly="True"/>
-        <TextBox Grid.Column="2" Grid.Row="3" Text="Firma:" ToolTip="Hvilket Firma høre vedkommende til? Skal Udfyldes"
+        <TextBox Grid.Column="4" Grid.Row="3" Text="Firma:" ToolTip="Hvilket Firma høre vedkommende til? Skal Udfyldes"
                      TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" IsReadOnly="True"/>
-        <TextBox Grid.Column="2" Grid.Row="4" Text="Mail:" ToolTip="Hvad er vedkommendens Mail? Skal Udfyldes"
+        <TextBox Grid.Column="4" Grid.Row="4" Text="Mail:" ToolTip="Hvad er vedkommendens Mail? Skal Udfyldes"
                      TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" IsReadOnly="True"/>
-        <TextBox Grid.Column="2" Grid.Row="5" Text="Note:" ToolTip="Andre ting der skal gemmes?"
+        <TextBox Grid.Column="4" Grid.Row="5" Text="Note:" ToolTip="Andre ting der skal gemmes?"
                      TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" IsReadOnly="True"/>
 
-        <TextBox Grid.Column="3" Grid.Row="1" Name="IDText" Width="160"
+        <TextBox Grid.Column="5" Grid.Row="1" Name="IDText" Width="160"
                  TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        <TextBox Grid.Column="3" Grid.Row="2" Name="NameText" Width="160"
+        <TextBox Grid.Column="5" Grid.Row="2" Name="NameText" Width="160"
                  TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        <TextBox Grid.Column="3" Grid.Row="3" Name="FirmText" Width="160"
+        <TextBox Grid.Column="5" Grid.Row="3" Name="FirmText" Width="160"
                  TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        <TextBox Grid.Column="3" Grid.Row="4" Name="MailText" Width="160"
+        <TextBox Grid.Column="5" Grid.Row="4" Name="MailText" Width="160"
                  TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        <TextBox Grid.Column="3" Grid.Row="5" Name="NoteText" Width="160"
+        <TextBox Grid.Column="5" Grid.Row="5" Name="NoteText" Width="160"
                  TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
         <TextBox Grid.Column="0" Grid.Row="1" Text="Status:" ToolTip="Hvad er Systemets Status? Skal Udfyldes"
-                     TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" IsReadOnly="True"/>
+                     TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" IsReadOnly="True" TextWrapping="Wrap"/>
         <TextBox Grid.Column="0" Grid.Row="2" Text="Addresse:" ToolTip="Hvor er Systemets henne? Skal Udfyldes"
-                     TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" IsReadOnly="True"/>
+                     TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" IsReadOnly="True" TextWrapping="Wrap"/>
         <TextBox Grid.Column="0" Grid.Row="3" Text="Simkort Nummer:" ToolTip="Hvad er Systemets simkort nummer? Skal Udfyldes"
-                     TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" IsReadOnly="True"/>
-        <TextBox Grid.Column="0" Grid.Row="4" Text="Opretelses Dato:" ToolTip="Hvornår blev Systemets oprettet? Skal Udfyldes"
-                     TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" IsReadOnly="True"/>
-        <TextBox Grid.Column="0" Grid.Row="5" Text="Luknings Dato:" ToolTip="Hvornår blev Systemets lukket?"
-                     TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" IsReadOnly="True"/>
-        
-        <Grid Grid.Row="10" Grid.Column="3">
+                     TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" IsReadOnly="True" TextWrapping="Wrap"/>
+        <TextBox Grid.Column="2" Grid.Row="4" Text="Opretelses Dato:" ToolTip="Hvornår blev Systemets oprettet? Skal Udfyldes"
+                     TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" IsReadOnly="True" TextWrapping="Wrap"/>
+        <TextBox Grid.Column="2" Grid.Row="5" Text="Luknings Dato:" ToolTip="Hvornår blev Systemets lukket?"
+                     TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" IsReadOnly="True" TextWrapping="Wrap"/>
+        <TextBox Grid.Column="2" Grid.Row="1" Text="Forsinkelse Elavon:" ToolTip="Er der Forsinkelse fra Elavon?"
+                     TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" IsReadOnly="True" TextWrapping="Wrap"/>
+        <TextBox Grid.Column="2" Grid.Row="2" Text="Forsinkelse NETS:" ToolTip="Er der Forsinkelse fra NETS?" Name="DNETSText"
+                     TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" IsReadOnly="True" TextWrapping="Wrap"/>
+        <TextBox Grid.Column="2" Grid.Row="3" Text="Forsinkelse CPI:" ToolTip="Er der Forsinkelse fra CPI?" Name="DCPIText"
+                     TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" IsReadOnly="True" TextWrapping="Wrap"/>
+        <TextBox Grid.Column="0" Grid.Row="4" Text="MAC Addresse:" ToolTip="Hvad er Maskinens Addresse=" Name="MACAddText"
+                     TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" IsReadOnly="True" TextWrapping="Wrap"/>
+        <TextBox Grid.Column="0" Grid.Row="5" Text="Boks Navn:" ToolTip="Hvad er Boksens Navn?" Name="BoxNameText"
+                     TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" IsReadOnly="True" TextWrapping="Wrap"/>
+        <TextBox Grid.Column="0" Grid.Row="6" Text="Terminal ID:" ToolTip="Hvad er Terminalens ID?" Name="TIDText"
+                     TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" IsReadOnly="True" TextWrapping="Wrap"/>
+        <TextBox Grid.Column="0" Grid.Row="7" Text="Phys ID:" ToolTip="Hvad er terminalens Fysike ID?" Name="PhysIDText"
+                     TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" IsReadOnly="True" TextWrapping="Wrap"/>
+        <TextBox Grid.Column="2" Grid.Row="6" Text="Noter:" ToolTip="Andre ting at gemme?"
+                     TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" IsReadOnly="True" TextWrapping="Wrap"/>
+
+        <ComboBox Grid.Column="1" Grid.Row="1" Name="StatusDrop" Height="25" Width="160" />
+        <ComboBox Grid.Column="3" Grid.Row="1" Name="DElavonDrop" Height="25" Width="160" />
+        <ComboBox Grid.Column="3" Grid.Row="2" Name="DNETSDrop" Height="25" Width="160" />
+        <ComboBox Grid.Column="3" Grid.Row="3" Name="DCPIDrop" Height="25" Width="160" />
+
+        <Grid Grid.Row="7" Grid.Column="5">
             <Grid.RowDefinitions>
                 <RowDefinition Height="50"/>
             </Grid.RowDefinitions>

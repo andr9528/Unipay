@@ -34,20 +34,19 @@ namespace Unipay_Lib
         //
         // should take one argument per list that is to be stored in the repository
         //
-        public void GetLists(List<Cardsystem> card = null, List<Mobilsystem> mobil = null, List<Merchant> merc = null)
+        public void GetCardLists(List<Cardsystem> card)
         {
-            if (card != null)
-            {
-                Cardsystems = card;
-            }
-            if (mobil != null)
-            {
-                Mobilsystems = mobil;
-            }
-            if (merc != null)
-            {
-                Merchants = merc;
-            }
+
+            Cardsystems = card;
+        }
+        public void GetMobilLists(List<Mobilsystem> mobil)
+        {
+
+            Mobilsystems = mobil;
+        }
+        public void GetMercLists(List<Merchant> merc)
+        {
+            Merchants = merc;
         }
         public List<Cardsystem> GetCardsystems()
         {

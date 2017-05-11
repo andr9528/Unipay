@@ -116,7 +116,9 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="ico.ico" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Unipay-Lib\Unipay-Lib.csproj">
       <Project>{022b5c0b-9c0c-49fe-b551-5090be8b778e}</Project>

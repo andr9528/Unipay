@@ -53,6 +53,7 @@ namespace Unipay_UI
         public MainWindow()
         {
             InitializeComponent();
+
             TypeFilter.ItemsSource = Types;
 
             PhoneState = true;
@@ -985,6 +986,7 @@ namespace Unipay_UI
         private void NewSubscription_Click(object sender, RoutedEventArgs e)
         {
             NewSubscription newsub = new NewSubscription();
+            newsub.Title = "Opret";
 
             newsub.ShowDialog();
 

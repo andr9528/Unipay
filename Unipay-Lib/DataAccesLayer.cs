@@ -159,10 +159,13 @@ namespace Unipay_Lib
 
                         mobilsystems.Add(mobil);
                     }
+                    skip = 0;
                 }
                 sheet++;
             }
-            repo.GetLists(cardsystems, mobilsystems, merchants);
+            repo.GetCardLists(cardsystems);
+            repo.GetMobilLists(mobilsystems);
+            repo.GetMercLists(merchants);
         }
 
         public void ExportBackup()
