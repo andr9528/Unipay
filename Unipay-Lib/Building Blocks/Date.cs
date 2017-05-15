@@ -84,7 +84,7 @@ namespace Unipay_Lib.Building_Blocks
             }
             else
             {
-                output += Day + "-";
+                output += Month + "-";
             }
             output += Year;
 

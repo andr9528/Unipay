@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Unipay_Lib;
+using Unipay_Lib.Building_Blocks;
 
 namespace Unipay_UI.Functionality_Windows
 {
@@ -21,21 +22,163 @@ namespace Unipay_UI.Functionality_Windows
     public partial class NewSubscription : Window
     {
         Repository repo = Repository.GetRepository();
-        Control control = new Control();
+        Controler control = new Controler();
+
+        string[] types = new string[] { "Mobilsystem", "Kortsystem", "Kunde"};
+        string[] delays = new string[] { "Ikke Forsinket", "Forsinket" };
+        string[] status = new string[] { "Aktiv", "Inaktiv" };
+        List<string> merchants = new List<string>() { "< Ny Kunde >" };
 
         public NewSubscription()
         {
             InitializeComponent();
+
+            TypeToCreate.ItemsSource = types;
+            TypeToCreate.SelectedIndex = 0;
+
+            DElavonDrop.ItemsSource = delays;
+            DElavonDrop.SelectedIndex = 0;
+
+            DNETSDrop.ItemsSource = delays;
+            DNETSDrop.SelectedIndex = 0;
+
+            DCPIDrop.ItemsSource = delays;
+            DCPIDrop.SelectedIndex = 0;
+
+            StatusDrop.ItemsSource = status;
+            StatusDrop.SelectedIndex = 0;
+
+            foreach (Merchant merc in repo.GetMerchants())
+            {
+                merchants.Add(merc.ToStringM());
+            }
+
+            MerchantSelector.ItemsSource = merchants;
+            MerchantSelector.SelectedIndex = 0;
         }
 
         private void TypeToCreate_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            if (TypeToCreate.SelectedIndex == 0)
+            {
+                DElavonDrop.IsEnabled = true;
+                DNETSDrop.IsEnabled = true;
+                DCPIDrop.IsEnabled = false;
+                StatusDrop.IsEnabled = true;
 
+                MacAddInput.IsEnabled = true;
+                BoxNameInput.IsEnabled = true;
+                TIDInput.IsEnabled = false;
+                PhysInput.IsEnabled = false;
+
+                AddressInput.IsEnabled = true;
+                SimNrInput.IsEnabled = true;
+                NoteSysInput.IsEnabled = true;
+
+                CrDDateInput.IsEnabled = true;
+                CrDMonthInput.IsEnabled = true;
+                CrDYearInput.IsEnabled = true;
+
+                ClDDateInput.IsEnabled = true;
+                ClDMonthInput.IsEnabled = true;
+                ClDYearInput.IsEnabled = true;
+
+                Line1.IsEnabled = true;
+                Line2.IsEnabled = true;
+                Line3.IsEnabled = true;
+                Line4.IsEnabled = true;
+
+                MerchantSelector.IsEnabled = true;
+            }
+            else if (TypeToCreate.SelectedIndex == 1)
+            {
+                DElavonDrop.IsEnabled = true;
+                DNETSDrop.IsEnabled = false;
+                DCPIDrop.IsEnabled = true;
+                StatusDrop.IsEnabled = true;
+
+                MacAddInput.IsEnabled = false;
+                BoxNameInput.IsEnabled = false;
+                TIDInput.IsEnabled = true;
+                PhysInput.IsEnabled = true;
+
+                AddressInput.IsEnabled = true;
+                SimNrInput.IsEnabled = true;
+                NoteSysInput.IsEnabled = true;
+
+                CrDDateInput.IsEnabled = true;
+                CrDMonthInput.IsEnabled = true;
+                CrDYearInput.IsEnabled = true;
+
+                ClDDateInput.IsEnabled = true;
+                ClDMonthInput.IsEnabled = true;
+                ClDYearInput.IsEnabled = true;
+
+                Line1.IsEnabled = true;
+                Line2.IsEnabled = true;
+                Line3.IsEnabled = true;
+                Line4.IsEnabled = true;
+
+                MerchantSelector.IsEnabled = true;
+            }
+            else if (TypeToCreate.SelectedIndex == 2)
+            {
+                DElavonDrop.IsEnabled = false;
+                DNETSDrop.IsEnabled = false;
+                DCPIDrop.IsEnabled = false;
+                StatusDrop.IsEnabled = false;
+
+                MacAddInput.IsEnabled = false;
+                BoxNameInput.IsEnabled = false;
+                TIDInput.IsEnabled = false;
+                PhysInput.IsEnabled = false;
+
+                AddressInput.IsEnabled = false;
+                SimNrInput.IsEnabled = false;
+                NoteSysInput.IsEnabled = false;
+
+                CrDDateInput.IsEnabled = false;
+                CrDMonthInput.IsEnabled = false;
+                CrDYearInput.IsEnabled = false;
+
+                ClDDateInput.IsEnabled = false;
+                ClDMonthInput.IsEnabled = false;
+                ClDYearInput.IsEnabled = false;
+
+                Line1.IsEnabled = false;
+                Line2.IsEnabled = false;
+                Line3.IsEnabled = false;
+                Line4.IsEnabled = false;
+
+                MerchantSelector.IsEnabled = false;
+                MerchantSelector.SelectedIndex = 0;
+            }
         }
 
         private void MerchantSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            if (MerchantSelector.SelectedIndex == 0)
+            {
+                IDInput.IsReadOnly = false;
+                NameInput.IsReadOnly = false;
+                FirmInput.IsReadOnly = false;
+                MailInput.IsReadOnly = false;
+                NoteMercInput.IsReadOnly = false;
+            }
+            else
+            {
+                IDInput.IsReadOnly = true;
+                NameInput.IsReadOnly = true;
+                FirmInput.IsReadOnly = true;
+                MailInput.IsReadOnly = true;
+                NoteMercInput.IsReadOnly = true;
 
+                IDInput.Text = repo.GetMerchants()[MerchantSelector.SelectedIndex - 1].ID;
+                NameInput.Text = repo.GetMerchants()[MerchantSelector.SelectedIndex - 1].Name;
+                FirmInput.Text = repo.GetMerchants()[MerchantSelector.SelectedIndex - 1].Firm;
+                MailInput.Text = repo.GetMerchants()[MerchantSelector.SelectedIndex - 1].Mail;
+                NoteMercInput.Text = repo.GetMerchants()[MerchantSelector.SelectedIndex - 1].Note;
+            }
         }
 
         private void Cancel_Click(object sender, RoutedEventArgs e)
@@ -45,7 +188,51 @@ namespace Unipay_UI.Functionality_Windows
 
         private void Accept_Click(object sender, RoutedEventArgs e)
         {
+            if (TypeToCreate.SelectedIndex == 0 && MerchantSelector.SelectedIndex != 0)
+            {
+                string[] crd = new string[] { CrDDateInput.Text, CrDMonthInput.Text, CrDYearInput.Text};
+                string[] cld = new string[] { ClDDateInput.Text, ClDMonthInput.Text, ClDYearInput.Text };
+                int merchant = MerchantSelector.SelectedIndex - 1;
 
+                control.NewMobil(merchant, delays[DNETSDrop.SelectedIndex], delays[DElavonDrop.SelectedIndex],
+                    status[StatusDrop.SelectedIndex], AddressInput.Text, SimNrInput.Text,
+                    NoteSysInput.Text, MacAddInput.Text, BoxNameInput.Text, crd, cld) ;
+            }
+            else if (TypeToCreate.SelectedIndex == 0 && MerchantSelector.SelectedIndex == 0)
+            {
+                string[] crd = new string[] { CrDDateInput.Text, CrDMonthInput.Text, CrDYearInput.Text };
+                string[] cld = new string[] { ClDDateInput.Text, ClDMonthInput.Text, ClDYearInput.Text };
+                string[] data = new string[] { IDInput.Text, NameInput.Text, FirmInput.Text, MailInput.Text, NoteMercInput.Text };
+
+                control.NewMobilAndMerc(data, delays[DNETSDrop.SelectedIndex], delays[DElavonDrop.SelectedIndex],
+                    status[StatusDrop.SelectedIndex], AddressInput.Text, SimNrInput.Text,
+                    NoteSysInput.Text, MacAddInput.Text, BoxNameInput.Text, crd, cld);
+            }
+            else if (TypeToCreate.SelectedIndex == 1 && MerchantSelector.SelectedIndex != 0)
+            {
+                string[] crd = new string[] { CrDDateInput.Text, CrDMonthInput.Text, CrDYearInput.Text };
+                string[] cld = new string[] { ClDDateInput.Text, ClDMonthInput.Text, ClDYearInput.Text };
+                int merchant = MerchantSelector.SelectedIndex - 1;
+
+                control.NewCard(merchant, delays[DCPIDrop.SelectedIndex], delays[DElavonDrop.SelectedIndex],
+                    status[StatusDrop.SelectedIndex], AddressInput.Text, SimNrInput.Text,
+                    NoteSysInput.Text, TIDInput.Text, PhysInput.Text, crd, cld);
+            }
+            else if (TypeToCreate.SelectedIndex == 1 && MerchantSelector.SelectedIndex == 0)
+            {
+                string[] crd = new string[] { CrDDateInput.Text, CrDMonthInput.Text, CrDYearInput.Text };
+                string[] cld = new string[] { ClDDateInput.Text, ClDMonthInput.Text, ClDYearInput.Text };
+                string[] data = new string[] { IDInput.Text, NameInput.Text, FirmInput.Text, MailInput.Text, NoteMercInput.Text };
+
+                control.NewCardAndMerc(data, delays[DCPIDrop.SelectedIndex], delays[DElavonDrop.SelectedIndex],
+                    status[StatusDrop.SelectedIndex], AddressInput.Text, SimNrInput.Text,
+                    NoteSysInput.Text, TIDInput.Text, PhysInput.Text, crd, cld);
+            }
+            else if (TypeToCreate.SelectedIndex == 2)
+            {
+                string[] data = new string[] { IDInput.Text, NameInput.Text, FirmInput.Text, MailInput.Text, NoteMercInput.Text };
+                control.NewMerc(data);
+            }
 
             Close();
         }

@@ -627,9 +627,11 @@ namespace Unipay_UI
                         row["Sim Nummer"] = mobil.SimNumber;
                         row["Opretelses Dato"] = mobil.CreationDate.ToStringDF();
                         row["Addresse for Enhed"] = mobil.Address;
+                        row["Noter"] = mobil.Note;
 
                         phoneView.Rows.Add(row);
                     }
+                    MobilGrid.ItemsSource = phoneView.AsDataView();
                 }
                 else
                 {
@@ -673,9 +675,11 @@ namespace Unipay_UI
                         row["Sim Producent"] = card.SimNumber;
                         row["Opretelses Dato"] = card.CreationDate.ToStringDF();
                         row["Addresse for Enhed"] = card.Address;
+                        row["Noter"] = card.Note;
 
                         cardView.Rows.Add(row);
                     }
+                    CardGrid.ItemsSource = cardView.AsDataView();
                 }
                 else
                 {
@@ -714,9 +718,11 @@ namespace Unipay_UI
                         row["Navn"] = merc.Name;
                         row["Firma"] = merc.Firm;
                         row["Mail"] = merc.Mail;
+                        row["Noter"] = merc.Note;
 
                         mercView.Rows.Add(row);
                     }
+                    MercGrid.ItemsSource = mercView.AsDataView();
                 }
                 else
                 {
@@ -868,9 +874,11 @@ namespace Unipay_UI
                 row["Sim Nummer"] = mobil.SimNumber;
                 row["Opretelses Dato"] = mobil.CreationDate.ToStringDF();
                 row["Addresse for Enhed"] = mobil.Address;
+                row["Noter"] = mobil.Note;
 
                 phoneView.Rows.Add(row);
             }
+            MobilGrid.ItemsSource = phoneView.AsDataView();
         }
 
         private void SetCardGrid()
@@ -888,9 +896,11 @@ namespace Unipay_UI
                 row["Sim Producent"] = card.SimNumber;
                 row["Opretelses Dato"] = card.CreationDate.ToStringDF();
                 row["Addresse for Enhed"] = card.Address;
+                row["Noter"] = card.Note;
 
                 cardView.Rows.Add(row);
             }
+            CardGrid.ItemsSource = cardView.AsDataView();
         }
 
         private void SetMercGrid()
@@ -903,9 +913,11 @@ namespace Unipay_UI
                 row["Navn"] = merc.Name;
                 row["Firma"] = merc.Firm;
                 row["Mail"] = merc.Mail;
+                row["Noter"] = merc.Note;
 
                 mercView.Rows.Add(row);
             }
+            MercGrid.ItemsSource = mercView.AsDataView();
         }
 
         private void Mobilsystem_Click(object sender, RoutedEventArgs e)
