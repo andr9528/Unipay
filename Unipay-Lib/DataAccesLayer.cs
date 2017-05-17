@@ -7,7 +7,7 @@ using System.IO;
 using Excel = Microsoft.Office.Interop.Excel;
 using Unipay_Lib.Building_Blocks;
 using System.Reflection;
-using ExcelAddOn;
+
 
 namespace Unipay_Lib
 {
@@ -19,150 +19,153 @@ namespace Unipay_Lib
         List<Cardsystem> cardsystems = new List<Cardsystem>();
         List<Merchant> merchants = new List<Merchant>();
 
-        string backup = "Datafile.xlsx";
+        string backup = "Datafile.xls";
         
         public void ImportBackup()
         {
             string path = Path.Combine(Environment.CurrentDirectory, backup);
-            int skip = 0;
             int sheet = 0;
 
-            foreach (var worksheet in Workbook.Worksheets(@path))
+            Excel.Application xlApp = new Excel.Application();
+            xlApp.DisplayAlerts = false;
+
+            Excel.Workbook xlWB;
+
+            object misValue = Missing.Value;
+
+            xlWB = xlApp.Workbooks.Open(path);
+
+
+            foreach (Excel.Worksheet xlWS in xlWB.Worksheets)
             {
-                foreach (var row in worksheet.Rows)
+
+                if (sheet == 0) // if it is merchant sheet
                 {
-                    if (skip == 0)
+                    for (int y = 2; y <= xlWS.UsedRange.Rows.Count; y++)
                     {
-                        continue;
-                    }
-                    skip++;
-                    if (sheet == 0) // if it is the mechants sheet
-                    {
-                        Merchant merc = new Merchant(row.Cells[0].ToString(), row.Cells[1].ToString(), row.Cells[2].ToString(),
-                            row.Cells[3].ToString(), row.Cells[4].ToString());
+                        Merchant merc = new Merchant
+                            (
+                            xlWS.Cells[y, 1].Text,
+                            xlWS.Cells[y, 2].Text,
+                            xlWS.Cells[y, 3].Text,
+                            xlWS.Cells[y, 4].Text,
+                            xlWS.Cells[y, 5].Text
+                            );
 
                         merchants.Add(merc);
                     }
-                    else if (sheet == 1) // if it is the cardsystems sheet
+                    sheet++;
+                }
+                else if (sheet == 1) // if it is cardsystem sheet
+                {
+                    for (int y = 2; y <= xlWS.UsedRange.Rows.Count; y++)
                     {
                         Merchant merc = null;
-                        Date crd = new Date(int.Parse(row.Cells[8].ToString().Split('-')[0]),
-                            int.Parse(row.Cells[8].ToString().Split('-')[1]),
-                            int.Parse(row.Cells[8].ToString().Split('-')[2]));
-                        Date cld = null;
-                        if (row.Cells[9] != null)
-                        {
-                            cld = new Date(int.Parse(row.Cells[9].ToString().Split('-')[0]),
-                            int.Parse(row.Cells[9].ToString().Split('-')[1]),
-                            int.Parse(row.Cells[9].ToString().Split('-')[2]));
-                        }
-                        bool status = false;
-                        bool de = false;
-                        bool dc = false;
-
-                        if (row.Cells[1].ToString() == "Aktiv")
-                        {
-                            status = true;
-                        }
-                        else
-                        {
-                            status = false;
-                        }
-                        if (row.Cells[2].ToString() == "Forsinket")
-                        {
-                            de = true;
-                        }
-                        else
-                        {
-                            de = false;
-                        }
-                        if (row.Cells[3].ToString() == "Forsinket")
-                        {
-                            dc = true;
-                        }
-                        else
-                        {
-                            dc = false;
-                        }
-
+                        bool status = true;
+                        bool delayCPI = false;
+                        bool delayEvalon = false;
+                        Date crd = new Date(int.Parse(xlWS.Cells[y, 9].Text.Split('-')[0]), int.Parse(xlWS.Cells[y, 9].Text.Split('-')[1]), int.Parse(xlWS.Cells[y, 9].Text.Split('-')[2]), "Opretelses Dato");
+                        Date cld = new Date(int.Parse(xlWS.Cells[y, 10].Text.Split('-')[0]), int.Parse(xlWS.Cells[y, 10].Text.Split('-')[1]), int.Parse(xlWS.Cells[y, 10].Text.Split('-')[2]), "Luknings Dato");
 
                         foreach (Merchant merchant in merchants)
                         {
-                            if (merchant.ID == row.Cells[0].ToString())
+                            if (merchant.ID == xlWS.Cells[y, 1].Text)
                             {
                                 merc = merchant;
+                                break;
                             }
                         }
 
-                        Cardsystem card = new Cardsystem(merc, crd, row.Cells[4].ToString(),
-                            row.Cells[5].ToString(), row.Cells[6].ToString(),
-                            row.Cells[7].ToString(), status, de, dc,
-                            row.Cells[10].ToString(), cld);
+                        if (xlWS.Cells[y, 2].Text != "Aktiv")
+                        {
+                            status = false;
+                        }
+
+                        if (xlWS.Cells[y, 3].Text == "Forsinket")
+                        {
+                            delayEvalon = true;
+                        }
+                        if (xlWS.Cells[y, 4].Text == "Forsinket")
+                        {
+                            delayCPI = true;
+                        }
+
+                        Cardsystem card = new Cardsystem
+                            (
+                            merc,
+                            crd,
+                            xlWS.Cells[y, 5].Text,
+                            xlWS.Cells[y, 6].Text,
+                            xlWS.Cells[y, 7].Text,
+                            xlWS.Cells[y, 8].Text,
+                            status,
+                            delayEvalon,
+                            delayCPI,
+                            xlWS.Cells[y, 11].Text,
+                            cld
+                            );
 
                         cardsystems.Add(card);
                     }
-                    else if (sheet == 2) // if it is the mobilsystems sheet
+
+                    sheet++;
+                }
+                else if (sheet == 2) // if it is mobilsystem sheet
+                {
+                    for (int y = 2; y <= xlWS.UsedRange.Rows.Count; y++)
                     {
                         Merchant merc = null;
-                        Date crd = new Date(int.Parse(row.Cells[8].ToString().Split('-')[0]),
-                            int.Parse(row.Cells[8].ToString().Split('-')[1]),
-                            int.Parse(row.Cells[8].ToString().Split('-')[2]));
-                        Date cld = null;
-                        if (row.Cells[9] != null)
-                        {
-                            cld = new Date(int.Parse(row.Cells[9].ToString().Split('-')[0]),
-                            int.Parse(row.Cells[9].ToString().Split('-')[1]),
-                            int.Parse(row.Cells[9].ToString().Split('-')[2]));
-                        }
-                        bool status = false;
-                        bool de = false;
-                        bool dn = false;
-
-                        if (row.Cells[1].ToString() == "Aktiv")
-                        {
-                            status = true;
-                        }
-                        else
-                        {
-                            status = false;
-                        }
-                        if (row.Cells[2].ToString() == "Forsinket")
-                        {
-                            de = true;
-                        }
-                        else
-                        {
-                            de = false;
-                        }
-                        if (row.Cells[3].ToString() == "Forsinket")
-                        {
-                            dn = true;
-                        }
-                        else
-                        {
-                            dn = false;
-                        }
-
+                        bool status = true;
+                        bool delayNETS = false;
+                        bool delayEvalon = false;
+                        Date crd = new Date(int.Parse(xlWS.Cells[y, 9].Text.Split('-')[0]), int.Parse(xlWS.Cells[y, 9].Text.Split('-')[1]), int.Parse(xlWS.Cells[y, 9].Text.Split('-')[2]), "Opretelses Dato");
+                        Date cld = new Date(int.Parse(xlWS.Cells[y, 10].Text.Split('-')[0]), int.Parse(xlWS.Cells[y, 10].Text.Split('-')[1]), int.Parse(xlWS.Cells[y, 10].Text.Split('-')[2]), "Luknings Dato");
 
                         foreach (Merchant merchant in merchants)
                         {
-                            if (merchant.ID == row.Cells[0].ToString())
+                            if (merchant.ID == xlWS.Cells[y, 1].Text)
                             {
                                 merc = merchant;
+                                break;
                             }
                         }
 
-                        Mobilsystem mobil = new Mobilsystem(merc, crd, row.Cells[4].ToString(),
-                            row.Cells[5].ToString(), row.Cells[6].ToString(),
-                            row.Cells[7].ToString(), status, de, dn,
-                            row.Cells[10].ToString(), cld);
+                        if (xlWS.Cells[y, 2].Text != "Aktiv")
+                        {
+                            status = false;
+                        }
+
+                        if (xlWS.Cells[y, 3].Text == "Forsinket")
+                        {
+                            delayEvalon = true;
+                        }
+                        if (xlWS.Cells[y, 4].Text == "Forsinket")
+                        {
+                            delayNETS = true;
+                        }
+
+                        Mobilsystem mobil = new Mobilsystem
+                            (
+                            merc,
+                            crd,
+                            xlWS.Cells[y, 5].Text,
+                            xlWS.Cells[y, 6].Text,
+                            xlWS.Cells[y, 7].Text,
+                            xlWS.Cells[y, 8].Text,
+                            status,
+                            delayEvalon,
+                            delayNETS,
+                            xlWS.Cells[y, 11].Text,
+                            cld
+                            );
 
                         mobilsystems.Add(mobil);
                     }
-                    skip = 0;
+
+                    sheet++;
                 }
-                sheet++;
             }
+
             repo.GetCardLists(cardsystems);
             repo.GetMobilLists(mobilsystems);
             repo.GetMercLists(merchants);
@@ -180,6 +183,9 @@ namespace Unipay_Lib
             object misValue = Missing.Value;
 
             xlWB = xlApp.Workbooks.Add(misValue);
+            xlWB.Worksheets.Add();
+            xlWB.Worksheets.Add();
+
             xlWS = (Excel.Worksheet)xlWB.Worksheets.get_Item(3);
             xlWS.Name = "Mobilsystems";
 
@@ -254,16 +260,21 @@ namespace Unipay_Lib
             xlWS.Cells[1, 4] = "Mail";
             xlWS.Cells[1, 5] = "Note";
 
-            for (int y = 2, l = 0; l < repo.GetCardsystems().Count; y++, l++)
+            for (int y = 2, l = 0; l < repo.GetMerchants().Count; y++, l++)
             {
                 xlWS.Cells[y, 1] = repo.GetMerchants()[l].ID;
-                xlWS.Cells[y, 1] = repo.GetMerchants()[l].Name;
-                xlWS.Cells[y, 1] = repo.GetMerchants()[l].Firm;
-                xlWS.Cells[y, 1] = repo.GetMerchants()[l].Mail;
-                xlWS.Cells[y, 1] = repo.GetMerchants()[l].Note;
+                xlWS.Cells[y, 2] = repo.GetMerchants()[l].Name;
+                xlWS.Cells[y, 3] = repo.GetMerchants()[l].Firm;
+                xlWS.Cells[y, 4] = repo.GetMerchants()[l].Mail;
+                xlWS.Cells[y, 5] = repo.GetMerchants()[l].Note;
             }
 
             string path = Path.Combine(Environment.CurrentDirectory, backup);
+
+            if (File.Exists(path))
+            {
+                File.Delete(path);
+            }
 
             xlWB.SaveAs(path, Excel.XlFileFormat.xlWorkbookNormal, misValue,
                 misValue, true, true, Excel.XlSaveAsAccessMode.xlShared, false, false,

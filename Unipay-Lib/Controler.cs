@@ -116,7 +116,6 @@ namespace Unipay_Lib
                 physcialID, Bstatus, BDElavon, BDCPI, note, ClDate);
 
             cardList.Add(card);
-            merchantList.Add(merchant);
 
             repo.GetCardLists(cardList);
             repo.GetMercLists(merchantList);
