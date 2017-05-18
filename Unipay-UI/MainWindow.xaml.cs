@@ -65,6 +65,8 @@ namespace Unipay_UI
 
             }
 
+            SearchBox.KeyDown += new KeyEventHandler(listenEnter_KeyDown);
+
             PhoneState = true;
             CardState = false;
             MerchantState = false;
@@ -105,13 +107,72 @@ namespace Unipay_UI
             HideUnused();
         }
 
+        private void listenEnter_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                Search();
+            }
+            UpdateView();
+        }
+
         private void Search()
         {
             SRMobil.Clear();
             SRCard.Clear();
             SRMerc.Clear();
 
-            
+            var IESRMobil = from mobil in repo.GetMobilsystems()
+                            where mobil.Address.ToLowerInvariant().Contains(SearchBox.Text.ToLowerInvariant()) ||
+                            mobil.BoxName.ToLowerInvariant().Contains(SearchBox.Text.ToLowerInvariant()) ||
+                            mobil.MachineAddress.ToLowerInvariant().Contains(SearchBox.Text.ToLowerInvariant()) ||
+                            mobil.SimNumber.ToLowerInvariant().Contains(SearchBox.Text.ToLowerInvariant()) ||
+                            mobil.ToStringDE().ToLowerInvariant().Contains(SearchBox.Text.ToLowerInvariant()) ||
+                            mobil.ToStringDN().ToLowerInvariant().Contains(SearchBox.Text.ToLowerInvariant()) ||
+                            mobil.ToStringS().ToLowerInvariant().Contains(SearchBox.Text.ToLowerInvariant()) ||
+                            mobil.Merchant.ID.ToLowerInvariant().Contains(SearchBox.Text.ToLowerInvariant()) ||
+                            mobil.Note.ToLowerInvariant().Contains(SearchBox.Text.ToLowerInvariant()) ||
+                            mobil.CreationDate.ToStringDF().ToLowerInvariant().Contains(SearchBox.Text.ToLowerInvariant()) ||
+                            mobil.CloseingDate.ToStringDF().ToLowerInvariant().Contains(SearchBox.Text.ToLowerInvariant())
+                            select mobil;
+
+            var IESRCard = from card in repo.GetCardsystems()
+                           where card.Address.ToLowerInvariant().Contains(SearchBox.Text.ToLowerInvariant()) ||
+                           card.TerminalID.ToLowerInvariant().Contains(SearchBox.Text.ToLowerInvariant()) ||
+                           card.PhysicalID.ToLowerInvariant().Contains(SearchBox.Text.ToLowerInvariant()) ||
+                           card.SimNumber.ToLowerInvariant().Contains(SearchBox.Text.ToLowerInvariant()) ||
+                           card.ToStringDE().ToLowerInvariant().Contains(SearchBox.Text.ToLowerInvariant()) ||
+                           card.ToStringDC().ToLowerInvariant().Contains(SearchBox.Text.ToLowerInvariant()) ||
+                           card.ToStringS().ToLowerInvariant().Contains(SearchBox.Text.ToLowerInvariant()) ||
+                           card.Merchant.ID.ToLowerInvariant().Contains(SearchBox.Text.ToLowerInvariant()) ||
+                           card.Note.ToLowerInvariant().Contains(SearchBox.Text.ToLowerInvariant()) ||
+                           card.CreationDate.ToStringDF().ToLowerInvariant().Contains(SearchBox.Text.ToLowerInvariant()) ||
+                           card.CloseingDate.ToStringDF().ToLowerInvariant().Contains(SearchBox.Text.ToLowerInvariant())
+                           select card;
+
+            var IESRMerc = from merc in repo.GetMerchants()
+                           where merc.ID.ToLowerInvariant().Contains(SearchBox.Text.ToLowerInvariant()) ||
+                           merc.Name.ToLowerInvariant().Contains(SearchBox.Text.ToLowerInvariant()) ||
+                           merc.Firm.ToLowerInvariant().Contains(SearchBox.Text.ToLowerInvariant()) ||
+                           merc.Mail.ToLowerInvariant().Contains(SearchBox.Text.ToLowerInvariant()) ||
+                           merc.Note.ToLowerInvariant().Contains(SearchBox.Text.ToLowerInvariant())
+                           select merc;
+
+
+            foreach (var mobil in IESRMobil)
+            {
+                SRMobil.Add(mobil);
+            }
+
+            foreach (var card in IESRCard)
+            {
+                SRCard.Add(card);
+            }
+
+            foreach (var merc in IESRMerc)
+            {
+                SRMerc.Add(merc);
+            }
             
         }
 
@@ -464,6 +525,13 @@ namespace Unipay_UI
 
         private void Søgeresultat_Click(object sender, RoutedEventArgs e)
         {
+            if (SearchBox.Text == "")
+            {
+                SRMobil.Clear();
+                SRCard.Clear();
+                SRMerc.Clear();
+            }
+
             PhoneState = false;
             CardState = false;
             MerchantState = false;
@@ -481,30 +549,6 @@ namespace Unipay_UI
 
             UpdateView();
         }
-
-        private void TypeFilter_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (TypeFilter.SelectedIndex == 0)
-            {
-                ColumnFilter.ItemsSource = ColumnAll;
-            }
-            else if (TypeFilter.SelectedIndex == 1)
-            {
-                ColumnFilter.ItemsSource = ColumnMobil;
-            }
-            else if (TypeFilter.SelectedIndex == 2)
-            {
-                ColumnFilter.ItemsSource = ColumnCard;
-            }
-            else if (TypeFilter.SelectedIndex == 3)
-            {
-                ColumnFilter.ItemsSource = ColumnMerc;
-            }
-
-            Search();
-            UpdateView();
-        }
-
         
         private void NewSubscription_Click(object sender, RoutedEventArgs e)
         {
@@ -530,18 +574,35 @@ namespace Unipay_UI
             UpdateView();
         }
 
-        private void SearchBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            Search();
-            UpdateView();
-        }
-
+        #region Unused
         private void ColumnFilter_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             Search();
             UpdateView();
         }
-        #region Unused
+
+        private void TypeFilter_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (TypeFilter.SelectedIndex == 0)
+            {
+                ColumnFilter.ItemsSource = ColumnAll;
+            }
+            else if (TypeFilter.SelectedIndex == 1)
+            {
+                ColumnFilter.ItemsSource = ColumnMobil;
+            }
+            else if (TypeFilter.SelectedIndex == 2)
+            {
+                ColumnFilter.ItemsSource = ColumnCard;
+            }
+            else if (TypeFilter.SelectedIndex == 3)
+            {
+                ColumnFilter.ItemsSource = ColumnMerc;
+            }
+
+            Search();
+            UpdateView();
+        }
         private void Import_Click(object sender, RoutedEventArgs e)
         {
 

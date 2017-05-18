@@ -15,12 +15,19 @@ namespace Unipay_Lib
     {
         Repository repo = Repository.GetRepository();
 
+        char toText = '\'';
+
         List<Mobilsystem> mobilsystems = new List<Mobilsystem>();
         List<Cardsystem> cardsystems = new List<Cardsystem>();
         List<Merchant> merchants = new List<Merchant>();
 
         string backup = "Datafile.xls";
         
+        public DataAccesLayer()
+        {
+            
+        }
+
         public void ImportBackup()
         {
             string path = Path.Combine(Environment.CurrentDirectory, backup);
@@ -203,20 +210,20 @@ namespace Unipay_Lib
 
             for (int y = 2, l = 0; l < repo.GetMobilsystems().Count; y++, l++)
             {
-                xlWS.Cells[y, 1] = repo.GetMobilsystems()[l].Merchant.ID;
-                xlWS.Cells[y, 2] = repo.GetMobilsystems()[l].ToStringS();
-                xlWS.Cells[y, 3] = repo.GetMobilsystems()[l].ToStringDE();
-                xlWS.Cells[y, 4] = repo.GetMobilsystems()[l].ToStringDN();
-                xlWS.Cells[y, 5] = repo.GetMobilsystems()[l].Address;
-                xlWS.Cells[y, 6] = repo.GetMobilsystems()[l].SimNumber;
-                xlWS.Cells[y, 7] = repo.GetMobilsystems()[l].MachineAddress;
-                xlWS.Cells[y, 8] = repo.GetMobilsystems()[l].BoxName;
-                xlWS.Cells[y, 9] = repo.GetMobilsystems()[l].CreationDate.ToStringDF();
+                xlWS.Cells[y, 1] = toText + repo.GetMobilsystems()[l].Merchant.ID;
+                xlWS.Cells[y, 2] = toText + repo.GetMobilsystems()[l].ToStringS();
+                xlWS.Cells[y, 3] = toText + repo.GetMobilsystems()[l].ToStringDE();
+                xlWS.Cells[y, 4] = toText + repo.GetMobilsystems()[l].ToStringDN();
+                xlWS.Cells[y, 5] = toText + repo.GetMobilsystems()[l].Address;
+                xlWS.Cells[y, 6] = toText + repo.GetMobilsystems()[l].SimNumber;
+                xlWS.Cells[y, 7] = toText + repo.GetMobilsystems()[l].MachineAddress;
+                xlWS.Cells[y, 8] = toText + repo.GetMobilsystems()[l].BoxName;
+                xlWS.Cells[y, 9] = toText + repo.GetMobilsystems()[l].CreationDate.ToStringDF();
                 if (repo.GetMobilsystems()[l].CloseingDate != null)
                 {
-                    xlWS.Cells[y, 10] = repo.GetMobilsystems()[l].CloseingDate.ToStringDF();
+                    xlWS.Cells[y, 10] = toText + repo.GetMobilsystems()[l].CloseingDate.ToStringDF();
                 }
-                xlWS.Cells[y, 11] = repo.GetMobilsystems()[l].Note;
+                xlWS.Cells[y, 11] = toText + repo.GetMobilsystems()[l].Note;
             }
 
             xlWS = (Excel.Worksheet)xlWB.Worksheets.get_Item(2);
@@ -236,20 +243,20 @@ namespace Unipay_Lib
 
             for (int y = 2, l = 0; l < repo.GetCardsystems().Count; y++, l++)
             {
-                xlWS.Cells[y, 1] = repo.GetCardsystems()[l].Merchant.ID;
-                xlWS.Cells[y, 2] = repo.GetCardsystems()[l].ToStringS();
-                xlWS.Cells[y, 3] = repo.GetCardsystems()[l].ToStringDE();
-                xlWS.Cells[y, 4] = repo.GetCardsystems()[l].ToStringDC();
-                xlWS.Cells[y, 5] = repo.GetCardsystems()[l].Address;
-                xlWS.Cells[y, 6] = repo.GetCardsystems()[l].SimNumber;
-                xlWS.Cells[y, 7] = repo.GetCardsystems()[l].TerminalID;
-                xlWS.Cells[y, 8] = repo.GetCardsystems()[l].PhysicalID;
-                xlWS.Cells[y, 9] = repo.GetCardsystems()[l].CreationDate.ToStringDF();
+                xlWS.Cells[y, 1] = toText + repo.GetCardsystems()[l].Merchant.ID;
+                xlWS.Cells[y, 2] = toText + repo.GetCardsystems()[l].ToStringS();
+                xlWS.Cells[y, 3] = toText + repo.GetCardsystems()[l].ToStringDE();
+                xlWS.Cells[y, 4] = toText + repo.GetCardsystems()[l].ToStringDC();
+                xlWS.Cells[y, 5] = toText + repo.GetCardsystems()[l].Address;
+                xlWS.Cells[y, 6] = toText + repo.GetCardsystems()[l].SimNumber;
+                xlWS.Cells[y, 7] = toText + repo.GetCardsystems()[l].TerminalID;
+                xlWS.Cells[y, 8] = toText + repo.GetCardsystems()[l].PhysicalID;
+                xlWS.Cells[y, 9] = toText + repo.GetCardsystems()[l].CreationDate.ToStringDF();
                 if (repo.GetCardsystems()[l].CloseingDate != null)
                 {
-                    xlWS.Cells[y, 10] = repo.GetCardsystems()[l].CloseingDate.ToStringDF();
+                    xlWS.Cells[y, 10] = toText + repo.GetCardsystems()[l].CloseingDate.ToStringDF();
                 }
-                xlWS.Cells[y, 11] = repo.GetCardsystems()[l].Note;
+                xlWS.Cells[y, 11] = toText + repo.GetCardsystems()[l].Note;
             }
             xlWS = (Excel.Worksheet)xlWB.Worksheets.get_Item(1);
             xlWS.Name = "Merchants";
@@ -262,11 +269,11 @@ namespace Unipay_Lib
 
             for (int y = 2, l = 0; l < repo.GetMerchants().Count; y++, l++)
             {
-                xlWS.Cells[y, 1] = repo.GetMerchants()[l].ID;
-                xlWS.Cells[y, 2] = repo.GetMerchants()[l].Name;
-                xlWS.Cells[y, 3] = repo.GetMerchants()[l].Firm;
-                xlWS.Cells[y, 4] = repo.GetMerchants()[l].Mail;
-                xlWS.Cells[y, 5] = repo.GetMerchants()[l].Note;
+                xlWS.Cells[y, 1] = toText + repo.GetMerchants()[l].ID;
+                xlWS.Cells[y, 2] = toText + repo.GetMerchants()[l].Name;
+                xlWS.Cells[y, 3] = toText + repo.GetMerchants()[l].Firm;
+                xlWS.Cells[y, 4] = toText + repo.GetMerchants()[l].Mail;
+                xlWS.Cells[y, 5] = toText + repo.GetMerchants()[l].Note;
             }
 
             string path = Path.Combine(Environment.CurrentDirectory, backup);
