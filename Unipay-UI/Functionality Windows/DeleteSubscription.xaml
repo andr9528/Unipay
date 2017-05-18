@@ -5,8 +5,22 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Unipay_UI.Functionality_Windows"
         mc:Ignorable="d"
-        Title="DeleteSubscription" Height="300" Width="300">
+        Title="DeleteSubscription" Height="100" Width="470">
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="180"/>
+            <ColumnDefinition Width="180"/>
+            <ColumnDefinition Width="80"/>
+        </Grid.ColumnDefinitions>
+
+        <ComboBox Grid.Row="0" Grid.Column="0" Name="TypeToDelete" Width="160" Height="25" 
+                  SelectionChanged="TypeToDelete_SelectionChanged" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <ComboBox Grid.Row="0" Grid.Column="1" Name="ObjectToDelete" Width="160" Height="25"
+                  HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <Button Grid.Row="0" Grid.Column="2" Name="Delete" Content="Slet" Height="25" Width="60" 
+                HorizontalAlignment="Center" VerticalAlignment="Center" Click="Delete_Click"/>
     </Grid>
 </Window>

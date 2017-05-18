@@ -562,14 +562,20 @@ namespace Unipay_UI
 
         private void EditSubscription_Click(object sender, RoutedEventArgs e)
         {
+            EditSubscription editsub = new EditSubscription();
+            editsub.Title = "Edit";
 
+            editsub.ShowDialog();
 
             UpdateView();
         }
 
         private void DeleteSubscription_Click(object sender, RoutedEventArgs e)
         {
+            DeleteSubscription delsub = new DeleteSubscription();
+            delsub.Title = "Delete";
 
+            delsub.ShowDialog();
 
             UpdateView();
         }

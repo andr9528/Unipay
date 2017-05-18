@@ -61,65 +61,20 @@ namespace Unipay_UI.Functionality_Windows
         {
             if (TypeToCreate.SelectedIndex == 0)
             {
-                DElavonDrop.IsEnabled = true;
-                DNETSDrop.IsEnabled = true;
+                EnableInputs();
+                
                 DCPIDrop.IsEnabled = false;
-                StatusDrop.IsEnabled = true;
-
-                MacAddInput.IsEnabled = true;
-                BoxNameInput.IsEnabled = true;
                 TIDInput.IsEnabled = false;
                 PhysInput.IsEnabled = false;
 
-                AddressInput.IsEnabled = true;
-                SimNrInput.IsEnabled = true;
-                NoteSysInput.IsEnabled = true;
-
-                CrDDateInput.IsEnabled = true;
-                CrDMonthInput.IsEnabled = true;
-                CrDYearInput.IsEnabled = true;
-
-                ClDDateInput.IsEnabled = true;
-                ClDMonthInput.IsEnabled = true;
-                ClDYearInput.IsEnabled = true;
-
-                Line1.IsEnabled = true;
-                Line2.IsEnabled = true;
-                Line3.IsEnabled = true;
-                Line4.IsEnabled = true;
-
-                MerchantSelector.IsEnabled = true;
             }
             else if (TypeToCreate.SelectedIndex == 1)
             {
-                DElavonDrop.IsEnabled = true;
-                DNETSDrop.IsEnabled = false;
-                DCPIDrop.IsEnabled = true;
-                StatusDrop.IsEnabled = true;
+                EnableInputs();
 
+                DNETSDrop.IsEnabled = false;
                 MacAddInput.IsEnabled = false;
                 BoxNameInput.IsEnabled = false;
-                TIDInput.IsEnabled = true;
-                PhysInput.IsEnabled = true;
-
-                AddressInput.IsEnabled = true;
-                SimNrInput.IsEnabled = true;
-                NoteSysInput.IsEnabled = true;
-
-                CrDDateInput.IsEnabled = true;
-                CrDMonthInput.IsEnabled = true;
-                CrDYearInput.IsEnabled = true;
-
-                ClDDateInput.IsEnabled = true;
-                ClDMonthInput.IsEnabled = true;
-                ClDYearInput.IsEnabled = true;
-
-                Line1.IsEnabled = true;
-                Line2.IsEnabled = true;
-                Line3.IsEnabled = true;
-                Line4.IsEnabled = true;
-
-                MerchantSelector.IsEnabled = true;
             }
             else if (TypeToCreate.SelectedIndex == 2)
             {
@@ -235,6 +190,37 @@ namespace Unipay_UI.Functionality_Windows
             }
 
             Close();
+        }
+        private void EnableInputs()
+        {
+            DElavonDrop.IsEnabled = true;
+            DNETSDrop.IsEnabled = true;
+            DCPIDrop.IsEnabled = true;
+            StatusDrop.IsEnabled = true;
+
+            MacAddInput.IsEnabled = true;
+            BoxNameInput.IsEnabled = true;
+            TIDInput.IsEnabled = true;
+            PhysInput.IsEnabled = true;
+
+            AddressInput.IsEnabled = true;
+            SimNrInput.IsEnabled = true;
+            NoteSysInput.IsEnabled = true;
+
+            CrDDateInput.IsEnabled = true;
+            CrDMonthInput.IsEnabled = true;
+            CrDYearInput.IsEnabled = true;
+
+            ClDDateInput.IsEnabled = true;
+            ClDMonthInput.IsEnabled = true;
+            ClDYearInput.IsEnabled = true;
+
+            Line1.IsEnabled = true;
+            Line2.IsEnabled = true;
+            Line3.IsEnabled = true;
+            Line4.IsEnabled = true;
+
+            MerchantSelector.IsEnabled = true;
         }
     }
 }

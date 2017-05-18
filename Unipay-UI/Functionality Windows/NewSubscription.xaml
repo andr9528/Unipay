@@ -28,9 +28,11 @@
         </Grid.ColumnDefinitions>
         
         <ComboBox Grid.Column="1" Grid.Row="0" Name="TypeToCreate"
-                  SelectionChanged="TypeToCreate_SelectionChanged" Height="25" Width="160"/>
+                  SelectionChanged="TypeToCreate_SelectionChanged" Height="25" Width="160"
+                  HorizontalAlignment="Center" VerticalAlignment="Center"/>
         <ComboBox Grid.Column="5" Grid.Row="0" Name="MerchantSelector"
-                  SelectionChanged="MerchantSelector_SelectionChanged" Height="25" Width="160"/>
+                  SelectionChanged="MerchantSelector_SelectionChanged" Height="25" Width="160"
+                  HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
 
         <TextBox Grid.Column="0" Grid.Row="0" Text="Opret:" ToolTip="Vælg hvad du gerne vil oprette"
@@ -87,10 +89,10 @@
         <TextBox Grid.Column="2" Grid.Row="6" Text="Noter:" ToolTip="Andre ting at gemme?"
                      TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" IsReadOnly="True" TextWrapping="Wrap"/>
 
-        <ComboBox Grid.Column="1" Grid.Row="1" Name="StatusDrop" Height="25" Width="160" />
-        <ComboBox Grid.Column="3" Grid.Row="1" Name="DElavonDrop" Height="25" Width="160" />
-        <ComboBox Grid.Column="3" Grid.Row="2" Name="DNETSDrop" Height="25" Width="160" />
-        <ComboBox Grid.Column="3" Grid.Row="3" Name="DCPIDrop" Height="25" Width="160" />
+        <ComboBox Grid.Column="1" Grid.Row="1" Name="StatusDrop" Height="25" Width="160" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <ComboBox Grid.Column="3" Grid.Row="1" Name="DElavonDrop" Height="25" Width="160" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <ComboBox Grid.Column="3" Grid.Row="2" Name="DNETSDrop" Height="25" Width="160" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <ComboBox Grid.Column="3" Grid.Row="3" Name="DCPIDrop" Height="25" Width="160" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
         <TextBox Grid.Row="2" Grid.Column="1" Width="160" Name="AddressInput" 
                  TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center"/>
