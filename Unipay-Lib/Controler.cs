@@ -9,24 +9,23 @@ namespace Unipay_Lib
 {
     public class Controler
     {
-        List<Mobilsystem> mobilList = new List<Mobilsystem>();
-        List<Cardsystem> cardList = new List<Cardsystem>();
-        List<Merchant> merchantList = new List<Merchant>();
+        List<Mobilsystem> mobilsystems = new List<Mobilsystem>();
+        List<Cardsystem> cardsystems = new List<Cardsystem>();
+        List<Merchant> merchants = new List<Merchant>();
 
         Repository repo = Repository.GetRepository();
 
         public void NewMobil(int merchantIndex, string DNETS, string DElavon, string status,
             string address, string simnr, string note, string MACAddress, string BoxName, string[] CrD, string[] ClD)
         {
-            mobilList = repo.GetMobilsystems();
-            merchantList = repo.GetMerchants();
+            UpdateInternalLists();
 
             bool BDNETS = false;
             bool BDElavon = false;
             bool Bstatus = true;
             Date CrDate = ConvertToDate(CrD);
             Date ClDate = ConvertToDate(ClD);
-            Merchant merchant = merchantList[merchantIndex];
+            Merchant merchant = merchants[merchantIndex];
 
             if (DNETS == "Forsinket")
             {
@@ -44,8 +43,8 @@ namespace Unipay_Lib
             Mobilsystem mobil = new Mobilsystem(merchant, CrDate, address, simnr, MACAddress,
                 BoxName, Bstatus, BDElavon, BDNETS, note, ClDate);
 
-            mobilList.Add(mobil);
-            repo.GetMobilLists(mobilList);
+            mobilsystems.Add(mobil);
+            repo.GetMobilLists(mobilsystems);
         }
 
         
@@ -53,8 +52,7 @@ namespace Unipay_Lib
         public void NewMobilAndMerc(string[] merchantData, string DNETS, string DElavon, string status,
             string address, string simnr, string note, string MACAddress, string BoxName, string[] CrD, string[] ClD)
         {
-            mobilList = repo.GetMobilsystems();
-            merchantList = repo.GetMerchants();
+            UpdateInternalLists();
 
             bool BDNETS = false;
             bool BDElavon = false;
@@ -79,25 +77,24 @@ namespace Unipay_Lib
             Mobilsystem mobil = new Mobilsystem(merchant, CrDate, address, simnr, MACAddress,
                 BoxName, Bstatus, BDElavon, BDNETS, note, ClDate);
 
-            mobilList.Add(mobil);
-            merchantList.Add(merchant);
+            mobilsystems.Add(mobil);
+            merchants.Add(merchant);
 
-            repo.GetMobilLists(mobilList);
-            repo.GetMercLists(merchantList);
+            repo.GetMobilLists(mobilsystems);
+            repo.GetMercLists(merchants);
         }
 
         public void NewCard(int merchantIndex, string DCPI, string DElavon, string status,
             string address, string simnr, string note, string terminalID, string physcialID, string[] CrD, string[] ClD)
         {
-            cardList = repo.GetCardsystems();
-            merchantList = repo.GetMerchants();
+            UpdateInternalLists();
 
             bool BDCPI = false;
             bool BDElavon = false;
             bool Bstatus = true;
             Date CrDate = ConvertToDate(CrD);
             Date ClDate = ConvertToDate(ClD);
-            Merchant merchant = merchantList[merchantIndex];
+            Merchant merchant = merchants[merchantIndex];
 
             if (DCPI == "Forsinket")
             {
@@ -115,17 +112,38 @@ namespace Unipay_Lib
             Cardsystem card = new Cardsystem(merchant, CrDate, address, simnr, terminalID,
                 physcialID, Bstatus, BDElavon, BDCPI, note, ClDate);
 
-            cardList.Add(card);
+            cardsystems.Add(card);
 
-            repo.GetCardLists(cardList);
-            repo.GetMercLists(merchantList);
+            repo.GetCardLists(cardsystems);
+            repo.GetMercLists(merchants);
+        }
+
+        public void Delete(int what, int where)
+        {
+            UpdateInternalLists();
+
+            if (what == 0)
+            {
+                mobilsystems.RemoveAt(where);
+            }
+            else if (what == 1)
+            {
+                cardsystems.RemoveAt(where);
+            }
+            else if (what == 2)
+            {
+                merchants.RemoveAt(where);
+            }
+
+            repo.GetMobilLists(mobilsystems);
+            repo.GetCardLists(cardsystems);
+            repo.GetMercLists(merchants);
         }
 
         public void NewCardAndMerc(string[] merchantData, string DCPI, string DElavon, string status,
             string address, string simnr, string note, string terminalID, string physcialID, string[] CrD, string[] ClD)
         {
-            cardList = repo.GetCardsystems();
-            merchantList = repo.GetMerchants();
+            UpdateInternalLists();
 
             bool BDCPI = false;
             bool BDElavon = false;
@@ -150,21 +168,21 @@ namespace Unipay_Lib
             Cardsystem card = new Cardsystem(merchant, CrDate, address, simnr, terminalID,
                 physcialID, Bstatus, BDElavon, BDCPI, note, ClDate);
 
-            cardList.Add(card);
-            merchantList.Add(merchant);
+            cardsystems.Add(card);
+            merchants.Add(merchant);
 
-            repo.GetCardLists(cardList);
-            repo.GetMercLists(merchantList);
+            repo.GetCardLists(cardsystems);
+            repo.GetMercLists(merchants);
         }
 
         public void NewMerc(string[] data)
         {
-            merchantList = repo.GetMerchants();
+            UpdateInternalLists();
 
             Merchant merchant = new Merchant(data[0], data[1], data[2], data[3], data[4]);
 
-            merchantList.Add(merchant);
-            repo.GetMercLists(merchantList);
+            merchants.Add(merchant);
+            repo.GetMercLists(merchants);
         }
 
         private Date ConvertToDate(string[] arrayDate)
@@ -180,6 +198,12 @@ namespace Unipay_Lib
             Date returnDate = new Date(day, month, year);
 
             return returnDate;
+        }
+        private void UpdateInternalLists()
+        {
+            mobilsystems = repo.GetMobilsystems();
+            cardsystems = repo.GetCardsystems();
+            merchants = repo.GetMerchants();
         }
     }
 }

@@ -27,11 +27,17 @@ namespace Unipay_UI.Functionality_Windows
         string[] types = new string[] { "Mobilsystem", "Kortsystem", "Kunde"};
         string[] delays = new string[] { "Ikke Forsinket", "Forsinket" };
         string[] status = new string[] { "Aktiv", "Inaktiv" };
-        List<string> merchants = new List<string>() { "< Ny Kunde >" };
+        List<string> merchantsSource = new List<string>() { "< Ny Kunde >" };
+
+        List<Mobilsystem> mobilsystems;
+        List<Cardsystem> cardsystems;
+        List<Merchant> merchants;
 
         public NewSubscription()
         {
             InitializeComponent();
+
+            UpdateInternalLists();
 
             TypeToCreate.ItemsSource = types;
             TypeToCreate.SelectedIndex = 0;
@@ -48,12 +54,12 @@ namespace Unipay_UI.Functionality_Windows
             StatusDrop.ItemsSource = status;
             StatusDrop.SelectedIndex = 0;
 
-            foreach (Merchant merc in repo.GetMerchants())
+            foreach (Merchant merc in merchants)
             {
-                merchants.Add(merc.ToStringM());
+                merchantsSource.Add(merc.ToStringM());
             }
 
-            MerchantSelector.ItemsSource = merchants;
+            MerchantSelector.ItemsSource = merchantsSource;
             MerchantSelector.SelectedIndex = 0;
         }
 
@@ -221,6 +227,13 @@ namespace Unipay_UI.Functionality_Windows
             Line4.IsEnabled = true;
 
             MerchantSelector.IsEnabled = true;
+        }
+
+        private void UpdateInternalLists()
+        {
+            mobilsystems = repo.GetMobilsystems();
+            cardsystems = repo.GetCardsystems();
+            merchants = repo.GetMerchants();
         }
     }
 }

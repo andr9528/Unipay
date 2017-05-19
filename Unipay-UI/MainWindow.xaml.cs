@@ -38,6 +38,10 @@ namespace Unipay_UI
         List<Cardsystem> SRCard = new List<Cardsystem>();
         List<Merchant> SRMerc = new List<Merchant>();
 
+        List<Mobilsystem> mobilsystems;
+        List<Cardsystem> cardsystems;
+        List<Merchant> merchants;
+
         Repository repo = Repository.GetRepository();
         Controler control = new Controler();
         DataAccesLayer data = new DataAccesLayer();
@@ -122,7 +126,9 @@ namespace Unipay_UI
             SRCard.Clear();
             SRMerc.Clear();
 
-            var IESRMobil = from mobil in repo.GetMobilsystems()
+            UpdateInternalLists();
+
+            var IESRMobil = from mobil in mobilsystems
                             where mobil.Address.ToLowerInvariant().Contains(SearchBox.Text.ToLowerInvariant()) ||
                             mobil.BoxName.ToLowerInvariant().Contains(SearchBox.Text.ToLowerInvariant()) ||
                             mobil.MachineAddress.ToLowerInvariant().Contains(SearchBox.Text.ToLowerInvariant()) ||
@@ -136,7 +142,7 @@ namespace Unipay_UI
                             mobil.CloseingDate.ToStringDF().ToLowerInvariant().Contains(SearchBox.Text.ToLowerInvariant())
                             select mobil;
 
-            var IESRCard = from card in repo.GetCardsystems()
+            var IESRCard = from card in cardsystems
                            where card.Address.ToLowerInvariant().Contains(SearchBox.Text.ToLowerInvariant()) ||
                            card.TerminalID.ToLowerInvariant().Contains(SearchBox.Text.ToLowerInvariant()) ||
                            card.PhysicalID.ToLowerInvariant().Contains(SearchBox.Text.ToLowerInvariant()) ||
@@ -150,7 +156,7 @@ namespace Unipay_UI
                            card.CloseingDate.ToStringDF().ToLowerInvariant().Contains(SearchBox.Text.ToLowerInvariant())
                            select card;
 
-            var IESRMerc = from merc in repo.GetMerchants()
+            var IESRMerc = from merc in merchants
                            where merc.ID.ToLowerInvariant().Contains(SearchBox.Text.ToLowerInvariant()) ||
                            merc.Name.ToLowerInvariant().Contains(SearchBox.Text.ToLowerInvariant()) ||
                            merc.Firm.ToLowerInvariant().Contains(SearchBox.Text.ToLowerInvariant()) ||
@@ -182,9 +188,11 @@ namespace Unipay_UI
             cardView.Clear();
             mercView.Clear();
 
+            UpdateInternalLists();
+
             if (PhoneState)
                 {
-                if (repo.GetMobilsystems().Count() != 0)
+                if (mobilsystems.Count() != 0)
                 {
                     MobilGrid.Height = 600;
                     CardGrid.Height = 0;
@@ -196,7 +204,7 @@ namespace Unipay_UI
                     CardGrid.Visibility = Visibility.Hidden;
                     MercGrid.Visibility = Visibility.Hidden;
 
-                    foreach (Mobilsystem mobil in repo.GetMobilsystems())
+                    foreach (Mobilsystem mobil in mobilsystems)
                     {
                         DataRow row = phoneView.NewRow();
 
@@ -232,7 +240,7 @@ namespace Unipay_UI
             }
                 else if (CardState)
                 {
-                if (repo.GetCardsystems().Count() != 0)
+                if (cardsystems.Count() != 0)
                 {
                     MobilGrid.Height = 0;
                     CardGrid.Height = 600;
@@ -244,7 +252,7 @@ namespace Unipay_UI
                     CardGrid.Visibility = Visibility.Visible;
                     MercGrid.Visibility = Visibility.Hidden;
 
-                    foreach (Cardsystem card in repo.GetCardsystems())
+                    foreach (Cardsystem card in cardsystems)
                     {
                         DataRow row = cardView.NewRow();
 
@@ -280,7 +288,7 @@ namespace Unipay_UI
             }
                 else if (MerchantState)
                 {
-                if (repo.GetMerchants().Count() != 0)
+                if (merchants.Count() != 0)
                 {
                     MobilGrid.Height = 0;
                     CardGrid.Height = 0;
@@ -292,7 +300,7 @@ namespace Unipay_UI
                     CardGrid.Visibility = Visibility.Hidden;
                     MercGrid.Visibility = Visibility.Visible;
 
-                    foreach (Merchant merc in repo.GetMerchants())
+                    foreach (Merchant merc in merchants)
                     {
                         DataRow row = mercView.NewRow();
 
@@ -578,6 +586,13 @@ namespace Unipay_UI
             delsub.ShowDialog();
 
             UpdateView();
+        }
+
+        private void UpdateInternalLists()
+        {
+            mobilsystems = repo.GetMobilsystems();
+            cardsystems = repo.GetCardsystems();
+            merchants = repo.GetMerchants();
         }
 
         #region Unused

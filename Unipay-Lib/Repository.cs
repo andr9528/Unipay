@@ -36,12 +36,10 @@ namespace Unipay_Lib
         //
         public void GetCardLists(List<Cardsystem> card)
         {
-
             Cardsystems = card;
         }
         public void GetMobilLists(List<Mobilsystem> mobil)
         {
-
             Mobilsystems = mobil;
         }
         public void GetMercLists(List<Merchant> merc)
