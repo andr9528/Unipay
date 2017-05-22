@@ -42,5 +42,18 @@ namespace Unipay_Lib.Building_Blocks
                 return "Ikke Forsinkket";
             }
         }
+
+        public string TostringM()
+        {
+            string output = "";
+
+            output += Merchant.ID + ", ";
+            output += ToStringS() + ", ";
+            output += Address + ", ";
+            output += MachineAddress + ", ";
+            output += BoxName;
+
+            return output;
+        }
     }
 }
