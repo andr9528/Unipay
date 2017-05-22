@@ -7,8 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unipay-UI", "Unipay-UI\Unip
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unipay-Lib", "Unipay-Lib\Unipay-Lib.csproj", "{022B5C0B-9C0C-49FE-B551-5090BE8B778E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unipay-Test", "Unipay-Test\Unipay-Test.csproj", "{38B64EEE-E77B-4889-BDB7-E39C5B5A2A2E}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,10 +21,6 @@ Global
 		{022B5C0B-9C0C-49FE-B551-5090BE8B778E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{022B5C0B-9C0C-49FE-B551-5090BE8B778E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{022B5C0B-9C0C-49FE-B551-5090BE8B778E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{38B64EEE-E77B-4889-BDB7-E39C5B5A2A2E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{38B64EEE-E77B-4889-BDB7-E39C5B5A2A2E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{38B64EEE-E77B-4889-BDB7-E39C5B5A2A2E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{38B64EEE-E77B-4889-BDB7-E39C5B5A2A2E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

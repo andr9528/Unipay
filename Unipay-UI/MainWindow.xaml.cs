@@ -216,6 +216,7 @@ namespace Unipay_UI
                         row["Boks Navn"] = mobil.BoxName;
                         row["Sim Nummer"] = mobil.SimNumber;
                         row["Opretelses Dato"] = mobil.CreationDate.ToStringDF();
+                        row["Luknings Dato"] = mobil.CloseingDate.ToStringDF();
                         row["Addresse for Enhed"] = mobil.Address;
                         row["Noter"] = mobil.Note;
 
@@ -264,6 +265,7 @@ namespace Unipay_UI
                         row["Phys ID"] = card.PhysicalID;
                         row["Sim Producent"] = card.SimNumber;
                         row["Opretelses Dato"] = card.CreationDate.ToStringDF();
+                        row[ "Luknings Dato"] = card.CloseingDate.ToStringDF();
                         row["Addresse for Enhed"] = card.Address;
                         row["Noter"] = card.Note;
 
@@ -594,6 +596,10 @@ namespace Unipay_UI
             cardsystems = repo.GetCardsystems();
             merchants = repo.GetMerchants();
         }
+        private void Exit_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
 
         #region Unused
         private void ColumnFilter_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -685,5 +691,7 @@ namespace Unipay_UI
             ColumnFilter.ItemsSource = ColumnAll;
         }
         #endregion
+
+        
     }
 }

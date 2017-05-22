@@ -47,7 +47,38 @@ namespace Unipay_Lib
             repo.GetMobilLists(mobilsystems);
         }
 
-        
+        public void NewMobil(Merchant merchant, string DNETS, string DElavon, string status,
+            string address, string simnr, string note, string MACAddress, string BoxName, string[] CrD, string[] ClD)
+        {
+            UpdateInternalLists();
+
+            bool BDNETS = false;
+            bool BDElavon = false;
+            bool Bstatus = true;
+            Date CrDate = ConvertToDate(CrD);
+            Date ClDate = ConvertToDate(ClD);
+
+            if (DNETS == "Forsinket")
+            {
+                BDNETS = true;
+            }
+            if (DElavon == "Forsinket")
+            {
+                BDElavon = true;
+            }
+            if (status != "Aktiv")
+            {
+                Bstatus = false;
+            }
+
+            Mobilsystem mobil = new Mobilsystem(merchant, CrDate, address, simnr, MACAddress,
+                BoxName, Bstatus, BDElavon, BDNETS, note, ClDate);
+
+            mobilsystems.Add(mobil);
+            repo.GetMobilLists(mobilsystems);
+        }
+
+
 
         public void NewMobilAndMerc(string[] merchantData, string DNETS, string DElavon, string status,
             string address, string simnr, string note, string MACAddress, string BoxName, string[] CrD, string[] ClD)
@@ -118,6 +149,38 @@ namespace Unipay_Lib
             repo.GetMercLists(merchants);
         }
 
+        public void NewCard(Merchant merchant, string DCPI, string DElavon, string status,
+            string address, string simnr, string note, string terminalID, string physcialID, string[] CrD, string[] ClD)
+        {
+            UpdateInternalLists();
+
+            bool BDCPI = false;
+            bool BDElavon = false;
+            bool Bstatus = true;
+            Date CrDate = ConvertToDate(CrD);
+            Date ClDate = ConvertToDate(ClD);
+
+            if (DCPI == "Forsinket")
+            {
+                BDCPI = true;
+            }
+            if (DElavon == "Forsinket")
+            {
+                BDElavon = true;
+            }
+            if (status != "Aktiv")
+            {
+                Bstatus = false;
+            }
+
+            Cardsystem card = new Cardsystem(merchant, CrDate, address, simnr, terminalID,
+                physcialID, Bstatus, BDElavon, BDCPI, note, ClDate);
+
+            cardsystems.Add(card);
+
+            repo.GetCardLists(cardsystems);
+            repo.GetMercLists(merchants);
+        }
         public void Delete(int what, int where)
         {
             UpdateInternalLists();

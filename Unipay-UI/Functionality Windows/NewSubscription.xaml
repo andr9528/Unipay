@@ -125,11 +125,11 @@
             <TextBox Grid.Row="0" Grid.Column="1" Name="CrDDateInput" Width="30"
                      TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             <TextBox Grid.Row="0" Grid.Column="2" Width="10" Text="-" IsReadOnly="True" Name="Line1"
-                     TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                     TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" IsEnabled="False"/>
             <TextBox Grid.Row="0" Grid.Column="3" Name="CrDMonthInput" Width="30"
                      TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             <TextBox Grid.Row="0" Grid.Column="4"  Width="10" Text="-" IsReadOnly="True" Name="Line2"
-                     TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                     TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" IsEnabled="False"/>
             <TextBox Grid.Row="0" Grid.Column="5" Name="CrDYearInput" Width="40"
                      TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         </Grid>
@@ -149,11 +149,11 @@
             <TextBox Grid.Row="0" Grid.Column="1" Name="ClDDateInput" Width="30"
                      TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             <TextBox Grid.Row="0" Grid.Column="2" Width="10" Text="-" IsReadOnly="True" Name="Line3"
-                     TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                     TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" IsEnabled="False"/>
             <TextBox Grid.Row="0" Grid.Column="3" Name="ClDMonthInput" Width="30"
                      TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             <TextBox Grid.Row="0" Grid.Column="4"  Width="10" Text="-" IsReadOnly="True" Name="Line4"
-                     TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                     TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" IsEnabled="False"/>
             <TextBox Grid.Row="0" Grid.Column="5" Name="ClDYearInput" Width="40"
                      TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         </Grid>

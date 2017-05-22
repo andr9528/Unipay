@@ -106,11 +106,6 @@ namespace Unipay_UI.Functionality_Windows
                 ClDMonthInput.IsEnabled = false;
                 ClDYearInput.IsEnabled = false;
 
-                Line1.IsEnabled = false;
-                Line2.IsEnabled = false;
-                Line3.IsEnabled = false;
-                Line4.IsEnabled = false;
-
                 MerchantSelector.IsEnabled = false;
                 MerchantSelector.SelectedIndex = 0;
             }
@@ -118,6 +113,8 @@ namespace Unipay_UI.Functionality_Windows
 
         private void MerchantSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            UpdateInternalLists();
+
             if (MerchantSelector.SelectedIndex == 0)
             {
                 IDInput.IsReadOnly = false;
@@ -125,6 +122,12 @@ namespace Unipay_UI.Functionality_Windows
                 FirmInput.IsReadOnly = false;
                 MailInput.IsReadOnly = false;
                 NoteMercInput.IsReadOnly = false;
+
+                IDInput.Text = "";
+                NameInput.Text = "";
+                FirmInput.Text = "";
+                MailInput.Text = "";
+                NoteMercInput.Text = "";
             }
             else
             {
@@ -134,11 +137,11 @@ namespace Unipay_UI.Functionality_Windows
                 MailInput.IsReadOnly = true;
                 NoteMercInput.IsReadOnly = true;
 
-                IDInput.Text = repo.GetMerchants()[MerchantSelector.SelectedIndex - 1].ID;
-                NameInput.Text = repo.GetMerchants()[MerchantSelector.SelectedIndex - 1].Name;
-                FirmInput.Text = repo.GetMerchants()[MerchantSelector.SelectedIndex - 1].Firm;
-                MailInput.Text = repo.GetMerchants()[MerchantSelector.SelectedIndex - 1].Mail;
-                NoteMercInput.Text = repo.GetMerchants()[MerchantSelector.SelectedIndex - 1].Note;
+                IDInput.Text = merchants[MerchantSelector.SelectedIndex - 1].ID;
+                NameInput.Text = merchants[MerchantSelector.SelectedIndex - 1].Name;
+                FirmInput.Text = merchants[MerchantSelector.SelectedIndex - 1].Firm;
+                MailInput.Text = merchants[MerchantSelector.SelectedIndex - 1].Mail;
+                NoteMercInput.Text = merchants[MerchantSelector.SelectedIndex - 1].Note;
             }
         }
 
@@ -157,7 +160,7 @@ namespace Unipay_UI.Functionality_Windows
 
                 control.NewMobil(merchant, delays[DNETSDrop.SelectedIndex], delays[DElavonDrop.SelectedIndex],
                     status[StatusDrop.SelectedIndex], AddressInput.Text, SimNrInput.Text,
-                    NoteSysInput.Text, MacAddInput.Text, BoxNameInput.Text, crd, cld) ;
+                    NoteSysInput.Text, MacAddInput.Text, BoxNameInput.Text, crd, cld);
             }
             else if (TypeToCreate.SelectedIndex == 0 && MerchantSelector.SelectedIndex == 0)
             {
@@ -220,11 +223,6 @@ namespace Unipay_UI.Functionality_Windows
             ClDDateInput.IsEnabled = true;
             ClDMonthInput.IsEnabled = true;
             ClDYearInput.IsEnabled = true;
-
-            Line1.IsEnabled = true;
-            Line2.IsEnabled = true;
-            Line3.IsEnabled = true;
-            Line4.IsEnabled = true;
 
             MerchantSelector.IsEnabled = true;
         }

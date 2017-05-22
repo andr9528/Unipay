@@ -45,10 +45,8 @@
     <Compile Include="Building Blocks\Date.cs" />
     <Compile Include="Building Blocks\Merchant.cs" />
     <Compile Include="Building Blocks\Mobilsystem.cs" />
-    <Compile Include="ExportToPDF.cs" />
     <Compile Include="DataAccesLayer.cs" />
     <Compile Include="Controler.cs" />
-    <Compile Include="ImportTrash.cs" />
     <Compile Include="Repository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
