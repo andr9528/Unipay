@@ -43,7 +43,6 @@ namespace Unipay_UI
         List<Merchant> merchants;
 
         Repository repo = Repository.GetRepository();
-        Controler control = new Controler();
         DataAccesLayer data = new DataAccesLayer();
 
         DataTable phoneView = new DataTable();

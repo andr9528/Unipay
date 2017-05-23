@@ -144,9 +144,7 @@ namespace Unipay_Lib
                 physcialID, Bstatus, BDElavon, BDCPI, note, ClDate);
 
             cardsystems.Add(card);
-
             repo.GetCardLists(cardsystems);
-            repo.GetMercLists(merchants);
         }
 
         public void NewCard(Merchant merchant, string DCPI, string DElavon, string status,
