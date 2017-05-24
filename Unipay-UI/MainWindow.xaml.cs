@@ -115,8 +115,8 @@ namespace Unipay_UI
             if (e.Key == Key.Enter)
             {
                 Search();
+                UpdateView();
             }
-            UpdateView();
         }
 
         private void Search()
@@ -343,10 +343,6 @@ namespace Unipay_UI
                         MobilGrid.Visibility = Visibility.Visible;
                         CardGrid.Visibility = Visibility.Visible;
                         MercGrid.Visibility = Visibility.Visible;
-
-                        SetMobilGrid();
-                        SetCardGrid();
-                        SetMercGrid();
                     }
                     else if (SRMobil.Count != 0 && SRCard.Count != 0 && SRMerc.Count == 0) // all but Merc have hits
                     {
@@ -359,9 +355,6 @@ namespace Unipay_UI
                         MobilGrid.Visibility = Visibility.Visible;
                         CardGrid.Visibility = Visibility.Visible;
                         MercGrid.Visibility = Visibility.Hidden;
-
-                        SetMobilGrid();
-                        SetCardGrid();
                     }
                     else if (SRMobil.Count != 0 && SRCard.Count == 0 && SRMerc.Count != 0) // all but Card have hits
                     {
@@ -374,9 +367,6 @@ namespace Unipay_UI
                         MobilGrid.Visibility = Visibility.Visible;
                         CardGrid.Visibility = Visibility.Hidden;
                         MercGrid.Visibility = Visibility.Visible;
-
-                        SetMobilGrid();
-                        SetMercGrid();
                     }
                     else if (SRMobil.Count == 0 && SRCard.Count != 0 && SRMerc.Count != 0) // all but Mobil have hits
                     {
@@ -389,9 +379,6 @@ namespace Unipay_UI
                         MobilGrid.Visibility = Visibility.Hidden;
                         CardGrid.Visibility = Visibility.Visible;
                         MercGrid.Visibility = Visibility.Visible;
-
-                        SetCardGrid();
-                        SetMercGrid();
                     }
                     else if (SRMobil.Count != 0 && SRCard.Count == 0 && SRMerc.Count == 0) // Mobil have hits
                     {
@@ -404,8 +391,6 @@ namespace Unipay_UI
                         MobilGrid.Visibility = Visibility.Visible;
                         CardGrid.Visibility = Visibility.Hidden;
                         MercGrid.Visibility = Visibility.Hidden;
-
-                        SetMobilGrid();
                     }
                     else if (SRMobil.Count == 0 && SRCard.Count != 0 && SRMerc.Count == 0) // Card have hits
                     {
@@ -418,8 +403,6 @@ namespace Unipay_UI
                         MobilGrid.Visibility = Visibility.Hidden;
                         CardGrid.Visibility = Visibility.Visible;
                         MercGrid.Visibility = Visibility.Hidden;
-
-                        SetCardGrid();
                     }
                     else if (SRMobil.Count == 0 && SRCard.Count == 0 && SRMerc.Count != 0) // Merc have hits
                     {
@@ -432,8 +415,6 @@ namespace Unipay_UI
                         MobilGrid.Visibility = Visibility.Hidden;
                         CardGrid.Visibility = Visibility.Hidden;
                         MercGrid.Visibility = Visibility.Visible;
-
-                        SetMercGrid();
                     }
                     else if (SRMobil.Count == 0 && SRCard.Count == 0 && SRMerc.Count == 0) // None have hits
                     {
@@ -447,8 +428,19 @@ namespace Unipay_UI
                         CardGrid.Visibility = Visibility.Hidden;
                         MercGrid.Visibility = Visibility.Hidden;
                     }
+                if (SRMobil.Count != 0)
+                {
+                    SetMobilGrid();
                 }
-            data.ExportBackup();
+                if (SRCard.Count != 0)
+                {
+                    SetCardGrid();
+                }
+                if (SRMerc.Count != 0)
+                {
+                    SetMercGrid();
+                }
+            }
         }
 
         private void SetMobilGrid()
@@ -465,6 +457,7 @@ namespace Unipay_UI
                 row["Boks Navn"] = mobil.BoxName;
                 row["Sim Nummer"] = mobil.SimNumber;
                 row["Opretelses Dato"] = mobil.CreationDate.ToStringDF();
+                row["Luknings Dato"] = mobil.CloseingDate.ToStringDF();
                 row["Addresse for Enhed"] = mobil.Address;
                 row["Noter"] = mobil.Note;
 
@@ -487,6 +480,7 @@ namespace Unipay_UI
                 row["Phys ID"] = card.PhysicalID;
                 row["Sim Producent"] = card.SimNumber;
                 row["Opretelses Dato"] = card.CreationDate.ToStringDF();
+                row["Luknings Dato"] = card.CloseingDate.ToStringDF();
                 row["Addresse for Enhed"] = card.Address;
                 row["Noter"] = card.Note;
 
@@ -566,6 +560,8 @@ namespace Unipay_UI
 
             newsub.ShowDialog();
 
+            data.ExportBackup();
+
             UpdateView();
         }
 
@@ -576,6 +572,8 @@ namespace Unipay_UI
 
             editsub.ShowDialog();
 
+            data.ExportBackup();
+
             UpdateView();
         }
 
@@ -585,6 +583,8 @@ namespace Unipay_UI
             delsub.Title = "Delete";
 
             delsub.ShowDialog();
+
+            data.ExportBackup();
 
             UpdateView();
         }
