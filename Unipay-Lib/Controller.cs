@@ -7,7 +7,7 @@ using Unipay_Lib.Building_Blocks;
 
 namespace Unipay_Lib
 {
-    public class Controler
+    public class Controller
     {
         List<Mobilesystem> mobilesystems = new List<Mobilesystem>();
         List<Cardsystem> cardsystems = new List<Cardsystem>();
@@ -15,7 +15,7 @@ namespace Unipay_Lib
 
         Repository repo = Repository.GetRepository();
 
-        public void NewMobil(int merchantIndex, string DNETS, string DElavon, string status,
+        public void NewMobile(int merchantIndex, string DNETS, string DElavon, string status,
             string address, string simnr, string note, string MACAddress, string BoxName, string[] CrD, string[] ClD)
         {
             UpdateInternalLists();
@@ -47,7 +47,7 @@ namespace Unipay_Lib
             repo.GetMobileLists(mobilesystems);
         }
 
-        public void NewMobil(Merchant merchant, string DNETS, string DElavon, string status,
+        public void NewMobile(Merchant merchant, string DNETS, string DElavon, string status,
             string address, string simnr, string note, string MACAddress, string BoxName, string[] CrD, string[] ClD)
         {
             UpdateInternalLists();
@@ -80,7 +80,7 @@ namespace Unipay_Lib
 
 
 
-        public void NewMobilAndMerc(string[] merchantData, string DNETS, string DElavon, string status,
+        public void NewMobileAndMerc(string[] merchantData, string DNETS, string DElavon, string status,
             string address, string simnr, string note, string MACAddress, string BoxName, string[] CrD, string[] ClD)
         {
             UpdateInternalLists();

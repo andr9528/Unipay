@@ -22,7 +22,7 @@ namespace Unipay_UI.Functionality_Windows
     public partial class NewSubscription : Window
     {
         Repository repo = Repository.GetRepository();
-        Controler control = new Controler();
+        Controller control = new Controller();
 
         string[] types = new string[] { "Mobilsystem", "Kortsystem", "Kunde"};
         string[] delays = new string[] { "Ikke Forsinket", "Forsinket" };
@@ -158,7 +158,7 @@ namespace Unipay_UI.Functionality_Windows
                 string[] cld = new string[] { ClDDateInput.Text, ClDMonthInput.Text, ClDYearInput.Text };
                 int merchant = MerchantSelector.SelectedIndex - 1;
 
-                control.NewMobil(merchant, delays[DNETSDrop.SelectedIndex], delays[DElavonDrop.SelectedIndex],
+                control.NewMobile(merchant, delays[DNETSDrop.SelectedIndex], delays[DElavonDrop.SelectedIndex],
                     status[StatusDrop.SelectedIndex], AddressInput.Text, SimNrInput.Text,
                     NoteSysInput.Text, MacAddInput.Text, BoxNameInput.Text, crd, cld);
             }
@@ -168,7 +168,7 @@ namespace Unipay_UI.Functionality_Windows
                 string[] cld = new string[] { ClDDateInput.Text, ClDMonthInput.Text, ClDYearInput.Text };
                 string[] data = new string[] { IDInput.Text, NameInput.Text, FirmInput.Text, MailInput.Text, NoteMercInput.Text };
 
-                control.NewMobilAndMerc(data, delays[DNETSDrop.SelectedIndex], delays[DElavonDrop.SelectedIndex],
+                control.NewMobileAndMerc(data, delays[DNETSDrop.SelectedIndex], delays[DElavonDrop.SelectedIndex],
                     status[StatusDrop.SelectedIndex], AddressInput.Text, SimNrInput.Text,
                     NoteSysInput.Text, MacAddInput.Text, BoxNameInput.Text, crd, cld);
             }

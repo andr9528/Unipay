@@ -68,7 +68,7 @@ namespace Unipay_UI
 
             }
 
-            SearchBox.KeyDown += new KeyEventHandler(listenEnter_KeyDown);
+            SearchBox.KeyDown += new KeyEventHandler(ListenEnter_KeyDown);
 
             PhoneState = true;
             CardState = false;
@@ -109,7 +109,7 @@ namespace Unipay_UI
             HideUnused();
         }
 
-        private void listenEnter_KeyDown(object sender, KeyEventArgs e)
+        private void ListenEnter_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Enter)
             {

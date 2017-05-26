@@ -24,7 +24,7 @@ namespace Unipay_UI.Functionality_Windows
         //1305921897 - Simons CPR nr
 
         Repository repo = Repository.GetRepository();
-        Controler control = new Controler();
+        Controller control = new Controller();
 
         string[] types = new string[] { "Mobilsystem", "Kortsystem", "Kunde" };
         string[] delays = new string[] { "Ikke Forsinket", "Forsinket" };
@@ -247,7 +247,7 @@ namespace Unipay_UI.Functionality_Windows
                     }
                 }
 
-                control.NewMobil(merchant, delays[DNETSDrop.SelectedIndex], delays[DElavonDrop.SelectedIndex],
+                control.NewMobile(merchant, delays[DNETSDrop.SelectedIndex], delays[DElavonDrop.SelectedIndex],
                     status[StatusDrop.SelectedIndex], AddressInput.Text, SimNrInput.Text,
                     NoteSysInput.Text, MacAddInput.Text, BoxNameInput.Text, crd, cld);
 

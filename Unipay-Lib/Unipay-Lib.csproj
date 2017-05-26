@@ -46,7 +46,7 @@
     <Compile Include="Building Blocks\Merchant.cs" />
     <Compile Include="Building Blocks\Mobilesystem.cs" />
     <Compile Include="DataAccessLayer.cs" />
-    <Compile Include="Controler.cs" />
+    <Compile Include="Controller.cs" />
     <Compile Include="Repository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

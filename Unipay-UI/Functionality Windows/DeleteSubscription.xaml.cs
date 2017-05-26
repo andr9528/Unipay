@@ -26,7 +26,7 @@ namespace Unipay_UI.Functionality_Windows
         List<string> objects = new List<string>();
 
         Repository repo = Repository.GetRepository();
-        Controler control = new Controler();
+        Controller control = new Controller();
 
         List<Mobilesystem> mobilesystems;
         List<Cardsystem> cardsystems;
