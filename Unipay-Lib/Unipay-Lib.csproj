@@ -40,12 +40,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Building Blocks\Basesystem.cs" />
+    <Compile Include="Building Blocks\Subscription.cs" />
     <Compile Include="Building Blocks\Cardsystem.cs" />
     <Compile Include="Building Blocks\Date.cs" />
     <Compile Include="Building Blocks\Merchant.cs" />
-    <Compile Include="Building Blocks\Mobilsystem.cs" />
-    <Compile Include="DataAccesLayer.cs" />
+    <Compile Include="Building Blocks\Mobilesystem.cs" />
+    <Compile Include="DataAccessLayer.cs" />
     <Compile Include="Controler.cs" />
     <Compile Include="Repository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

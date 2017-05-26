@@ -29,7 +29,7 @@ namespace Unipay_UI.Functionality_Windows
         string[] status = new string[] { "Aktiv", "Inaktiv" };
         List<string> merchantsSource = new List<string>() { "< Ny Kunde >" };
 
-        List<Mobilsystem> mobilsystems;
+        List<Mobilesystem> mobilesystems;
         List<Cardsystem> cardsystems;
         List<Merchant> merchants;
 
@@ -229,7 +229,7 @@ namespace Unipay_UI.Functionality_Windows
 
         private void UpdateInternalLists()
         {
-            mobilsystems = repo.GetMobilsystems();
+            mobilesystems = repo.GetMobilesystems();
             cardsystems = repo.GetCardsystems();
             merchants = repo.GetMerchants();
         }

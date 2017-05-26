@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Unipay_Lib.Building_Blocks
 {
-    public class Basesystem
+    public class Subscription
     {
         public Merchant Merchant { get; set; }
         // is true while it is active and false while it is inactive.

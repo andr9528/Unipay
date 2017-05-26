@@ -9,7 +9,7 @@ namespace Unipay_Lib
 {
     public class Controler
     {
-        List<Mobilsystem> mobilsystems = new List<Mobilsystem>();
+        List<Mobilesystem> mobilesystems = new List<Mobilesystem>();
         List<Cardsystem> cardsystems = new List<Cardsystem>();
         List<Merchant> merchants = new List<Merchant>();
 
@@ -40,11 +40,11 @@ namespace Unipay_Lib
                 Bstatus = false;
             }
 
-            Mobilsystem mobil = new Mobilsystem(merchant, CrDate, address, simnr, MACAddress,
+            Mobilesystem mobile = new Mobilesystem(merchant, CrDate, address, simnr, MACAddress,
                 BoxName, Bstatus, BDElavon, BDNETS, note, ClDate);
 
-            mobilsystems.Add(mobil);
-            repo.GetMobilLists(mobilsystems);
+            mobilesystems.Add(mobile);
+            repo.GetMobileLists(mobilesystems);
         }
 
         public void NewMobil(Merchant merchant, string DNETS, string DElavon, string status,
@@ -71,11 +71,11 @@ namespace Unipay_Lib
                 Bstatus = false;
             }
 
-            Mobilsystem mobil = new Mobilsystem(merchant, CrDate, address, simnr, MACAddress,
+            Mobilesystem mobile = new Mobilesystem(merchant, CrDate, address, simnr, MACAddress,
                 BoxName, Bstatus, BDElavon, BDNETS, note, ClDate);
 
-            mobilsystems.Add(mobil);
-            repo.GetMobilLists(mobilsystems);
+            mobilesystems.Add(mobile);
+            repo.GetMobileLists(mobilesystems);
         }
 
 
@@ -105,13 +105,13 @@ namespace Unipay_Lib
                 Bstatus = false;
             }
 
-            Mobilsystem mobil = new Mobilsystem(merchant, CrDate, address, simnr, MACAddress,
+            Mobilesystem mobile = new Mobilesystem(merchant, CrDate, address, simnr, MACAddress,
                 BoxName, Bstatus, BDElavon, BDNETS, note, ClDate);
 
-            mobilsystems.Add(mobil);
+            mobilesystems.Add(mobile);
             merchants.Add(merchant);
 
-            repo.GetMobilLists(mobilsystems);
+            repo.GetMobileLists(mobilesystems);
             repo.GetMercLists(merchants);
         }
 
@@ -185,7 +185,7 @@ namespace Unipay_Lib
 
             if (what == 0)
             {
-                mobilsystems.RemoveAt(where);
+                mobilesystems.RemoveAt(where);
             }
             else if (what == 1)
             {
@@ -196,7 +196,7 @@ namespace Unipay_Lib
                 merchants.RemoveAt(where);
             }
 
-            repo.GetMobilLists(mobilsystems);
+            repo.GetMobileLists(mobilesystems);
             repo.GetCardLists(cardsystems);
             repo.GetMercLists(merchants);
         }
@@ -262,7 +262,7 @@ namespace Unipay_Lib
         }
         private void UpdateInternalLists()
         {
-            mobilsystems = repo.GetMobilsystems();
+            mobilesystems = repo.GetMobilesystems();
             cardsystems = repo.GetCardsystems();
             merchants = repo.GetMerchants();
         }

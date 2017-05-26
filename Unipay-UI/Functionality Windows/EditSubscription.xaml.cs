@@ -32,7 +32,7 @@ namespace Unipay_UI.Functionality_Windows
 
         List<string> objects = new List<string>();
 
-        List<Mobilsystem> mobilsystems;
+        List<Mobilesystem> mobilesystems;
         List<Cardsystem> cardsystems;
         List<Merchant> merchants;
 
@@ -68,9 +68,9 @@ namespace Unipay_UI.Functionality_Windows
 
             if (TypeToEdit.SelectedIndex == 0)
             {
-                foreach (var mobil in mobilsystems)
+                foreach (var mobile in mobilesystems)
                 {
-                    objects.Add(mobil.TostringM());
+                    objects.Add(mobile.TostringM());
                 }
 
                 EnableInputs();
@@ -147,39 +147,39 @@ namespace Unipay_UI.Functionality_Windows
 
             if (TypeToEdit.SelectedIndex == 0 && ObjectToEdit.SelectedIndex != -1)
             {
-                if (mobilsystems[ObjectToEdit.SelectedIndex].DelayElavon != false)
+                if (mobilesystems[ObjectToEdit.SelectedIndex].DelayElavon != false)
                 {
                     DElavonDrop.SelectedIndex = 1;
                 }
-                if (mobilsystems[ObjectToEdit.SelectedIndex].DelayNETS != false)
+                if (mobilesystems[ObjectToEdit.SelectedIndex].DelayNETS != false)
                 {
                     DNETSDrop.SelectedIndex = 1;
                 }
-                if (mobilsystems[ObjectToEdit.SelectedIndex].Status != true)
+                if (mobilesystems[ObjectToEdit.SelectedIndex].Status != true)
                 {
                     StatusDrop.SelectedIndex = 1;
                 }
 
-                MacAddInput.Text = mobilsystems[ObjectToEdit.SelectedIndex].MachineAddress;
-                BoxNameInput.Text = mobilsystems[ObjectToEdit.SelectedIndex].BoxName;
+                MacAddInput.Text = mobilesystems[ObjectToEdit.SelectedIndex].MACAddress;
+                BoxNameInput.Text = mobilesystems[ObjectToEdit.SelectedIndex].BoxName;
 
-                AddressInput.Text = mobilsystems[ObjectToEdit.SelectedIndex].Address;
-                SimNrInput.Text = mobilsystems[ObjectToEdit.SelectedIndex].SimNumber;
-                NoteSysInput.Text = mobilsystems[ObjectToEdit.SelectedIndex].Note;
+                AddressInput.Text = mobilesystems[ObjectToEdit.SelectedIndex].Address;
+                SimNrInput.Text = mobilesystems[ObjectToEdit.SelectedIndex].SimNumber;
+                NoteSysInput.Text = mobilesystems[ObjectToEdit.SelectedIndex].Note;
 
-                CrDDateInput.Text = "" + mobilsystems[ObjectToEdit.SelectedIndex].CreationDate.Day;
-                CrDMonthInput.Text = "" + mobilsystems[ObjectToEdit.SelectedIndex].CreationDate.Month;
-                CrDYearInput.Text = "" + mobilsystems[ObjectToEdit.SelectedIndex].CreationDate.Year;
+                CrDDateInput.Text = "" + mobilesystems[ObjectToEdit.SelectedIndex].CreationDate.Day;
+                CrDMonthInput.Text = "" + mobilesystems[ObjectToEdit.SelectedIndex].CreationDate.Month;
+                CrDYearInput.Text = "" + mobilesystems[ObjectToEdit.SelectedIndex].CreationDate.Year;
 
-                ClDDateInput.Text = "" + mobilsystems[ObjectToEdit.SelectedIndex].CloseingDate.Day;
-                ClDMonthInput.Text = "" + mobilsystems[ObjectToEdit.SelectedIndex].CloseingDate.Month;
-                ClDYearInput.Text = "" + mobilsystems[ObjectToEdit.SelectedIndex].CloseingDate.Year;
+                ClDDateInput.Text = "" + mobilesystems[ObjectToEdit.SelectedIndex].CloseingDate.Day;
+                ClDMonthInput.Text = "" + mobilesystems[ObjectToEdit.SelectedIndex].CloseingDate.Month;
+                ClDYearInput.Text = "" + mobilesystems[ObjectToEdit.SelectedIndex].CloseingDate.Year;
 
-                IDInput.Text = mobilsystems[ObjectToEdit.SelectedIndex].Merchant.ID;
-                NameInput.Text = mobilsystems[ObjectToEdit.SelectedIndex].Merchant.Name;
-                FirmInput.Text = mobilsystems[ObjectToEdit.SelectedIndex].Merchant.Firm;
-                MailInput.Text = mobilsystems[ObjectToEdit.SelectedIndex].Merchant.Mail;
-                NoteMercInput.Text = mobilsystems[ObjectToEdit.SelectedIndex].Merchant.Note;
+                IDInput.Text = mobilesystems[ObjectToEdit.SelectedIndex].Merchant.ID;
+                NameInput.Text = mobilesystems[ObjectToEdit.SelectedIndex].Merchant.Name;
+                FirmInput.Text = mobilesystems[ObjectToEdit.SelectedIndex].Merchant.Firm;
+                MailInput.Text = mobilesystems[ObjectToEdit.SelectedIndex].Merchant.Mail;
+                NoteMercInput.Text = mobilesystems[ObjectToEdit.SelectedIndex].Merchant.Note;
             }
             else if (TypeToEdit.SelectedIndex == 1 && ObjectToEdit.SelectedIndex != -1)
             {
@@ -285,7 +285,7 @@ namespace Unipay_UI.Functionality_Windows
         }
         private void UpdateInternalLists()
         {
-            mobilsystems = repo.GetMobilsystems();
+            mobilesystems = repo.GetMobilesystems();
             cardsystems = repo.GetCardsystems();
             merchants = repo.GetMerchants();
         }

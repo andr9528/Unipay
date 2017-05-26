@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Unipay_Lib.Building_Blocks
 {
-    public class Cardsystem : Basesystem
+    public class Cardsystem : Subscription
     {
         // is true while waiting on respone from CPI and false while not waiting.
         public bool DelayCPI { get; set; }

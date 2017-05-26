@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace Unipay_Lib.Building_Blocks
 {
-    public class Mobilsystem : Basesystem
+    public class Mobilesystem : Subscription
     {
         public bool DelayNETS { get; set; }
-        public string MachineAddress { get; set; }
+        public string MACAddress { get; set; }
         public string BoxName { get; set; }
 
-        public Mobilsystem(Merchant merc, Date crd, string address,
+        public Mobilesystem(Merchant merc, Date crd, string address,
             string simnr, string macaddress, string boxname,
             bool status = true, bool de = false,
             bool dn = false, string note = "", Date cld = null)
@@ -25,7 +25,7 @@ namespace Unipay_Lib.Building_Blocks
             DelayElavon = de;
             DelayNETS = dn;
 
-            MachineAddress = macaddress;
+            MACAddress = macaddress;
             BoxName = boxname;
             Address = address;
             SimNumber = simnr;
@@ -50,7 +50,7 @@ namespace Unipay_Lib.Building_Blocks
             output += Merchant.ID + ", ";
             output += ToStringS() + ", ";
             output += Address + ", ";
-            output += MachineAddress + ", ";
+            output += MACAddress + ", ";
             output += BoxName;
 
             return output;

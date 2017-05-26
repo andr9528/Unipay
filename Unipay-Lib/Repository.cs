@@ -10,7 +10,7 @@ namespace Unipay_Lib
     public sealed class Repository
     {
         List<Cardsystem> Cardsystems;
-        List<Mobilsystem> Mobilsystems;
+        List<Mobilesystem> Mobilesystems;
         List<Merchant> Merchants;
 
         static readonly Repository repository = new Repository();
@@ -20,7 +20,7 @@ namespace Unipay_Lib
         private Repository()
         {
             Cardsystems = new List<Cardsystem>();
-            Mobilsystems = new List<Mobilsystem>();
+            Mobilesystems = new List<Mobilesystem>();
             Merchants = new List<Merchant>();
         }
         //
@@ -38,9 +38,9 @@ namespace Unipay_Lib
         {
             Cardsystems = card;
         }
-        public void GetMobilLists(List<Mobilsystem> mobil)
+        public void GetMobileLists(List<Mobilesystem> mobil)
         {
-            Mobilsystems = mobil;
+            Mobilesystems = mobil;
         }
         public void GetMercLists(List<Merchant> merc)
         {
@@ -50,9 +50,9 @@ namespace Unipay_Lib
         {
             return Cardsystems;
         }
-        public List<Mobilsystem> GetMobilsystems()
+        public List<Mobilesystem> GetMobilesystems()
         {
-            return Mobilsystems;
+            return Mobilesystems;
         }
         public List<Merchant> GetMerchants()
         {

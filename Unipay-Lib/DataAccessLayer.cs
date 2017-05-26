@@ -11,19 +11,19 @@ using System.Reflection;
 
 namespace Unipay_Lib
 {
-    public class DataAccesLayer
+    public class DataAccessLayer
     {
         Repository repo = Repository.GetRepository();
 
         char toText = '\'';
 
-        List<Mobilsystem> mobilsystems = new List<Mobilsystem>();
+        List<Mobilesystem> mobilesystems = new List<Mobilesystem>();
         List<Cardsystem> cardsystems = new List<Cardsystem>();
         List<Merchant> merchants = new List<Merchant>();
 
         string backup = "Datafile.xls";
         
-        public DataAccesLayer()
+        public DataAccessLayer()
         {
             
         }
@@ -151,7 +151,7 @@ namespace Unipay_Lib
                             delayNETS = true;
                         }
 
-                        Mobilsystem mobil = new Mobilsystem
+                        Mobilesystem mobile = new Mobilesystem
                             (
                             merc,
                             crd,
@@ -166,7 +166,7 @@ namespace Unipay_Lib
                             cld
                             );
 
-                        mobilsystems.Add(mobil);
+                        mobilesystems.Add(mobile);
                     }
 
                     sheet++;
@@ -174,7 +174,7 @@ namespace Unipay_Lib
             }
 
             repo.GetCardLists(cardsystems);
-            repo.GetMobilLists(mobilsystems);
+            repo.GetMobileLists(mobilesystems);
             repo.GetMercLists(merchants);
         }
 
@@ -196,7 +196,7 @@ namespace Unipay_Lib
             xlWB.Worksheets.Add();
 
             xlWS = (Excel.Worksheet)xlWB.Worksheets.get_Item(3);
-            xlWS.Name = "Mobilsystems";
+            xlWS.Name = "Mobilesystems";
 
             xlWS.Cells[1, 1] = "MerchantID";
             xlWS.Cells[1, 2] = "Status";
@@ -204,28 +204,28 @@ namespace Unipay_Lib
             xlWS.Cells[1, 4] = "DelayNETS";
             xlWS.Cells[1, 5] = "Address";
             xlWS.Cells[1, 6] = "SimNumber";
-            xlWS.Cells[1, 7] = "MachineAddres";
+            xlWS.Cells[1, 7] = "MAC Addres";
             xlWS.Cells[1, 8] = "BoxName";
             xlWS.Cells[1, 9] = "CreationDate";
             xlWS.Cells[1, 10] = "CloseingDate";
             xlWS.Cells[1, 11] = "Note";
 
-            for (int y = 2, l = 0; l < mobilsystems.Count; y++, l++)
+            for (int y = 2, l = 0; l < mobilesystems.Count; y++, l++)
             {
-                xlWS.Cells[y, 1] = toText + mobilsystems[l].Merchant.ID;
-                xlWS.Cells[y, 2] = toText + mobilsystems[l].ToStringS();
-                xlWS.Cells[y, 3] = toText + mobilsystems[l].ToStringDE();
-                xlWS.Cells[y, 4] = toText + mobilsystems[l].ToStringDN();
-                xlWS.Cells[y, 5] = toText + mobilsystems[l].Address;
-                xlWS.Cells[y, 6] = toText + mobilsystems[l].SimNumber;
-                xlWS.Cells[y, 7] = toText + mobilsystems[l].MachineAddress;
-                xlWS.Cells[y, 8] = toText + mobilsystems[l].BoxName;
-                xlWS.Cells[y, 9] = toText + mobilsystems[l].CreationDate.ToStringDF();
-                if (mobilsystems[l].CloseingDate != null)
+                xlWS.Cells[y, 1] = toText + mobilesystems[l].Merchant.ID;
+                xlWS.Cells[y, 2] = toText + mobilesystems[l].ToStringS();
+                xlWS.Cells[y, 3] = toText + mobilesystems[l].ToStringDE();
+                xlWS.Cells[y, 4] = toText + mobilesystems[l].ToStringDN();
+                xlWS.Cells[y, 5] = toText + mobilesystems[l].Address;
+                xlWS.Cells[y, 6] = toText + mobilesystems[l].SimNumber;
+                xlWS.Cells[y, 7] = toText + mobilesystems[l].MACAddress;
+                xlWS.Cells[y, 8] = toText + mobilesystems[l].BoxName;
+                xlWS.Cells[y, 9] = toText + mobilesystems[l].CreationDate.ToStringDF();
+                if (mobilesystems[l].CloseingDate != null)
                 {
-                    xlWS.Cells[y, 10] = toText + mobilsystems[l].CloseingDate.ToStringDF();
+                    xlWS.Cells[y, 10] = toText + mobilesystems[l].CloseingDate.ToStringDF();
                 }
-                xlWS.Cells[y, 11] = toText + mobilsystems[l].Note;
+                xlWS.Cells[y, 11] = toText + mobilesystems[l].Note;
             }
 
             xlWS = (Excel.Worksheet)xlWB.Worksheets.get_Item(2);
@@ -293,7 +293,7 @@ namespace Unipay_Lib
         }
         private void UpdateInternalLists()
         {
-            mobilsystems = repo.GetMobilsystems();
+            mobilesystems = repo.GetMobilesystems();
             cardsystems = repo.GetCardsystems();
             merchants = repo.GetMerchants();
         }

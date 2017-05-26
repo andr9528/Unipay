@@ -34,16 +34,16 @@ namespace Unipay_UI
         List<string> ColumnMerc = new List<string> { "" };
         #endregion
 
-        List<Mobilsystem> SRMobil = new List<Mobilsystem>();
+        List<Mobilesystem> SRMobile = new List<Mobilesystem>();
         List<Cardsystem> SRCard = new List<Cardsystem>();
         List<Merchant> SRMerc = new List<Merchant>();
 
-        List<Mobilsystem> mobilsystems;
+        List<Mobilesystem> mobilesystems;
         List<Cardsystem> cardsystems;
         List<Merchant> merchants;
 
         Repository repo = Repository.GetRepository();
-        DataAccesLayer data = new DataAccesLayer();
+        DataAccessLayer data = new DataAccessLayer();
 
         DataTable phoneView = new DataTable();
         DataTable cardView = new DataTable();
@@ -105,7 +105,6 @@ namespace Unipay_UI
             mercView.Columns.Add("Mail");
             mercView.Columns.Add("Noter");
 
-
             UpdateView();
             HideUnused();
         }
@@ -121,25 +120,25 @@ namespace Unipay_UI
 
         private void Search()
         {
-            SRMobil.Clear();
+            SRMobile.Clear();
             SRCard.Clear();
             SRMerc.Clear();
 
             UpdateInternalLists();
 
-            var IESRMobil = from mobil in mobilsystems
-                            where mobil.Address.ToLowerInvariant().Contains(SearchBox.Text.ToLowerInvariant()) ||
-                            mobil.BoxName.ToLowerInvariant().Contains(SearchBox.Text.ToLowerInvariant()) ||
-                            mobil.MachineAddress.ToLowerInvariant().Contains(SearchBox.Text.ToLowerInvariant()) ||
-                            mobil.SimNumber.ToLowerInvariant().Contains(SearchBox.Text.ToLowerInvariant()) ||
-                            mobil.ToStringDE().ToLowerInvariant().Contains(SearchBox.Text.ToLowerInvariant()) ||
-                            mobil.ToStringDN().ToLowerInvariant().Contains(SearchBox.Text.ToLowerInvariant()) ||
-                            mobil.ToStringS().ToLowerInvariant().Contains(SearchBox.Text.ToLowerInvariant()) ||
-                            mobil.Merchant.ID.ToLowerInvariant().Contains(SearchBox.Text.ToLowerInvariant()) ||
-                            mobil.Note.ToLowerInvariant().Contains(SearchBox.Text.ToLowerInvariant()) ||
-                            mobil.CreationDate.ToStringDF().ToLowerInvariant().Contains(SearchBox.Text.ToLowerInvariant()) ||
-                            mobil.CloseingDate.ToStringDF().ToLowerInvariant().Contains(SearchBox.Text.ToLowerInvariant())
-                            select mobil;
+            var IESRMobil = from mobile in mobilesystems
+                            where mobile.Address.ToLowerInvariant().Contains(SearchBox.Text.ToLowerInvariant()) ||
+                            mobile.BoxName.ToLowerInvariant().Contains(SearchBox.Text.ToLowerInvariant()) ||
+                            mobile.MACAddress.ToLowerInvariant().Contains(SearchBox.Text.ToLowerInvariant()) ||
+                            mobile.SimNumber.ToLowerInvariant().Contains(SearchBox.Text.ToLowerInvariant()) ||
+                            mobile.ToStringDE().ToLowerInvariant().Contains(SearchBox.Text.ToLowerInvariant()) ||
+                            mobile.ToStringDN().ToLowerInvariant().Contains(SearchBox.Text.ToLowerInvariant()) ||
+                            mobile.ToStringS().ToLowerInvariant().Contains(SearchBox.Text.ToLowerInvariant()) ||
+                            mobile.Merchant.ID.ToLowerInvariant().Contains(SearchBox.Text.ToLowerInvariant()) ||
+                            mobile.Note.ToLowerInvariant().Contains(SearchBox.Text.ToLowerInvariant()) ||
+                            mobile.CreationDate.ToStringDF().ToLowerInvariant().Contains(SearchBox.Text.ToLowerInvariant()) ||
+                            mobile.CloseingDate.ToStringDF().ToLowerInvariant().Contains(SearchBox.Text.ToLowerInvariant())
+                            select mobile;
 
             var IESRCard = from card in cardsystems
                            where card.Address.ToLowerInvariant().Contains(SearchBox.Text.ToLowerInvariant()) ||
@@ -164,9 +163,9 @@ namespace Unipay_UI
                            select merc;
 
 
-            foreach (var mobil in IESRMobil)
+            foreach (var mobile in IESRMobil)
             {
-                SRMobil.Add(mobil);
+                SRMobile.Add(mobile);
             }
 
             foreach (var card in IESRCard)
@@ -191,47 +190,47 @@ namespace Unipay_UI
 
             if (PhoneState)
                 {
-                if (mobilsystems.Count() != 0)
+                if (mobilesystems.Count() != 0)
                 {
-                    MobilGrid.Height = 600;
+                    MobileGrid.Height = 600;
                     CardGrid.Height = 0;
                     MercGrid.Height = 0;
-                    MobilGrid.Margin = new Thickness(0, 0, 0, 0);
+                    MobileGrid.Margin = new Thickness(0, 0, 0, 0);
                     CardGrid.Margin = new Thickness(0, 0, 0, 0);
                     MercGrid.Margin = new Thickness(0, 0, 0, 0);
-                    MobilGrid.Visibility = Visibility.Visible;
+                    MobileGrid.Visibility = Visibility.Visible;
                     CardGrid.Visibility = Visibility.Hidden;
                     MercGrid.Visibility = Visibility.Hidden;
 
-                    foreach (Mobilsystem mobil in mobilsystems)
+                    foreach (Mobilesystem mobile in mobilesystems)
                     {
                         DataRow row = phoneView.NewRow();
 
-                        row["Merchant ID"] = mobil.Merchant.ID;
-                        row["Status"] = mobil.ToStringS();
-                        row["Forsinkelse Elavon"] = mobil.ToStringDE();
-                        row["Forsinkelse NETS"] = mobil.ToStringDN();
-                        row["MAC Addresse"] = mobil.MachineAddress;
-                        row["Boks Navn"] = mobil.BoxName;
-                        row["Sim Nummer"] = mobil.SimNumber;
-                        row["Opretelses Dato"] = mobil.CreationDate.ToStringDF();
-                        row["Luknings Dato"] = mobil.CloseingDate.ToStringDF();
-                        row["Addresse for Enhed"] = mobil.Address;
-                        row["Noter"] = mobil.Note;
+                        row["Merchant ID"] = mobile.Merchant.ID;
+                        row["Status"] = mobile.ToStringS();
+                        row["Forsinkelse Elavon"] = mobile.ToStringDE();
+                        row["Forsinkelse NETS"] = mobile.ToStringDN();
+                        row["MAC Addresse"] = mobile.MACAddress;
+                        row["Boks Navn"] = mobile.BoxName;
+                        row["Sim Nummer"] = mobile.SimNumber;
+                        row["Opretelses Dato"] = mobile.CreationDate.ToStringDF();
+                        row["Luknings Dato"] = mobile.CloseingDate.ToStringDF();
+                        row["Addresse for Enhed"] = mobile.Address;
+                        row["Noter"] = mobile.Note;
 
                         phoneView.Rows.Add(row);
                     }
-                    MobilGrid.ItemsSource = phoneView.AsDataView();
+                    MobileGrid.ItemsSource = phoneView.AsDataView();
                 }
                 else
                 {
-                    MobilGrid.Height = 0;
+                    MobileGrid.Height = 0;
                     CardGrid.Height = 0;
                     MercGrid.Height = 0;
-                    MobilGrid.Margin = new Thickness(0, 0, 0, 0);
+                    MobileGrid.Margin = new Thickness(0, 0, 0, 0);
                     CardGrid.Margin = new Thickness(0, 0, 0, 0);
                     MercGrid.Margin = new Thickness(0, 0, 0, 0);
-                    MobilGrid.Visibility = Visibility.Hidden;
+                    MobileGrid.Visibility = Visibility.Hidden;
                     CardGrid.Visibility = Visibility.Hidden;
                     MercGrid.Visibility = Visibility.Hidden;
                 }
@@ -242,13 +241,13 @@ namespace Unipay_UI
                 {
                 if (cardsystems.Count() != 0)
                 {
-                    MobilGrid.Height = 0;
+                    MobileGrid.Height = 0;
                     CardGrid.Height = 600;
                     MercGrid.Height = 0;
-                    MobilGrid.Margin = new Thickness(0, 0, 0, 0);
+                    MobileGrid.Margin = new Thickness(0, 0, 0, 0);
                     CardGrid.Margin = new Thickness(0, 0, 0, 0);
                     MercGrid.Margin = new Thickness(0, 0, 0, 0);
-                    MobilGrid.Visibility = Visibility.Hidden;
+                    MobileGrid.Visibility = Visibility.Hidden;
                     CardGrid.Visibility = Visibility.Visible;
                     MercGrid.Visibility = Visibility.Hidden;
 
@@ -264,7 +263,7 @@ namespace Unipay_UI
                         row["Phys ID"] = card.PhysicalID;
                         row["Sim Producent"] = card.SimNumber;
                         row["Opretelses Dato"] = card.CreationDate.ToStringDF();
-                        row[ "Luknings Dato"] = card.CloseingDate.ToStringDF();
+                        row["Luknings Dato"] = card.CloseingDate.ToStringDF();
                         row["Addresse for Enhed"] = card.Address;
                         row["Noter"] = card.Note;
 
@@ -274,13 +273,13 @@ namespace Unipay_UI
                 }
                 else
                 {
-                    MobilGrid.Height = 0;
+                    MobileGrid.Height = 0;
                     CardGrid.Height = 0;
                     MercGrid.Height = 0;
-                    MobilGrid.Margin = new Thickness(0, 0, 0, 0);
+                    MobileGrid.Margin = new Thickness(0, 0, 0, 0);
                     CardGrid.Margin = new Thickness(0, 0, 0, 0);
                     MercGrid.Margin = new Thickness(0, 0, 0, 0);
-                    MobilGrid.Visibility = Visibility.Hidden;
+                    MobileGrid.Visibility = Visibility.Hidden;
                     CardGrid.Visibility = Visibility.Hidden;
                     MercGrid.Visibility = Visibility.Hidden;
                 }
@@ -291,13 +290,13 @@ namespace Unipay_UI
                 {
                 if (merchants.Count() != 0)
                 {
-                    MobilGrid.Height = 0;
+                    MobileGrid.Height = 0;
                     CardGrid.Height = 0;
                     MercGrid.Height = 600;
-                    MobilGrid.Margin = new Thickness(0, 0, 0, 0);
+                    MobileGrid.Margin = new Thickness(0, 0, 0, 0);
                     CardGrid.Margin = new Thickness(0, 0, 0, 0);
                     MercGrid.Margin = new Thickness(0, 0, 0, 0);
-                    MobilGrid.Visibility = Visibility.Hidden;
+                    MobileGrid.Visibility = Visibility.Hidden;
                     CardGrid.Visibility = Visibility.Hidden;
                     MercGrid.Visibility = Visibility.Visible;
 
@@ -317,13 +316,13 @@ namespace Unipay_UI
                 }
                 else
                 {
-                    MobilGrid.Height = 0;
+                    MobileGrid.Height = 0;
                     CardGrid.Height = 0;
                     MercGrid.Height = 0;
-                    MobilGrid.Margin = new Thickness(0, 0, 0, 0);
+                    MobileGrid.Margin = new Thickness(0, 0, 0, 0);
                     CardGrid.Margin = new Thickness(0, 0, 0, 0);
                     MercGrid.Margin = new Thickness(0, 0, 0, 0);
-                    MobilGrid.Visibility = Visibility.Hidden;
+                    MobileGrid.Visibility = Visibility.Hidden;
                     CardGrid.Visibility = Visibility.Hidden;
                     MercGrid.Visibility = Visibility.Hidden;
                 }
@@ -332,103 +331,103 @@ namespace Unipay_UI
             }
                 else if (SearchState)
                 {
-                    if (SRMobil.Count != 0 && SRCard.Count != 0 && SRMerc.Count != 0) // all have hits
+                    if (SRMobile.Count != 0 && SRCard.Count != 0 && SRMerc.Count != 0) // all have hits
                     {
-                        MobilGrid.Height = 200;
+                        MobileGrid.Height = 200;
                         CardGrid.Height = 200;
                         MercGrid.Height = 200;
-                        MobilGrid.Margin = new Thickness(0, 0, 0, 400);
+                        MobileGrid.Margin = new Thickness(0, 0, 0, 400);
                         CardGrid.Margin = new Thickness(0, 0, 0, 0);
                         MercGrid.Margin = new Thickness(0, 400, 0, 0);
-                        MobilGrid.Visibility = Visibility.Visible;
+                        MobileGrid.Visibility = Visibility.Visible;
                         CardGrid.Visibility = Visibility.Visible;
                         MercGrid.Visibility = Visibility.Visible;
                     }
-                    else if (SRMobil.Count != 0 && SRCard.Count != 0 && SRMerc.Count == 0) // all but Merc have hits
+                    else if (SRMobile.Count != 0 && SRCard.Count != 0 && SRMerc.Count == 0) // all but Merc have hits
                     {
-                        MobilGrid.Height = 300;
+                        MobileGrid.Height = 300;
                         CardGrid.Height = 300;
                         MercGrid.Height = 0;
-                        MobilGrid.Margin = new Thickness(0, 0, 0, 300);
+                        MobileGrid.Margin = new Thickness(0, 0, 0, 300);
                         CardGrid.Margin = new Thickness(0, 300, 0, 0);
                         MercGrid.Margin = new Thickness(0, 0, 0, 0);
-                        MobilGrid.Visibility = Visibility.Visible;
+                        MobileGrid.Visibility = Visibility.Visible;
                         CardGrid.Visibility = Visibility.Visible;
                         MercGrid.Visibility = Visibility.Hidden;
                     }
-                    else if (SRMobil.Count != 0 && SRCard.Count == 0 && SRMerc.Count != 0) // all but Card have hits
+                    else if (SRMobile.Count != 0 && SRCard.Count == 0 && SRMerc.Count != 0) // all but Card have hits
                     {
-                        MobilGrid.Height = 300;
+                        MobileGrid.Height = 300;
                         CardGrid.Height = 0;
                         MercGrid.Height = 300;
-                        MobilGrid.Margin = new Thickness(0, 0, 0, 300);
+                        MobileGrid.Margin = new Thickness(0, 0, 0, 300);
                         CardGrid.Margin = new Thickness(0, 0, 0, 0);
                         MercGrid.Margin = new Thickness(0, 300, 0, 0);
-                        MobilGrid.Visibility = Visibility.Visible;
+                        MobileGrid.Visibility = Visibility.Visible;
                         CardGrid.Visibility = Visibility.Hidden;
                         MercGrid.Visibility = Visibility.Visible;
                     }
-                    else if (SRMobil.Count == 0 && SRCard.Count != 0 && SRMerc.Count != 0) // all but Mobil have hits
+                    else if (SRMobile.Count == 0 && SRCard.Count != 0 && SRMerc.Count != 0) // all but Mobil have hits
                     {
-                        MobilGrid.Height = 0;
+                        MobileGrid.Height = 0;
                         CardGrid.Height = 300;
                         MercGrid.Height = 300;
-                        MobilGrid.Margin = new Thickness(0, 0, 0, 0);
+                        MobileGrid.Margin = new Thickness(0, 0, 0, 0);
                         CardGrid.Margin = new Thickness(0, 0, 0, 300);
                         MercGrid.Margin = new Thickness(0, 300, 0, 0);
-                        MobilGrid.Visibility = Visibility.Hidden;
+                        MobileGrid.Visibility = Visibility.Hidden;
                         CardGrid.Visibility = Visibility.Visible;
                         MercGrid.Visibility = Visibility.Visible;
                     }
-                    else if (SRMobil.Count != 0 && SRCard.Count == 0 && SRMerc.Count == 0) // Mobil have hits
+                    else if (SRMobile.Count != 0 && SRCard.Count == 0 && SRMerc.Count == 0) // Mobil have hits
                     {
-                        MobilGrid.Height = 600;
+                        MobileGrid.Height = 600;
                         CardGrid.Height = 0;
                         MercGrid.Height = 0;
-                        MobilGrid.Margin = new Thickness(0, 0, 0, 0);
+                        MobileGrid.Margin = new Thickness(0, 0, 0, 0);
                         CardGrid.Margin = new Thickness(0, 0, 0, 0);
                         MercGrid.Margin = new Thickness(0, 0, 0, 0);
-                        MobilGrid.Visibility = Visibility.Visible;
+                        MobileGrid.Visibility = Visibility.Visible;
                         CardGrid.Visibility = Visibility.Hidden;
                         MercGrid.Visibility = Visibility.Hidden;
                     }
-                    else if (SRMobil.Count == 0 && SRCard.Count != 0 && SRMerc.Count == 0) // Card have hits
+                    else if (SRMobile.Count == 0 && SRCard.Count != 0 && SRMerc.Count == 0) // Card have hits
                     {
-                        MobilGrid.Height = 0;
+                        MobileGrid.Height = 0;
                         CardGrid.Height = 600;
                         MercGrid.Height = 0;
-                        MobilGrid.Margin = new Thickness(0, 0, 0, 0);
+                        MobileGrid.Margin = new Thickness(0, 0, 0, 0);
                         CardGrid.Margin = new Thickness(0, 0, 0, 0);
                         MercGrid.Margin = new Thickness(0, 0, 0, 0);
-                        MobilGrid.Visibility = Visibility.Hidden;
+                        MobileGrid.Visibility = Visibility.Hidden;
                         CardGrid.Visibility = Visibility.Visible;
                         MercGrid.Visibility = Visibility.Hidden;
                     }
-                    else if (SRMobil.Count == 0 && SRCard.Count == 0 && SRMerc.Count != 0) // Merc have hits
+                    else if (SRMobile.Count == 0 && SRCard.Count == 0 && SRMerc.Count != 0) // Merc have hits
                     {
-                        MobilGrid.Height = 0;
+                        MobileGrid.Height = 0;
                         CardGrid.Height = 0;
                         MercGrid.Height = 600;
-                        MobilGrid.Margin = new Thickness(0, 0, 0, 0);
+                        MobileGrid.Margin = new Thickness(0, 0, 0, 0);
                         CardGrid.Margin = new Thickness(0, 0, 0, 0);
                         MercGrid.Margin = new Thickness(0, 0, 0, 0);
-                        MobilGrid.Visibility = Visibility.Hidden;
+                        MobileGrid.Visibility = Visibility.Hidden;
                         CardGrid.Visibility = Visibility.Hidden;
                         MercGrid.Visibility = Visibility.Visible;
                     }
-                    else if (SRMobil.Count == 0 && SRCard.Count == 0 && SRMerc.Count == 0) // None have hits
+                    else if (SRMobile.Count == 0 && SRCard.Count == 0 && SRMerc.Count == 0) // None have hits
                     {
-                        MobilGrid.Height = 0;
+                        MobileGrid.Height = 0;
                         CardGrid.Height = 0;
                         MercGrid.Height = 0;
-                        MobilGrid.Margin = new Thickness(0, 0, 0, 0);
+                        MobileGrid.Margin = new Thickness(0, 0, 0, 0);
                         CardGrid.Margin = new Thickness(0, 0, 0, 0);
                         MercGrid.Margin = new Thickness(0, 0, 0, 0);
-                        MobilGrid.Visibility = Visibility.Hidden;
+                        MobileGrid.Visibility = Visibility.Hidden;
                         CardGrid.Visibility = Visibility.Hidden;
                         MercGrid.Visibility = Visibility.Hidden;
                     }
-                if (SRMobil.Count != 0)
+                if (SRMobile.Count != 0)
                 {
                     SetMobilGrid();
                 }
@@ -445,25 +444,25 @@ namespace Unipay_UI
 
         private void SetMobilGrid()
         {
-            foreach (Mobilsystem mobil in SRMobil)
+            foreach (Mobilesystem mobile in SRMobile)
             {
                 DataRow row = phoneView.NewRow();
 
-                row["Merchant ID"] = mobil.Merchant.ID;
-                row["Status"] = mobil.ToStringS();
-                row["Forsinkelse Elavon"] = mobil.ToStringDE();
-                row["Forsinkelse NETS"] = mobil.ToStringDN();
-                row["MAC Addresse"] = mobil.MachineAddress;
-                row["Boks Navn"] = mobil.BoxName;
-                row["Sim Nummer"] = mobil.SimNumber;
-                row["Opretelses Dato"] = mobil.CreationDate.ToStringDF();
-                row["Luknings Dato"] = mobil.CloseingDate.ToStringDF();
-                row["Addresse for Enhed"] = mobil.Address;
-                row["Noter"] = mobil.Note;
+                row["Merchant ID"] = mobile.Merchant.ID;
+                row["Status"] = mobile.ToStringS();
+                row["Forsinkelse Elavon"] = mobile.ToStringDE();
+                row["Forsinkelse NETS"] = mobile.ToStringDN();
+                row["MAC Addresse"] = mobile.MACAddress;
+                row["Boks Navn"] = mobile.BoxName;
+                row["Sim Nummer"] = mobile.SimNumber;
+                row["Opretelses Dato"] = mobile.CreationDate.ToStringDF();
+                row["Luknings Dato"] = mobile.CloseingDate.ToStringDF();
+                row["Addresse for Enhed"] = mobile.Address;
+                row["Noter"] = mobile.Note;
 
                 phoneView.Rows.Add(row);
             }
-            MobilGrid.ItemsSource = phoneView.AsDataView();
+            MobileGrid.ItemsSource = phoneView.AsDataView();
         }
 
         private void SetCardGrid()
@@ -506,7 +505,7 @@ namespace Unipay_UI
             MercGrid.ItemsSource = mercView.AsDataView();
         }
 
-        private void Mobilsystem_Click(object sender, RoutedEventArgs e)
+        private void Mobilesystem_Click(object sender, RoutedEventArgs e)
         {
             PhoneState = true;
             CardState = false;
@@ -516,7 +515,7 @@ namespace Unipay_UI
             UpdateView();
         }
 
-        private void Kortsystem_Click(object sender, RoutedEventArgs e)
+        private void Cardsystem_Click(object sender, RoutedEventArgs e)
         {
             PhoneState = false;
             CardState = true;
@@ -526,11 +525,11 @@ namespace Unipay_UI
             UpdateView();
         }
 
-        private void Søgeresultat_Click(object sender, RoutedEventArgs e)
+        private void SearchResult_Click(object sender, RoutedEventArgs e)
         {
             if (SearchBox.Text == "")
             {
-                SRMobil.Clear();
+                SRMobile.Clear();
                 SRCard.Clear();
                 SRMerc.Clear();
             }
@@ -543,7 +542,7 @@ namespace Unipay_UI
             UpdateView();
         }
 
-        private void Kunde_Click(object sender, RoutedEventArgs e)
+        private void Merchant_Click(object sender, RoutedEventArgs e)
         {
             PhoneState = false;
             CardState = false;
@@ -591,7 +590,7 @@ namespace Unipay_UI
 
         private void UpdateInternalLists()
         {
-            mobilsystems = repo.GetMobilsystems();
+            mobilesystems = repo.GetMobilesystems();
             cardsystems = repo.GetCardsystems();
             merchants = repo.GetMerchants();
         }

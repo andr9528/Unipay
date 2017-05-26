@@ -28,7 +28,7 @@ namespace Unipay_UI.Functionality_Windows
         Repository repo = Repository.GetRepository();
         Controler control = new Controler();
 
-        List<Mobilsystem> mobilsystems;
+        List<Mobilesystem> mobilesystems;
         List<Cardsystem> cardsystems;
         List<Merchant> merchants;
 
@@ -49,11 +49,11 @@ namespace Unipay_UI.Functionality_Windows
 
             if (TypeToDelete.SelectedIndex == 0) // mobilsystem
             {
-                if (mobilsystems.Count() != 0)
+                if (mobilesystems.Count() != 0)
                 {
-                    foreach (var mobil in mobilsystems)
+                    foreach (var mobile in mobilesystems)
                     {
-                        objects.Add(mobil.TostringM());
+                        objects.Add(mobile.TostringM());
                     }
                 }
             }
@@ -90,9 +90,9 @@ namespace Unipay_UI.Functionality_Windows
 
             if (TypeToDelete.SelectedIndex == 2)
             {
-                foreach (var mobil in mobilsystems)
+                foreach (var mobile in mobilesystems)
                 {
-                    if (mobil.Merchant.ID == merchants[ObjectToDelete.SelectedIndex].ID)
+                    if (mobile.Merchant.ID == merchants[ObjectToDelete.SelectedIndex].ID)
                     {
                         ableToDeleteMerc = false;
                     }
@@ -123,7 +123,7 @@ namespace Unipay_UI.Functionality_Windows
 
         private void UpdateInternalLists()
         {
-            mobilsystems = repo.GetMobilsystems();
+            mobilesystems = repo.GetMobilesystems();
             cardsystems = repo.GetCardsystems();
             merchants = repo.GetMerchants();
         }
