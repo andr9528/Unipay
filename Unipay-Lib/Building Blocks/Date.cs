@@ -8,15 +8,15 @@ namespace Unipay_Lib.Building_Blocks
 {
     public class Date
     {
-        public string Name { get; set; }
+        public string Event { get; set; }
         public int Year { get; set; }
         public int Month { get; set; }
         public int Day { get; set; }
         
 
-        public Date(int day, int month, int year, string name = "")
+        public Date(int day, int month, int year, string eventName = "")
         {
-            Name = name;
+            Event = eventName;
             Year = year;
             Month = month;
             Day = day;
