@@ -86,6 +86,8 @@ namespace Unipay_UI.Functionality_Windows
 
         private void Delete_Click(object sender, RoutedEventArgs e)
         {
+            UpdateInternalLists();
+
             bool ableToDeleteMerc = true;
 
             if (TypeToDelete.SelectedIndex == 2)

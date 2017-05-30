@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Unipay_UI"
         mc:Ignorable="d"
-        Title="Unipay Systems" Height="730" Width="1310" Icon="ico.ico">
+        ResizeMode="CanMinimize"
+        Title="Unipay Systems" Height="730" Width="1110" Icon="ico.ico">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="100"/>
@@ -15,7 +16,7 @@
         <Grid.ColumnDefinitions>
            
             <ColumnDefinition Width="900"/>
-            <ColumnDefinition Width="400"/>
+            <ColumnDefinition Width="200"/>
         </Grid.ColumnDefinitions>
 
         <Grid Grid.Column="0" Grid.Row="0">
@@ -42,24 +43,24 @@
             </Grid.RowDefinitions>
 
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="100"/>
-                <ColumnDefinition Width="300"/>
+                <ColumnDefinition Width="40"/>
+                <ColumnDefinition Width="160"/>
             </Grid.ColumnDefinitions>
             <TextBox Grid.Row="0" Grid.Column="0" Text="Søg:" ToolTip="Indtast hvad du ønsker at finde og kig under søgeresultater" 
                      TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" IsReadOnly="True"/>
             <TextBox Grid.Row="1" Grid.Column="0" Text="Filter:" ToolTip="Øverste Vælger det system du vil søge i og den nederste vælger den colone du ønsker at søge i, eller efterlad dem blanke for at søge overalt"
                      TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" IsReadOnly="True" Name="FilterText"/>
-            <TextBox Grid.Row="0" Grid.Column="1" Name="SearchBox" TextAlignment="Center" VerticalAlignment="Center" Width="260"/>
+            <TextBox Grid.Row="0" Grid.Column="1" Name="SearchBox" TextAlignment="Center" VerticalAlignment="Center" Width="120"/>
             <Grid Grid.Row="1" Grid.Column="1">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="300"/>
+                    <ColumnDefinition Width="160"/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="25"/>
                     <RowDefinition Height="25"/>
                 </Grid.RowDefinitions>
-                <ComboBox Grid.Row="0" Name="TypeFilter" Width="260" Height="20" SelectionChanged="TypeFilter_SelectionChanged"/>
-                <ComboBox Grid.Row="1" Name="ColumnFilter" Width="260" Height="20" SelectionChanged="ColumnFilter_SelectionChanged"/>
+                <ComboBox Grid.Row="0" Name="TypeFilter" Width="120" Height="20" SelectionChanged="TypeFilter_SelectionChanged"/>
+                <ComboBox Grid.Row="1" Name="ColumnFilter" Width="120" Height="20" SelectionChanged="ColumnFilter_SelectionChanged"/>
             </Grid>
         </Grid>
         <Grid Grid.Column="2" Grid.Row="1">
@@ -73,15 +74,14 @@
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="200"/>
-                <ColumnDefinition Width="200"/>
             </Grid.ColumnDefinitions>
 
-            <Button Grid.Row="4" Grid.Column="1" Name="Import" Content="Import Excel" Width="150" Height="50" Click="Import_Click"/>
-            <Button Grid.Row="0" Grid.Column="1" Name="Export" Content="Export PDF" Width="150" Height="50" Click="Export_Click"/>
-            <Button Grid.Row="1" Grid.Column="1" Name="NewSubscription" Content="Nyt" Width="150" Height="50" Click="NewSubscription_Click"/>
-            <Button Grid.Row="2" Grid.Column="1" Name="EditSubscription" Content="Rediger" Width="150" Height="50" Click="EditSubscription_Click"/>
-            <Button Grid.Row="3" Grid.Column="1" Name="DeleteSubscription" Content="Slet" Width="150" Height="50" Click="DeleteSubscription_Click"/>
-            <Button Grid.Row="5" Grid.Column="1" Name="Exit" Content="Luk" Width="150" Height="50" Click="Exit_Click"/>
+            <Button Grid.Row="4" Grid.Column="0" Name="Import" Content="Import Excel" Width="150" Height="50" Click="Import_Click"/>
+            <Button Grid.Row="0" Grid.Column="0" Name="Export" Content="Export PDF" Width="150" Height="50" Click="Export_Click"/>
+            <Button Grid.Row="1" Grid.Column="0" Name="NewSubscription" Content="Nyt" Width="150" Height="50" Click="NewSubscription_Click"/>
+            <Button Grid.Row="2" Grid.Column="0" Name="EditSubscription" Content="Rediger" Width="150" Height="50" Click="EditSubscription_Click"/>
+            <Button Grid.Row="3" Grid.Column="0" Name="DeleteSubscription" Content="Slet" Width="150" Height="50" Click="DeleteSubscription_Click"/>
+            <Button Grid.Row="5" Grid.Column="0" Name="Exit" Content="Luk" Width="150" Height="50" Click="Exit_Click"/>
 
         </Grid>
         <DataGrid Grid.Row="1" Grid.Column="0" Height="200" Width="900" Name="MobileGrid" IsReadOnly="True"/>
