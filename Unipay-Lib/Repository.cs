@@ -46,14 +46,15 @@ namespace Unipay_Lib
         {
             Merchants = merc;
         }
-        public List<Cardsystem> GetCardsystems()
-        {
-            return Cardsystems;
-        }
         public List<Mobilesystem> GetMobilesystems()
         {
             return Mobilesystems;
         }
+        public List<Cardsystem> GetCardsystems()
+        {
+            return Cardsystems;
+        }
+        
         public List<Merchant> GetMerchants()
         {
             return Merchants;
