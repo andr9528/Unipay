@@ -54,7 +54,6 @@ namespace Unipay_Lib
         {
             return Cardsystems;
         }
-        
         public List<Merchant> GetMerchants()
         {
             return Merchants;
