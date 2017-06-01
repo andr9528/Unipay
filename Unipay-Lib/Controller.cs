@@ -186,19 +186,18 @@ namespace Unipay_Lib
             if (what == 0)
             {
                 mobilesystems.RemoveAt(where);
+                repo.GetMobileLists(mobilesystems);
             }
             else if (what == 1)
             {
                 cardsystems.RemoveAt(where);
+                repo.GetCardLists(cardsystems);
             }
             else if (what == 2)
             {
                 merchants.RemoveAt(where);
+                repo.GetMercLists(merchants);
             }
-
-            repo.GetMobileLists(mobilesystems);
-            repo.GetCardLists(cardsystems);
-            repo.GetMercLists(merchants);
         }
 
         public void NewCardAndMerc(string[] merchantData, string DCPI, string DElavon, string status,
