@@ -214,7 +214,10 @@ namespace Unipay_UI
                         row["Boks Navn"] = mobile.BoxName;
                         row["Sim Nummer"] = mobile.SimNumber;
                         row["Opretelses Dato"] = mobile.CreationDate.ToStringDF();
-                        row["Luknings Dato"] = mobile.CloseingDate.ToStringDF();
+                        if (mobile.CloseingDate != null)
+                        {
+                            row["Luknings Dato"] = mobile.CloseingDate.ToStringDF();
+                        }
                         row["Addresse for Enhed"] = mobile.Address;
                         row["Noter"] = mobile.Note;
 
@@ -263,7 +266,10 @@ namespace Unipay_UI
                         row["Phys ID"] = card.PhysicalID;
                         row["Sim Producent"] = card.SimNumber;
                         row["Opretelses Dato"] = card.CreationDate.ToStringDF();
-                        row["Luknings Dato"] = card.CloseingDate.ToStringDF();
+                        if (card.CloseingDate != null)
+                        {
+                            row["Luknings Dato"] = card.CloseingDate.ToStringDF();
+                        }
                         row["Addresse for Enhed"] = card.Address;
                         row["Noter"] = card.Note;
 
